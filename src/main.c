@@ -84,6 +84,14 @@ void UpdateDrawFrame(void)
                     : 0
                 )
             };
+            const u8 tile = GetTile(coord);
+            if (tile)
+                DrawTexture(
+                    *GetTileTexture(tile),
+                    screenPos.x,
+                    screenPos.y,
+                    WHITE
+                );
             if (HexEqual(coord, current)) {
                 if (currentTile != 0)
                     DrawTexture(
@@ -100,14 +108,6 @@ void UpdateDrawFrame(void)
                         WHITE
                     );
             }
-            const u8 tile = GetTile(coord);
-            if (tile)
-                DrawTexture(
-                    *GetTileTexture(tile),
-                    screenPos.x,
-                    screenPos.y,
-                    WHITE
-                );
         }
     EndTextureMode();
     BeginDrawing();
