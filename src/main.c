@@ -56,20 +56,14 @@ HexCoord GetMousePointed(void)
 void UpdateDrawFrame(void)
 {
     HexCoord current = GetMousePointed();
-    if (IsKeyPressed(KEY_ONE))
-        currentTile = 1;
-    if (IsKeyPressed(KEY_TWO))
-        currentTile = 2;
-    if (IsKeyPressed(KEY_THREE))
-        currentTile = 3;
-    if (IsKeyPressed(KEY_FOUR))
-        currentTile = 4;
 
-    if (IsKeyPressed(KEY_ESCAPE))
-        currentTile = 0;
-
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-        SetTile(current, currentTile);
+    if (GetMouseY() < 670 && !showBuildBox)
+    {
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            SetTile(current, currentTile);
+        if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
+            SetTile(current, 0);
+    }
 
     BeginTextureMode(Screen);
         ClearBackground((Color) {
@@ -134,34 +128,22 @@ void UpdateDrawFrame(void)
             GuiPanel(windowBounds, NULL);
 
             if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 10, 300, 40 }, "Biodome"))
-            {
-                TraceLog(LOG_INFO, "Biodome clicked!");
-            }
+                currentTile = 4;
 
             if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 60, 300, 40 }, "Apartaments"))
-            {
-                TraceLog(LOG_INFO, "Apartaments clicked!");
-            }
+                currentTile = 1;
 
             if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 110, 300, 40 }, "Drill"))
-            {
-                TraceLog(LOG_INFO, "Drill clicked!");
-            }
+                currentTile = 2;
 
             if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 160, 300, 40 }, "Lab"))
-            {
                 TraceLog(LOG_INFO, "Lab clicked!");
-            }
 
             if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 210, 300, 40 }, "Factory"))
-            {
-                TraceLog(LOG_INFO, "Factory clicked!");
-            }
+                currentTile = 3;
 
             if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 260, 300, 40 }, "Generator"))
-            {
                 TraceLog(LOG_INFO, "Generator clicked!");
-            }
        }
     EndDrawing();
 }
@@ -171,7 +153,9 @@ int main(int argc, char **argv)
 	InitWindow(720, 720, WINDOW_TITLE);
     InitTextures();
 
+#if !defined(PLATFORM_WEB)
     GuiLoadStyle("resources/raygui_styles/amber/style_amber.rgs");
+#endif
 
     Screen = LoadRenderTexture(360, 360);
 
