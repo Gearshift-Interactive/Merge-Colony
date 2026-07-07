@@ -6,6 +6,7 @@
 
 #include "textures.h"
 #include "map.h"
+#include "tiles.h"
 
 #define WINDOW_TITLE APP_NAME " v" APP_VERSION
 
@@ -91,21 +92,13 @@ void UpdateDrawFrame(void)
                     WHITE
                 );
             const u8 tile = GetTile(coord);
-            switch (tile)
-            {
-            case 1:
-                DrawTexture(TEXTURE_APARTAMENT, screenPos.x, screenPos.y, WHITE);
-                break;
-            case 2:
-                DrawTexture(TEXTURE_DRILL, screenPos.x, screenPos.y, WHITE);
-                break;
-            case 3:
-                DrawTexture(TEXTURE_FACTORY, screenPos.x, screenPos.y, WHITE);
-                break;
-            case 4:
-                DrawTexture(TEXTURE_BIODOME, screenPos.x, screenPos.y, WHITE);
-                break;
-            }
+            if (tile)
+                DrawTexture(
+                    *GetTileTexture(tile),
+                    screenPos.x,
+                    screenPos.y,
+                    WHITE
+                );
         }
     EndTextureMode();
     BeginDrawing();
@@ -128,22 +121,22 @@ void UpdateDrawFrame(void)
             GuiPanel(windowBounds, NULL);
 
             if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 10, 300, 40 }, "Biodome"))
-                currentTile = 4;
+                currentTile = GetTileId("biodome");
 
             if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 60, 300, 40 }, "Apartaments"))
-                currentTile = 1;
+                currentTile = GetTileId("apartaments");
 
             if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 110, 300, 40 }, "Drill"))
-                currentTile = 2;
+                currentTile = GetTileId("drill");
 
             if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 160, 300, 40 }, "Lab"))
-                TraceLog(LOG_INFO, "Lab clicked!");
+                currentTile = GetTileId("lab");
 
             if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 210, 300, 40 }, "Factory"))
-                currentTile = 3;
+                currentTile = GetTileId("factory");
 
             if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 260, 300, 40 }, "Generator"))
-                TraceLog(LOG_INFO, "Generator clicked!");
+                currentTile = GetTileId("generator");
        }
     EndDrawing();
 }
@@ -158,6 +151,8 @@ int main(int argc, char **argv)
 #endif
 
     Screen = LoadRenderTexture(360, 360);
+
+    GenerateMars();
 
 #if defined(PLATFORM_WEB)
     emscripten_set_main_loop(UpdateDrawFrame, 0, 1);
