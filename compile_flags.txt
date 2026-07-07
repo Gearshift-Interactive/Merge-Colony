@@ -1,1 +1,1 @@
--Wall -Wextra -Isrc
+-Wall -Wextra -Isrc -lm

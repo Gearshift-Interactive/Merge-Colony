@@ -9,18 +9,56 @@
 const u32 ORIGIN_X = 000;
 const u32 ORIGIN_Y = 000;
 
-static RenderTexture2D Screen;
+const float TILE_RADIUS = 16.0f;
 
+static RenderTexture2D Screen;
 static Texture2D BaseTile;
+static Texture2D HighlightTile;
+
+HexCoord GetMousePointed(void)
+{
+    const float px = GetMousePosition().x / 2.0f;
+    const float py = GetMousePosition().y / 2.0f;
+
+    const float q = (px - 16.0f) / 24.0f;
+    const float r_ = (py - 16.0f * q - 32.0f) / 32.0f;
+
+    const float cx = q;
+    const float cz = r_;
+    const float cy = -cx - cz;
+
+    int rx = roundf(cx);
+    int ry = roundf(cy);
+    int rz = roundf(cz);
+
+    const float dx = fabsf(rx - cx);
+    const float dy = fabsf(ry - cy);
+    const float dz = fabsf(rz - cz);
+
+    if (dx > dy && dx > dz)
+        rx = -ry - rz;
+    else if (dy > dz)
+        ry = -rx - rz;
+    else
+        rz = -rx - ry;
+
+    return (HexCoord) {
+        .x = rx,
+        .y = rz + (rx + (rx & 1)) / 2
+    };
+}
 
 void UpdateDrawFrame(void)
 {
     BeginTextureMode(Screen);
         ClearBackground(RAYWHITE);
+        HexCoord current = GetMousePointed();
         for (size_t x = 0; x < 10; x++)
             for (size_t y = 0; y < 10; y++)
                 DrawTexture(
-                    BaseTile,
+                    (x == current.x && y == current.y )
+                        ? HighlightTile
+                        : BaseTile,
                     /* x */ ORIGIN_X + BaseTile.width * 0.75f * x,
                     /* y */ ORIGIN_Y + BaseTile.height * y + ( (x % 2 == 0)
                         ? BaseTile.height / 2
@@ -47,6 +85,7 @@ int main(int argc, char **argv)
 
     Screen = LoadRenderTexture(360, 360);
     BaseTile = LoadTexture("resources/tiles/template.png");
+    HighlightTile = LoadTexture("resources/tiles/template2.png");
 
 #if defined(PLATFORM_WEB)
     emscripten_set_main_loop(UpdateDrawFrame, 0, 1);
