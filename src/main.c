@@ -11,6 +11,8 @@ const u32 ORIGIN_Y = 000;
 
 const float TILE_RADIUS = 16.0f;
 
+bool showBuildBox = false;
+
 static RenderTexture2D Screen;
 static Texture2D BaseTile;
 static Texture2D HighlightTile;
@@ -76,12 +78,54 @@ void UpdateDrawFrame(void)
             0,
             WHITE
         );
+
+       if (GuiButton((Rectangle){ 10, 670, 320, 40 }, "#185#build")) showBuildBox = !showBuildBox;
+       (GuiButton((Rectangle){ 340, 670, 320, 40 }, "#189#statistics"));
+       (GuiButton((Rectangle){ 670, 670, 40, 40 }, "orbit"));
+       if (showBuildBox)
+       {
+            Rectangle windowBounds = { 10, 350, 320, 310 };
+
+            GuiPanel(windowBounds, NULL);
+
+            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 10, 300, 40 }, "Biodome"))
+            {
+                TraceLog(LOG_INFO, "Biodome clicked!");
+            }
+
+            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 60, 300, 40 }, "Apartaments"))
+            {
+                TraceLog(LOG_INFO, "Apartaments clicked!");
+            }
+
+            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 110, 300, 40 }, "Drill"))
+            {
+                TraceLog(LOG_INFO, "Drill clicked!");
+            }
+
+            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 160, 300, 40 }, "Lab"))
+            {
+                TraceLog(LOG_INFO, "Lab clicked!");
+            }
+
+            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 210, 300, 40 }, "Factory"))
+            {
+                TraceLog(LOG_INFO, "Factory clicked!");
+            }
+
+            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 260, 300, 40 }, "Generator"))
+            {
+                TraceLog(LOG_INFO, "Generator clicked!");
+            }
+       }
     EndDrawing();
 }
 
 int main(int argc, char **argv)
 {
 	InitWindow(720, 720, WINDOW_TITLE);
+
+    GuiLoadStyle("resources/raygui_styles/amber/style_amber.rgs");
 
     Screen = LoadRenderTexture(360, 360);
     BaseTile = LoadTexture("resources/tiles/template.png");

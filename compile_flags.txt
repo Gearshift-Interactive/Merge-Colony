@@ -1,1 +1,1 @@
--Wall -Wextra -Isrc -lm
+-Wall -Wextra -Isrc -Iinclude -lm

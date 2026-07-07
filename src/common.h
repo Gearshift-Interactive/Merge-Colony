@@ -21,4 +21,5 @@ typedef double f64;
 
 typedef size_t usize;
 
+#include "raygui_.h"
 #include "hex_coord.h"
