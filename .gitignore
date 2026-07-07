@@ -1,0 +1,6 @@
+bin/
+lib/
+gmon.out
+profile.txt
+.idea/
+log.log
