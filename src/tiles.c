@@ -5,6 +5,7 @@
 typedef struct {
     char *id;
     Texture2D *texture;
+    bool destroyable;
 } TileData;
 
 static TileData Tiles[] = {
@@ -12,22 +13,28 @@ static TileData Tiles[] = {
         .id = "void"
     }, {
         .id = "biodome",
-        .texture = &TEXTURE_BIODOME
+        .texture = &TEXTURE_BIODOME,
+        .destroyable = true
     }, {
         .id = "apartaments",
-        .texture = &TEXTURE_APARTAMENT
+        .texture = &TEXTURE_APARTAMENT,
+        .destroyable = true
     }, {
         .id = "drill",
-        .texture = &TEXTURE_DRILL
+        .texture = &TEXTURE_DRILL,
+        .destroyable = true
     }, {
         .id = "lab",
-        // .texture = &TEXTURE_LAB
+        // .texture = &TEXTURE_LAB,
+        .destroyable = true
     }, {
         .id = "factory",
-        .texture = &TEXTURE_FACTORY
+        .texture = &TEXTURE_FACTORY,
+        .destroyable = true
     }, {
         .id = "generator",
-        // .texture = &TEXTURE_GENERATOR
+        // .texture = &TEXTURE_GENERATOR,
+        .destroyable = true
     }, {
         .id = "rocks1",
         .texture = &TEXTURE_ROCKS1
@@ -37,6 +44,14 @@ static TileData Tiles[] = {
     }, {
         .id = "rocks3",
         .texture = &TEXTURE_ROCKS3
+    }, {
+        .id = "boulder1",
+        .texture = &TEXTURE_BOULDER1,
+        .destroyable = true
+    }, {
+        .id = "boulder2",
+        .texture = &TEXTURE_BOULDER2,
+        .destroyable = true
     }
 };
 

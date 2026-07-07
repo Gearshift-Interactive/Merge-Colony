@@ -8,9 +8,23 @@ void GenerateMars(void)
 {
     const u8 tiles[] = {
         GetTileId("void"),
+        GetTileId("void"),
+        GetTileId("void"),
+        GetTileId("void"),
         GetTileId("rocks1"),
         GetTileId("rocks2"),
         GetTileId("rocks3"),
+        GetTileId("rocks1"),
+        GetTileId("rocks2"),
+        GetTileId("rocks3"),
+        GetTileId("rocks1"),
+        GetTileId("rocks2"),
+        GetTileId("rocks3"),
+        GetTileId("rocks1"),
+        GetTileId("rocks2"),
+        GetTileId("rocks3"),
+        GetTileId("boulder1"),
+        GetTileId("boulder2"),
     };
     const size_t size = sizeof(tiles) / sizeof(tiles[0]);
     for (size_t x = 0; x < MAP_WIDTH; x++)
