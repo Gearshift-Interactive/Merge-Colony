@@ -6,8 +6,8 @@
 
 #define WINDOW_TITLE APP_NAME " v" APP_VERSION
 
-const u32 ORIGIN_X = 000;
-const u32 ORIGIN_Y = 000;
+const u32 ORIGIN_X = 8;
+const u32 ORIGIN_Y = 8;
 
 const float TILE_RADIUS = 16.0f;
 
@@ -17,8 +17,8 @@ static Texture2D HighlightTile;
 
 HexCoord GetMousePointed(void)
 {
-    const float px = GetMousePosition().x / 2.0f;
-    const float py = GetMousePosition().y / 2.0f;
+    const float px = GetMousePosition().x / 2.0f - ORIGIN_X;
+    const float py = GetMousePosition().y / 2.0f - ORIGIN_Y;
 
     const float q = (px - 16.0f) / 24.0f;
     const float r_ = (py - 16.0f * q - 32.0f) / 32.0f;
@@ -51,14 +51,18 @@ HexCoord GetMousePointed(void)
 void UpdateDrawFrame(void)
 {
     BeginTextureMode(Screen);
-        ClearBackground(RAYWHITE);
+        ClearBackground((Color) {
+            .r = 202,
+            .g = 112,
+            .b = 78,
+            .a = 255,
+        });
         HexCoord current = GetMousePointed();
-        for (size_t x = 0; x < 10; x++)
-            for (size_t y = 0; y < 10; y++)
+        for (size_t x = 0; x < 14; x++)
+        for (size_t y = 0; y < 9; y++)
+            if (HexEqual((HexCoord) {x, y}, current))
                 DrawTexture(
-                    ( HexEqual((HexCoord) {x, y}, current) )
-                        ? HighlightTile
-                        : BaseTile,
+                    HighlightTile,
                     /* x */ ORIGIN_X + BaseTile.width * 0.75f * x,
                     /* y */ ORIGIN_Y + BaseTile.height * y + ( (x % 2 == 0)
                         ? BaseTile.height / 2
