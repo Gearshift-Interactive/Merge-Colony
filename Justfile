@@ -14,6 +14,9 @@ xargs := "$(xargs < compile_flags.txt)"
 _create-bin:
     mkdir -p bin
 
+_create-lib:
+    mkdir -p lib
+
 _pull-repo dir repo commit:
     @if [ ! -d "{{dir}}/.git" ]; then      \
         git clone {{repo}} {{dir}}; \
@@ -26,8 +29,7 @@ _pull-repo dir repo commit:
 run-web-server:
     cd bin && python -m http.server 8080
 
-build-raylib-web:
-    mkdir -p lib
+build-raylib-web: _create-lib
     just _pull-repo lib/raylib https://github.com/raysan5/raylib dbc56a87da87d973a9c5baa4e7438a9d20121d28
     if [ ! -e "lib/raylib/src/libraylib.web.a" ]; then \
         emcc -c lib/raylib/src/rcore.c     -Os -Wall -DPLATFORM_WEB -DGRAPHICS_API_OPENGL_ES2 -o lib/raylib/src/rcore.o; \

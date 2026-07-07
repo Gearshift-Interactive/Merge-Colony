@@ -4,3 +4,4 @@ gmon.out
 profile.txt
 .idea/
 log.log
+compile_commands.json
