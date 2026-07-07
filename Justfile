@@ -42,7 +42,7 @@ build-raylib-web: _create-lib
     fi
 
 build-web: _create-bin build-raylib-web
-    emcc {{ xargs }} -Llib/raylib/src -lraylib.web -Ilib/raylib/src {{ c_env }} -DPLATFORM_WEB -s USE_GLFW=3 --shell-file lib/raylib/src/minshell.html {{ files }} -o {{ web_binary }}
+    emcc {{ xargs }} -Llib/raylib/src -lraylib.web -Ilib/raylib/src --preload-file resources {{ c_env }} -DPLATFORM_WEB -s USE_GLFW=3 --shell-file lib/raylib/src/minshell.html {{ files }} -o {{ web_binary }}
 
 build: _create-bin
     gcc {{ xargs }} -lraylib  {{ c_env }} {{ files }} -o {{ binary }}

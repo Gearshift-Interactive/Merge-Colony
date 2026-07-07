@@ -1,0 +1,68 @@
+#include "hex_coord.h"
+
+HexCoord HexNeighbourTop(HexCoord origin)
+{
+    return (HexCoord) {
+        .x = origin.x,
+        .y = origin.y - 1
+    };
+}
+HexCoord HexNeighbourBottom(HexCoord origin)
+{
+    return (HexCoord) {
+        .x = origin.x,
+        .y = origin.y + 1
+    };
+}
+HexCoord HexNeighbourTopRight(HexCoord origin)
+{
+    if (origin.x % 2 == 0)
+        return (HexCoord) {
+            .x = origin.x + 1,
+            .y = origin.y - 1
+        };
+    else
+        return (HexCoord) {
+            .x = origin.x + 1,
+            .y = origin.y
+        };
+}
+HexCoord HexNeighbourBottomRight(HexCoord origin)
+{
+    if (origin.x % 2 == 0)
+        return (HexCoord) {
+            .x = origin.x + 1,
+            .y = origin.y
+        };
+    else
+        return (HexCoord) {
+            .x = origin.x + 1,
+            .y = origin.y + 1
+        };
+}
+HexCoord HexNeighbourTopLeft(HexCoord origin)
+{
+    if (origin.x % 2 == 0)
+        return (HexCoord) {
+            .x = origin.x - 1,
+            .y = origin.y - 1
+        };
+    else
+        return (HexCoord) {
+            .x = origin.x - 1,
+            .y = origin.y
+        };
+}
+HexCoord HexNeighbourBottomLeft(HexCoord origin)
+{
+    if (origin.x % 2 == 0)
+        return (HexCoord) {
+            .x = origin.x - 1,
+            .y = origin.y
+        };
+    else
+        return (HexCoord) {
+            .x = origin.x - 1,
+            .y = origin.y + 1
+        };
+}
