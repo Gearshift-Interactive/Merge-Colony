@@ -15,5 +15,10 @@ extern Texture2D TEXTURE_APARTAMENT;
 extern Texture2D TEXTURE_DRILL;
 extern Texture2D TEXTURE_BIODOME;
 
+extern Texture2D TEXTURE_FACTORY_OUTLINE;
+extern Texture2D TEXTURE_APARTAMENT_OUTLINE;
+extern Texture2D TEXTURE_DRILL_OUTLINE;
+extern Texture2D TEXTURE_BIODOME_OUTLINE;
+
 void InitTextures(void);
 void UnloadTextures(void);

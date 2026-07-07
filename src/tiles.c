@@ -5,6 +5,7 @@
 typedef struct {
     char *id;
     Texture2D *texture;
+    Texture2D *outline;
     bool destroyable;
 } TileData;
 
@@ -14,26 +15,32 @@ static TileData Tiles[] = {
     }, {
         .id = "biodome",
         .texture = &TEXTURE_BIODOME,
+        .outline = &TEXTURE_BIODOME_OUTLINE,
         .destroyable = true
     }, {
         .id = "apartaments",
         .texture = &TEXTURE_APARTAMENT,
+        .outline = &TEXTURE_APARTAMENT_OUTLINE,
         .destroyable = true
     }, {
         .id = "drill",
         .texture = &TEXTURE_DRILL,
+        .outline = &TEXTURE_DRILL_OUTLINE,
         .destroyable = true
     }, {
         .id = "lab",
         // .texture = &TEXTURE_LAB,
+        // .outline = &TEXTURE_OUTLINE_OUTLINE,
         .destroyable = true
     }, {
         .id = "factory",
         .texture = &TEXTURE_FACTORY,
+        .outline = &TEXTURE_FACTORY_OUTLINE,
         .destroyable = true
     }, {
         .id = "generator",
         // .texture = &TEXTURE_GENERATOR,
+        // .outline = &TEXTURE_GENERATOR_OUTLINE,
         .destroyable = true
     }, {
         .id = "rocks1",
@@ -66,4 +73,12 @@ u8 GetTileId(const char *stringId)
 Texture2D *GetTileTexture(u8 tileId)
 {
     return Tiles[tileId].texture;
+}
+Texture2D *GetTileOutline(u8 tileId)
+{
+    return Tiles[tileId].outline;
+}
+bool GetTileDestroyable(u8 tileId)
+{
+    return Tiles[tileId].destroyable;
 }

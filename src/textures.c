@@ -14,6 +14,11 @@ Texture2D TEXTURE_APARTAMENT;
 Texture2D TEXTURE_DRILL;
 Texture2D TEXTURE_BIODOME;
 
+Texture2D TEXTURE_FACTORY_OUTLINE;
+Texture2D TEXTURE_APARTAMENT_OUTLINE;
+Texture2D TEXTURE_DRILL_OUTLINE;
+Texture2D TEXTURE_BIODOME_OUTLINE;
+
 void InitTextures(void)
 {
     TEXTURE_ROCKS1 = LoadTexture("resources/tiles/rocks1.png");
@@ -28,6 +33,11 @@ void InitTextures(void)
     TEXTURE_DRILL      = LoadTexture("resources/tiles/drill.png");
     TEXTURE_HIGHLIGHT  = LoadTexture("resources/tiles/template2.png");
     TEXTURE_BIODOME    = LoadTexture("resources/tiles/biodome.png");
+
+    TEXTURE_APARTAMENT_OUTLINE = LoadTexture("resources/tiles/apartament_outline.png");
+    TEXTURE_DRILL_OUTLINE      = LoadTexture("resources/tiles/drill_outline.png");
+    TEXTURE_FACTORY_OUTLINE    = LoadTexture("resources/tiles/factory_outline.png");
+    TEXTURE_BIODOME_OUTLINE    = LoadTexture("resources/tiles/biodome_outline.png");
 }
 void UnloadTextures(void)
 {
