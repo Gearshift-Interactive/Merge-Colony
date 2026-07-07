@@ -1,5 +1,9 @@
 #include "hex_coord.h"
 
+bool HexEqual(HexCoord a, HexCoord b)
+{
+    return (a.x == b.x && a.y == b.y);
+}
 HexCoord HexNeighbourTop(HexCoord origin)
 {
     return (HexCoord) {

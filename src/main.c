@@ -56,7 +56,7 @@ void UpdateDrawFrame(void)
         for (size_t x = 0; x < 10; x++)
             for (size_t y = 0; y < 10; y++)
                 DrawTexture(
-                    (x == current.x && y == current.y )
+                    ( HexEqual((HexCoord) {x, y}, current) )
                         ? HighlightTile
                         : BaseTile,
                     /* x */ ORIGIN_X + BaseTile.width * 0.75f * x,
