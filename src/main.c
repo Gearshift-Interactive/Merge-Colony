@@ -111,31 +111,32 @@ void UpdateDrawFrame(void)
             WHITE
         );
 
-       if (GuiButton((Rectangle){ 10, 670, 320, 40 }, "#185#build")) showBuildBox = !showBuildBox;
-       (GuiButton((Rectangle){ 340, 670, 320, 40 }, "#189#statistics"));
-       (GuiButton((Rectangle){ 670, 670, 40, 40 }, "orbit"));
+       if (GuiButton((Rectangle){ 10, 670, 210, 40 }, "#0#build")) showBuildBox = !showBuildBox;
+       (GuiButton((Rectangle){ 230, 670, 210, 40 }, "#1#destroy"));
+       (GuiButton((Rectangle){ 450, 670, 210, 40 }, "#2#statistics"));
+       (GuiButton((Rectangle){ 670, 670, 40, 40 }, "#3#"));
        if (showBuildBox)
        {
-            Rectangle windowBounds = { 10, 350, 320, 310 };
+            Rectangle windowBounds = { 10, 350, 210, 310 };
 
             GuiPanel(windowBounds, NULL);
 
-            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 10, 300, 40 }, "Biodome"))
+            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 10, 190, 40 }, "Biodome"))
                 currentTile = GetTileId("biodome");
 
-            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 60, 300, 40 }, "Apartaments"))
+            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 60, 190, 40 }, "Apartaments"))
                 currentTile = GetTileId("apartaments");
 
-            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 110, 300, 40 }, "Drill"))
+            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 110, 190, 40 }, "Drill"))
                 currentTile = GetTileId("drill");
 
-            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 160, 300, 40 }, "Lab"))
+            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 160, 190, 40 }, "Lab"))
                 currentTile = GetTileId("lab");
 
-            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 210, 300, 40 }, "Factory"))
+            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 210, 190, 40 }, "Factory"))
                 currentTile = GetTileId("factory");
 
-            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 260, 300, 40 }, "Generator"))
+            if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 260, 190, 40 }, "Generator"))
                 currentTile = GetTileId("generator");
        }
     EndDrawing();
