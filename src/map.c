@@ -12,10 +12,10 @@ void GenerateMars(void)
         GetTileId("rocks2"),
         GetTileId("rocks3"),
     };
-    const size_t size = sizeof(tiles) / sizeof(u8);
+    const size_t size = sizeof(tiles) / sizeof(tiles[0]);
     for (size_t x = 0; x < MAP_WIDTH; x++)
     for (size_t y = 0; y < MAP_HEIGHT; y++)
-        SetTile((HexCoord) { x, y }, tiles[rand() % size + 1]);
+        SetTile((HexCoord) { x, y }, tiles[rand() % size]);
 }
 u8 GetTile(HexCoord pos)
 {

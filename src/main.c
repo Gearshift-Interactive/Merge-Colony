@@ -68,9 +68,9 @@ void UpdateDrawFrame(void)
 
     BeginTextureMode(Screen);
         ClearBackground((Color) {
-            .r = 0xFA,
-            .g = 0x74,
-            .b = 0x3E,
+            .r = 0xCA,
+            .g = 0x70,
+            .b = 0x4E,
             .a = 255,
         });
         for (size_t x = 0; x < 14; x++)
