@@ -120,9 +120,9 @@ void UpdateDrawFrame(void)
             WHITE
         );
 
-       if (GuiButton((Rectangle){ 10, 670, 210, 40 }, "#0#build")) showBuildBox = !showBuildBox;
-       (GuiButton((Rectangle){ 230, 670, 210, 40 }, "#1#destroy"));
-       (GuiButton((Rectangle){ 450, 670, 210, 40 }, "#2#statistics"));
+       if (GuiButton((Rectangle){ 10, 670, 210, 40 }, "#0#BUILD")) showBuildBox = !showBuildBox;
+       (GuiButton((Rectangle){ 230, 670, 210, 40 }, "#1#DESTROY"));
+       (GuiButton((Rectangle){ 450, 670, 210, 40 }, "#2#STATISTICS"));
        (GuiButton((Rectangle){ 670, 670, 40, 40 }, "#3#"));
        if (showBuildBox)
        {
