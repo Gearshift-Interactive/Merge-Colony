@@ -35,21 +35,44 @@ static const WindowData *WINDOWS[] = {
 };
 
 static u8 *currentTile;
+static i32 selected;
 
 static void DrawBuildContent(Vector2 position, __attribute__((unused)) Vector2 scroll)
 {
-    if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 10, 190, 40 }, "Biodome"))
-        *currentTile = GetTileId("biodome");
-    if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 60, 190, 40  }, "Apartaments"))
-        *currentTile = GetTileId("apartaments");
-    if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 110, 190, 40 }, "Drill"))
-        *currentTile = GetTileId("drill");
-    if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 160, 190, 40 }, "Lab"))
-        *currentTile = GetTileId("lab");
-    if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 210, 190, 40 }, "Factory"))
-        *currentTile = GetTileId("factory");
-    if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 260, 190, 40 }, "Generator"))
-        *currentTile = GetTileId("generator");
+    // if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 10, 190, 40 }, "Biodome"))
+    //     *currentTile = GetTileId("biodome");
+    // if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 60, 190, 40  }, "Apartaments"))
+    //     *currentTile = GetTileId("apartaments");
+    // if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 110, 190, 40 }, "Drill"))
+    //     *currentTile = GetTileId("drill");
+    // if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 160, 190, 40 }, "Lab"))
+    //     *currentTile = GetTileId("lab");
+    // if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 210, 190, 40 }, "Factory"))
+    //     *currentTile = GetTileId("factory");
+    // if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 260, 190, 40 }, "Generator"))
+    //     *currentTile = GetTileId("generator");
+    i32 prexSelect = selected;
+    GuiToggleGroup(
+        (Rectangle){
+            position.x + 10,
+            position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 10,
+            190,
+            40
+        },
+        "---\nBiodome\nApartaments\nDrill\nLab\nFactory\nGenerator",
+        &selected
+    );
+    if (selected != prexSelect)
+        switch (selected)
+        {
+        case 0: *currentTile = 0; break;
+        case 1: *currentTile = GetTileId("biodome"); break;
+        case 2: *currentTile = GetTileId("apartaments"); break;
+        case 3: *currentTile = GetTileId("drill"); break;
+        case 4: *currentTile = GetTileId("lab"); break;
+        case 5: *currentTile = GetTileId("factory"); break;
+        case 6: *currentTile = GetTileId("generator"); break;
+        }
 }
 
 static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 scroll)
@@ -139,15 +162,15 @@ void UpdateDrawGui(void)
     // (GuiButton((Rectangle){ 450, 670, 210, 40 }, "#2#STATISTICS"));
     // (GuiButton((Rectangle){ 670, 670, 40, 40 }, "#3#"));
     GuiWindowFloating(
-        &BuildWindow.position,
-        &BuildWindow.size,
-        &BuildWindow.minimized,
-        &BuildWindow.moving,
-        &BuildWindow.resizing,
-        DrawBuildContent,
+        &StatisticsWindow.position,
+        &StatisticsWindow.size,
+        &StatisticsWindow.minimized,
+        &StatisticsWindow.moving,
+        &StatisticsWindow.resizing,
+        DrawStatContent,
         (Vector2) { 0 },
-        &BuildWindow.scroll,
-        "#0#BUILD"
+        &StatisticsWindow.scroll,
+        "#2#SATISTICS"
     );
     GuiWindowFloating(
         &DestroyWindow.position,
@@ -161,16 +184,21 @@ void UpdateDrawGui(void)
         "#1#DESTROY"
     );
     GuiWindowFloating(
-        &StatisticsWindow.position,
-        &StatisticsWindow.size,
-        &StatisticsWindow.minimized,
-        &StatisticsWindow.moving,
-        &StatisticsWindow.resizing,
-        DrawStatContent,
+        &BuildWindow.position,
+        &BuildWindow.size,
+        &BuildWindow.minimized,
+        &BuildWindow.moving,
+        &BuildWindow.resizing,
+        DrawBuildContent,
         (Vector2) { 0 },
-        &StatisticsWindow.scroll,
-        "#2#SATISTICS"
+        &BuildWindow.scroll,
+        "#0#BUILD"
     );
+    if (IsKeyPressed(KEY_Q))
+    {
+        selected = 0;
+        *currentTile = 0;
+    }
 }
 bool IsCursorOnGui(Vector2 cursorPos)
 {
