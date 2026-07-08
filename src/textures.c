@@ -13,6 +13,8 @@ Texture2D TEXTURE_BOULDER1;
 Texture2D TEXTURE_BOULDER2;
 
 Texture2D TEXTURE_HIGHLIGHT;
+Texture2D TEXTURE_CROSS;
+
 Texture2D TEXTURE_FACTORY;
 Texture2D TEXTURE_APARTAMENT;
 Texture2D TEXTURE_DRILL;
@@ -36,10 +38,12 @@ void InitTextures(void)
     TEXTURE_BOULDER1 = LoadTexture("resources/tiles/boulder1.png");
     TEXTURE_BOULDER2 = LoadTexture("resources/tiles/boulder2.png");
 
+    TEXTURE_HIGHLIGHT = LoadTexture("resources/tiles/template2.png");
+    TEXTURE_CROSS     = LoadTexture("resources/tiles/coross.png");
+
     TEXTURE_FACTORY    = LoadTexture("resources/tiles/factory.png");
     TEXTURE_APARTAMENT = LoadTexture("resources/tiles/apartament.png");
     TEXTURE_DRILL      = LoadTexture("resources/tiles/drill.png");
-    TEXTURE_HIGHLIGHT  = LoadTexture("resources/tiles/template2.png");
     TEXTURE_BIODOME    = LoadTexture("resources/tiles/biodome.png");
 
     TEXTURE_APARTAMENT_OUTLINE = LoadTexture("resources/tiles/apartament_outline.png");
@@ -60,9 +64,16 @@ void UnloadTextures(void)
     UnloadTexture(TEXTURE_BOULDER1);
     UnloadTexture(TEXTURE_BOULDER2);
 
+    UnloadTexture(TEXTURE_HIGHLIGHT);
+    UnloadTexture(TEXTURE_CROSS);
+
     UnloadTexture(TEXTURE_FACTORY);
     UnloadTexture(TEXTURE_APARTAMENT);
     UnloadTexture(TEXTURE_DRILL);
-    UnloadTexture(TEXTURE_HIGHLIGHT);
     UnloadTexture(TEXTURE_BIODOME);
+
+    UnloadTexture(TEXTURE_FACTORY_OUTLINE);
+    UnloadTexture(TEXTURE_APARTAMENT_OUTLINE);
+    UnloadTexture(TEXTURE_DRILL_OUTLINE);
+    UnloadTexture(TEXTURE_BIODOME_OUTLINE);
 }

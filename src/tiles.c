@@ -6,7 +6,7 @@ typedef struct {
     char *id;
     Texture2D *texture;
     Texture2D *outline;
-    bool destroyable;
+    TileKind kind;
 } TileData;
 
 static TileData Tiles[] = {
@@ -16,58 +16,64 @@ static TileData Tiles[] = {
         .id = "biodome",
         .texture = &TEXTURE_BIODOME,
         .outline = &TEXTURE_BIODOME_OUTLINE,
-        .destroyable = true
+        .kind = TILE_BUILDING
     }, {
         .id = "apartaments",
         .texture = &TEXTURE_APARTAMENT,
         .outline = &TEXTURE_APARTAMENT_OUTLINE,
-        .destroyable = true
+        .kind = TILE_BUILDING
     }, {
         .id = "drill",
         .texture = &TEXTURE_DRILL,
         .outline = &TEXTURE_DRILL_OUTLINE,
-        .destroyable = true
+        .kind = TILE_BUILDING
     }, {
         .id = "lab",
         // .texture = &TEXTURE_LAB,
         // .outline = &TEXTURE_OUTLINE_OUTLINE,
-        .destroyable = true
+        .kind = TILE_BUILDING
     }, {
         .id = "factory",
         .texture = &TEXTURE_FACTORY,
         .outline = &TEXTURE_FACTORY_OUTLINE,
-        .destroyable = true
+        .kind = TILE_BUILDING
     }, {
         .id = "generator",
         // .texture = &TEXTURE_GENERATOR,
         // .outline = &TEXTURE_GENERATOR_OUTLINE,
-        .destroyable = true
+        .kind = TILE_BUILDING
     }, {
         .id = "rocks1",
-        .texture = &TEXTURE_ROCKS1
+        .texture = &TEXTURE_ROCKS1,
+        .kind = TILE_GROUND
     }, {
         .id = "rocks2",
-        .texture = &TEXTURE_ROCKS2
+        .texture = &TEXTURE_ROCKS2,
+        .kind = TILE_GROUND
     }, {
         .id = "rocks3",
-        .texture = &TEXTURE_ROCKS3
+        .texture = &TEXTURE_ROCKS3,
+        .kind = TILE_GROUND
     }, {
         .id = "mountain1",
-        .texture = &TEXTURE_MOUNTAIN1
+        .texture = &TEXTURE_MOUNTAIN1,
+        .kind = TILE_MOUNTAIN
     }, {
         .id = "mountain2",
-        .texture = &TEXTURE_MOUNTAIN2
+        .texture = &TEXTURE_MOUNTAIN2,
+        .kind = TILE_MOUNTAIN
     }, {
         .id = "mountain3",
-        .texture = &TEXTURE_MOUNTAIN3
+        .texture = &TEXTURE_MOUNTAIN3,
+        .kind = TILE_MOUNTAIN
     }, {
         .id = "boulder1",
         .texture = &TEXTURE_BOULDER1,
-        .destroyable = true
+        .kind = TILE_BOULDER
     }, {
         .id = "boulder2",
         .texture = &TEXTURE_BOULDER2,
-        .destroyable = true
+        .kind = TILE_BOULDER
     }
 };
 
@@ -87,7 +93,7 @@ Texture2D *GetTileOutline(u8 tileId)
 {
     return Tiles[tileId].outline;
 }
-bool GetTileDestroyable(u8 tileId)
+TileKind GetTileKind(u8 tileId)
 {
-    return Tiles[tileId].destroyable;
+    return Tiles[tileId].kind;
 }

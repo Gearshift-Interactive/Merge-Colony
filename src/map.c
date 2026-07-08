@@ -39,6 +39,8 @@ void GenerateMars(void)
             else
                 SetTile(1, (HexCoord) { x, y }, boulders[rand() % boulders_size]);
         }
+        else
+            SetTile(1, (HexCoord) { x, y }, 0);
         SetTile(0, (HexCoord) { x, y }, tiles[rand() % tiles_size]);
     }
 }

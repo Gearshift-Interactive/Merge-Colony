@@ -60,9 +60,8 @@ void UpdateDrawFrame(void)
     if (IsTileInMap(current) && !IsCursorOnGui(GetMousePosition()))
     {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-            SetTile(0, current, currentTile);
-        if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
-            SetTile(0, current, 0);
+            if (!GetTile(1, current))
+                SetTile(1, current, currentTile);
     }
 
     BeginTextureMode(Screen);
