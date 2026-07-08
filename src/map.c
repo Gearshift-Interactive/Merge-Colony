@@ -9,6 +9,10 @@
 
 static u8 Map[MAP_LAYERS][MAP_WIDTH][MAP_HEIGHT] = { 0 };
 
+static u8 Copper[MAP_WIDTH][MAP_HEIGHT] = { 0 };
+static u8 Iron[MAP_WIDTH][MAP_HEIGHT] = { 0 };
+static u8 Water[MAP_WIDTH][MAP_HEIGHT] = { 0 };
+
 static HexCoord FindFree()
 {
     HexCoord result =  { rand() % MAP_WIDTH, rand() % MAP_HEIGHT };
@@ -70,6 +74,31 @@ void GenerateMars(void)
         else
             SetTile(1, (HexCoord) { x, y }, 0);
         SetTile(0, (HexCoord) { x, y }, tiles[rand() % tiles_size]);
+
+        f32 copperPerlin = stb_perlin_fbm_noise3(
+            x * 0.15f, y * 0.15f, 0,
+            /* lacunarity */ 2,
+            /* gain */ 0.5f,
+            /* octaves */ 2
+        );
+        if (copperPerlin > 0)
+            Copper[x][y] = copperPerlin * 255;
+        f32 ironPerlin = stb_perlin_fbm_noise3(
+            x * 0.15f, y * 0.15f, 0,
+            /* lacunarity */ 2,
+            /* gain */ 0.5f,
+            /* octaves */ 2
+        );
+        if (ironPerlin > 0.1f)
+            Iron[x][y] = (ironPerlin - 0.1f) / 0.9f * 255;
+        f32 waterPerlin = stb_perlin_fbm_noise3(
+            x * 0.15f, y * 0.15f, 0,
+            /* lacunarity */ 2,
+            /* gain */ 0.5f,
+            /* octaves */ 2
+        );
+        if (waterPerlin > 0)
+            Iron[x][y] = waterPerlin * 255;
     }
     // const u8 coppers[] = {
     //     GetTileId("copper1"),
