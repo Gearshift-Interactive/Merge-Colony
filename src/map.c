@@ -41,7 +41,6 @@ Vector2 CalculateTileScreenPos(HexCoord coord)
             : 0
         )
     };
-
 }
 bool IsTileInMap(HexCoord coord)
 {

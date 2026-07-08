@@ -4,13 +4,11 @@
 #    include <emscripten/emscripten.h>
 #endif
 
-#define RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT 20
-
 #include "textures.h"
 #include "map.h"
 #include "tiles.h"
 #include "cursor.h"
-#include "guiwindow.h"
+#include "interface.h"
 
 #define WINDOW_TITLE APP_NAME " v" APP_VERSION
 
@@ -21,13 +19,6 @@ bool showBuildBox = false;
 static RenderTexture2D Screen;
 
 u8 currentTile = 0;
-
-static Vector2 BuildWindowPosition = { 10, 10 };
-static Vector2 BuildWindowSize = { 210, 310 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT };
-static bool BuildWindowMinimized = true;
-static bool BuildWindowMoving = false;
-static bool BuildWindowResizing = false;
-static Vector2 BuildWindowScroll;
 
 HexCoord GetMousePointed(void)
 {
@@ -62,27 +53,11 @@ HexCoord GetMousePointed(void)
     };
 }
 
-void DrawBuildContent(Vector2 position, __attribute__((unused)) Vector2 scroll)
-{
-    if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 10, 190, 40 }, "Biodome"))
-        currentTile = GetTileId("biodome");
-    if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 60, 190, 40 }, "Apartaments"))
-        currentTile = GetTileId("apartaments");
-    if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 110, 190, 40 }, "Drill"))
-        currentTile = GetTileId("drill");
-    if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 160, 190, 40 }, "Lab"))
-        currentTile = GetTileId("lab");
-    if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 210, 190, 40 }, "Factory"))
-        currentTile = GetTileId("factory");
-    if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 260, 190, 40 }, "Generator"))
-        currentTile = GetTileId("generator");
-}
-
 void UpdateDrawFrame(void)
 {
     HexCoord current = GetMousePointed();
 
-    if (GetMouseY() < 670 && !showBuildBox)
+    if (IsTileInMap(current) && !IsCursorOnGui(GetMousePosition()))
     {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
             SetTile(0, current, currentTile);
@@ -104,36 +79,7 @@ void UpdateDrawFrame(void)
             0,
             WHITE
         );
-
-       if (GuiButton((Rectangle){ 10, 670, 210, 40 }, "#0#BUILD")) showBuildBox = !showBuildBox;
-       (GuiButton((Rectangle){ 230, 670, 210, 40 }, "#1#DESTROY"));
-       (GuiButton((Rectangle){ 450, 670, 210, 40 }, "#2#STATISTICS"));
-       (GuiButton((Rectangle){ 670, 670, 40, 40 }, "#3#"));
-       GuiWindowFloating(&BuildWindowPosition, &BuildWindowSize, &BuildWindowMinimized, &BuildWindowMoving, &BuildWindowResizing, DrawBuildContent, (Vector2) { 0 }, &BuildWindowScroll, "#0#BUILD");
-       // if (showBuildBox)
-       // {
-       //      Rectangle windowBounds = { 10, 350, 210, 310 };
-       //
-       //      GuiPanel(windowBounds, NULL);
-       //
-       //      if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 10, 190, 40 }, "Biodome"))
-       //          currentTile = GetTileId("biodome");
-       //
-       //      if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 60, 190, 40 }, "Apartaments"))
-       //          currentTile = GetTileId("apartaments");
-       //
-       //      if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 110, 190, 40 }, "Drill"))
-       //          currentTile = GetTileId("drill");
-       //
-       //      if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 160, 190, 40 }, "Lab"))
-       //          currentTile = GetTileId("lab");
-       //
-       //      if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 210, 190, 40 }, "Factory"))
-       //          currentTile = GetTileId("factory");
-       //
-       //      if (GuiButton((Rectangle){ windowBounds.x + 10, windowBounds.y + 260, 190, 40 }, "Generator"))
-       //          currentTile = GetTileId("generator");
-       // }
+        UpdateDrawGui();
     EndDrawing();
 }
 
@@ -141,6 +87,7 @@ int main(int argc, char **argv)
 {
 	InitWindow(720, 720, WINDOW_TITLE);
     InitTextures();
+    InitGui(&currentTile);
 
 #if !defined(PLATFORM_WEB)
     GuiLoadStyle("resources/raygui_styles/amber/style_amber.rgs");
