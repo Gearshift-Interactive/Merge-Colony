@@ -116,7 +116,7 @@ void GuiWindowFloating(Vector2 *position, Vector2 *size, bool *minimized, bool *
         GuiDrawIcon(71, position->x + size->x - 20, position->y + size->y - 20, 1, WHITE);
     }
 }
-bool IsCursorOnWindow(Vector2 cursorPos, Vector2 *position, Vector2 *size, bool *minimized)
+bool IsCursorOnWindow(const Vector2 cursorPos, const Vector2 *position, const Vector2 *size, const bool *minimized)
 {
     if (*minimized)
         return CheckCollisionPointRec(cursorPos, (Rectangle){ position->x, position->y, size->x, RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT });

@@ -19,6 +19,19 @@ static WindowData BuildWindow = {
     .size = { 210, 310 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
     .minimized = true
 };
+static WindowData DestroyWindow = {
+    .position = { 10, 20 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
+    .size = { 210, 310 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
+    .minimized = true
+};
+static WindowData StatisticsWindow = {
+    .position = { 10, 30 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT * 2 },
+    .size = { 210, 310 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
+    .minimized = true
+};
+static const WindowData *WINDOWS[] = {
+    &BuildWindow, &DestroyWindow, &StatisticsWindow
+};
 
 static u8 *currentTile;
 
@@ -59,8 +72,39 @@ void UpdateDrawGui(void)
         &BuildWindow.scroll,
         "#0#BUILD"
     );
+    GuiWindowFloating(
+        &DestroyWindow.position,
+        &DestroyWindow.size,
+        &DestroyWindow.minimized,
+        &DestroyWindow.moving,
+        &DestroyWindow.resizing,
+        NULL,
+        (Vector2) { 0 },
+        &DestroyWindow.scroll,
+        "#1#DESTROY"
+    );
+    GuiWindowFloating(
+        &StatisticsWindow.position,
+        &StatisticsWindow.size,
+        &StatisticsWindow.minimized,
+        &StatisticsWindow.moving,
+        &StatisticsWindow.resizing,
+        NULL,
+        (Vector2) { 0 },
+        &StatisticsWindow.scroll,
+        "#2#SATISTICS"
+    );
 }
 bool IsCursorOnGui(Vector2 cursorPos)
 {
-    return IsCursorOnWindow(cursorPos, &BuildWindow.position, &BuildWindow.size, &BuildWindow.minimized);
+    size_t len = sizeof(WINDOWS) / sizeof(WINDOWS[0]);
+    for (size_t i = 0; i < len; i++)
+        if (IsCursorOnWindow(
+            cursorPos,
+            &WINDOWS[i]->position,
+            &WINDOWS[i]->size,
+            &WINDOWS[i]->minimized
+        ))
+            return true;
+    return false;
 }
