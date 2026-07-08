@@ -36,8 +36,8 @@ void GenerateMars(void)
             x * 0.15f, y * 0.15f, 0,
             /* lacunarity */ 2,
             /* gain */ 0.5f,
-            /* octaves */ 2);
-        printf("%f\n", perlin);
+            /* octaves */ 2
+        );
         if (perlin > 0)
         {
             if (perlin > 0.2f)
