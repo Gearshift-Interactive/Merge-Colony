@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 typedef struct {
-    unsigned int x, y;
+    int x, y;
 } HexCoord;
 
 bool HexEqual(HexCoord, HexCoord);

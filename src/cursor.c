@@ -11,13 +11,14 @@ static Vector2 targetCursorPos  = { 0 };
 
 void RenderMouseCursor(HexCoord tileSelected, u8 currentBuilding)
 {
+    if (!IsTileInMap(tileSelected) || IsCursorOnGui(GetMousePosition())) return;
+
+    printf("%f, %f\n", currentCursorPos.x, currentCursorPos.y);
     Vector2 tileCoord = CalculateTileScreenPos(tileSelected);
     targetCursorPos = tileCoord;
     float dt = GetFrameTime();
     currentCursorPos.x += (targetCursorPos.x - currentCursorPos.x) * CURSOR_SPEED * dt;
     currentCursorPos.y += (targetCursorPos.y - currentCursorPos.y) * CURSOR_SPEED * dt;
-
-    if (!IsTileInMap(tileSelected) || IsCursorOnGui(GetMousePosition())) return;
 
     if (currentBuilding)
         DrawTexture(*GetTileOutline(currentBuilding), currentCursorPos.x, currentCursorPos.y, WHITE);
