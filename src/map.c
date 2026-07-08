@@ -4,7 +4,17 @@
 #include "textures.h"
 #include "stb_perlin_.h"
 
+#define MAX_COPPER 5
+#define MAX_IRON 3
+
 static u8 Map[MAP_LAYERS][MAP_WIDTH][MAP_HEIGHT] = { 0 };
+
+static HexCoord FindFree()
+{
+    HexCoord result =  { rand() % MAP_WIDTH, rand() % MAP_HEIGHT };
+    if (GetTile(1, result)) return FindFree();
+    return result;
+}
 
 void GenerateMars(void)
 {
@@ -13,34 +23,34 @@ void GenerateMars(void)
         GetTileId("rocks2"),
         GetTileId("rocks3"),
     };
-    const size_t tiles_size = sizeof(tiles) / sizeof(tiles[0]);
+    const usize tiles_size = sizeof(tiles) / sizeof(tiles[0]);
     const u8 boulders[] = {
         GetTileId("boulder1"),
         GetTileId("boulder2"),
     };
-    const size_t boulders_size = sizeof(boulders) / sizeof(boulders[0]);
+    const usize boulders_size = sizeof(boulders) / sizeof(boulders[0]);
     const u8 mountains1[] = {
         GetTileId("mountain1-1"),
         GetTileId("mountain1-2"),
         GetTileId("mountain1-3"),
     };
-    const size_t mountains1_size = sizeof(mountains1) / sizeof(mountains1[0]);
+    const usize mountains1_size = sizeof(mountains1) / sizeof(mountains1[0]);
     const u8 mountains2[] = {
         GetTileId("mountain2-1"),
         GetTileId("mountain2-2"),
         GetTileId("mountain2-3"),
     };
-    const size_t mountains2_size = sizeof(mountains2) / sizeof(mountains2[0]);
+    const usize mountains2_size = sizeof(mountains2) / sizeof(mountains2[0]);
     const u8 mountains3[] = {
         GetTileId("mountain3-1"),
         GetTileId("mountain3-2"),
         GetTileId("mountain3-3"),
     };
-    const size_t mountains3_size = sizeof(mountains3) / sizeof(mountains3[0]);
+    const usize mountains3_size = sizeof(mountains3) / sizeof(mountains3[0]);
     for (size_t x = 0; x < MAP_WIDTH; x++)
     for (size_t y = 0; y < MAP_HEIGHT; y++)
     {
-        float perlin = stb_perlin_fbm_noise3(
+        f32 perlin = stb_perlin_fbm_noise3(
             x * 0.15f, y * 0.15f, 0,
             /* lacunarity */ 2,
             /* gain */ 0.5f,
@@ -61,6 +71,20 @@ void GenerateMars(void)
             SetTile(1, (HexCoord) { x, y }, 0);
         SetTile(0, (HexCoord) { x, y }, tiles[rand() % tiles_size]);
     }
+    const u8 coppers[] = {
+        GetTileId("copper1"),
+        GetTileId("copper2"),
+    };
+    const usize coppers_size = sizeof(coppers) / sizeof(coppers[0]);
+    for (usize i = 0; i < MAX_COPPER; i++)
+        SetTile(0, FindFree(), coppers[rand() % coppers_size]);
+    const u8 irons[] = {
+        GetTileId("iron1"),
+        GetTileId("iron2"),
+    };
+    const usize ironsSize = sizeof(irons) / sizeof(irons[0]);
+    for (usize i = 0; i < MAX_IRON; i++)
+        SetTile(0, FindFree(), irons[rand() % ironsSize]);
 }
 Vector2 CalculateTileScreenPos(HexCoord coord)
 {

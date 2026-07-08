@@ -6,6 +6,12 @@ extern Texture2D TEXTURE_ROCKS1;
 extern Texture2D TEXTURE_ROCKS2;
 extern Texture2D TEXTURE_ROCKS3;
 
+extern Texture2D TEXTURE_COPPER1;
+extern Texture2D TEXTURE_COPPER2;
+
+extern Texture2D TEXTURE_IRON1;
+extern Texture2D TEXTURE_IRON2;
+
 extern Texture2D TEXTURE_MOUNTAIN11;
 extern Texture2D TEXTURE_MOUNTAIN12;
 extern Texture2D TEXTURE_MOUNTAIN13;
@@ -26,11 +32,13 @@ extern Texture2D TEXTURE_FACTORY;
 extern Texture2D TEXTURE_APARTAMENT;
 extern Texture2D TEXTURE_DRILL;
 extern Texture2D TEXTURE_BIODOME;
+extern Texture2D TEXTURE_LAB;
 
 extern Texture2D TEXTURE_FACTORY_OUTLINE;
 extern Texture2D TEXTURE_APARTAMENT_OUTLINE;
 extern Texture2D TEXTURE_DRILL_OUTLINE;
 extern Texture2D TEXTURE_BIODOME_OUTLINE;
+extern Texture2D TEXTURE_LAB_OUTLINE;
 
 void InitTextures(void);
 void UnloadTextures(void);

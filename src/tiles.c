@@ -29,8 +29,8 @@ static TileData Tiles[] = {
         .kind = TILE_BUILDING
     }, {
         .id = "lab",
-        // .texture = &TEXTURE_LAB,
-        // .outline = &TEXTURE_OUTLINE_OUTLINE,
+        .texture = &TEXTURE_LAB,
+        .outline = &TEXTURE_LAB_OUTLINE,
         .kind = TILE_BUILDING
     }, {
         .id = "factory",
@@ -54,6 +54,22 @@ static TileData Tiles[] = {
         .id = "rocks3",
         .texture = &TEXTURE_ROCKS3,
         .kind = TILE_GROUND
+    }, {
+        .id = "copper1",
+        .texture = &TEXTURE_COPPER1,
+        .kind = TILE_GROUND_ORE_COPPER
+    }, {
+        .id = "copper2",
+        .texture = &TEXTURE_COPPER2,
+        .kind = TILE_GROUND_ORE_COPPER
+    }, {
+        .id = "iron1",
+        .texture = &TEXTURE_IRON1,
+        .kind = TILE_GROUND_ORE_IRON
+    }, {
+        .id = "iron2",
+        .texture = &TEXTURE_IRON2,
+        .kind = TILE_GROUND_ORE_IRON
     }, {
         .id = "mountain1-1",
         .texture = &TEXTURE_MOUNTAIN11,

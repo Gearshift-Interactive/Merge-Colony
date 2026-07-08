@@ -5,6 +5,12 @@ Texture2D TEXTURE_ROCKS1;
 Texture2D TEXTURE_ROCKS2;
 Texture2D TEXTURE_ROCKS3;
 
+Texture2D TEXTURE_COPPER1;
+Texture2D TEXTURE_COPPER2;
+
+Texture2D TEXTURE_IRON1;
+Texture2D TEXTURE_IRON2;
+
 Texture2D TEXTURE_MOUNTAIN11;
 Texture2D TEXTURE_MOUNTAIN12;
 Texture2D TEXTURE_MOUNTAIN13;
@@ -25,17 +31,25 @@ Texture2D TEXTURE_FACTORY;
 Texture2D TEXTURE_APARTAMENT;
 Texture2D TEXTURE_DRILL;
 Texture2D TEXTURE_BIODOME;
+Texture2D TEXTURE_LAB;
 
 Texture2D TEXTURE_FACTORY_OUTLINE;
 Texture2D TEXTURE_APARTAMENT_OUTLINE;
 Texture2D TEXTURE_DRILL_OUTLINE;
 Texture2D TEXTURE_BIODOME_OUTLINE;
+Texture2D TEXTURE_LAB_OUTLINE;
 
 void InitTextures(void)
 {
     TEXTURE_ROCKS1 = LoadTexture("resources/tiles/rocks1.png");
     TEXTURE_ROCKS2 = LoadTexture("resources/tiles/rocks2.png");
     TEXTURE_ROCKS3 = LoadTexture("resources/tiles/rocks3.png");
+
+    TEXTURE_COPPER1 = LoadTexture("resources/tiles/copper1.png");
+    TEXTURE_COPPER2 = LoadTexture("resources/tiles/copper2.png");
+
+    TEXTURE_IRON1 = LoadTexture("resources/tiles/iron1.png");
+    TEXTURE_IRON2 = LoadTexture("resources/tiles/iron2.png");
 
     TEXTURE_MOUNTAIN11 = LoadTexture("resources/tiles/mountain1-1.png");
     TEXTURE_MOUNTAIN12 = LoadTexture("resources/tiles/mountain1-2.png");
@@ -57,17 +71,25 @@ void InitTextures(void)
     TEXTURE_APARTAMENT = LoadTexture("resources/tiles/apartament.png");
     TEXTURE_DRILL      = LoadTexture("resources/tiles/drill.png");
     TEXTURE_BIODOME    = LoadTexture("resources/tiles/biodome.png");
+    TEXTURE_LAB        = LoadTexture("resources/tiles/laboratory.png");
 
     TEXTURE_APARTAMENT_OUTLINE = LoadTexture("resources/tiles/apartament_outline.png");
     TEXTURE_DRILL_OUTLINE      = LoadTexture("resources/tiles/drill_outline.png");
     TEXTURE_FACTORY_OUTLINE    = LoadTexture("resources/tiles/factory_outline.png");
     TEXTURE_BIODOME_OUTLINE    = LoadTexture("resources/tiles/biodome_outline.png");
+    TEXTURE_LAB_OUTLINE        = LoadTexture("resources/tiles/laboratory_outline.png");
 }
 void UnloadTextures(void)
 {
     UnloadTexture(TEXTURE_ROCKS1);
     UnloadTexture(TEXTURE_ROCKS2);
     UnloadTexture(TEXTURE_ROCKS3);
+
+    UnloadTexture(TEXTURE_COPPER1);
+    UnloadTexture(TEXTURE_COPPER2);
+
+    UnloadTexture(TEXTURE_IRON1);
+    UnloadTexture(TEXTURE_IRON2);
 
     UnloadTexture(TEXTURE_MOUNTAIN11);
     UnloadTexture(TEXTURE_MOUNTAIN12);
@@ -89,9 +111,11 @@ void UnloadTextures(void)
     UnloadTexture(TEXTURE_APARTAMENT);
     UnloadTexture(TEXTURE_DRILL);
     UnloadTexture(TEXTURE_BIODOME);
+    UnloadTexture(TEXTURE_LAB);
 
     UnloadTexture(TEXTURE_FACTORY_OUTLINE);
     UnloadTexture(TEXTURE_APARTAMENT_OUTLINE);
     UnloadTexture(TEXTURE_DRILL_OUTLINE);
     UnloadTexture(TEXTURE_BIODOME_OUTLINE);
+    UnloadTexture(TEXTURE_LAB_OUTLINE);
 }
