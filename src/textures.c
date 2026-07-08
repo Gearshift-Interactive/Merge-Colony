@@ -5,9 +5,15 @@ Texture2D TEXTURE_ROCKS1;
 Texture2D TEXTURE_ROCKS2;
 Texture2D TEXTURE_ROCKS3;
 
-Texture2D TEXTURE_MOUNTAIN1;
-Texture2D TEXTURE_MOUNTAIN2;
-Texture2D TEXTURE_MOUNTAIN3;
+Texture2D TEXTURE_MOUNTAIN11;
+Texture2D TEXTURE_MOUNTAIN12;
+Texture2D TEXTURE_MOUNTAIN13;
+Texture2D TEXTURE_MOUNTAIN21;
+Texture2D TEXTURE_MOUNTAIN22;
+Texture2D TEXTURE_MOUNTAIN23;
+Texture2D TEXTURE_MOUNTAIN31;
+Texture2D TEXTURE_MOUNTAIN32;
+Texture2D TEXTURE_MOUNTAIN33;
 
 Texture2D TEXTURE_BOULDER1;
 Texture2D TEXTURE_BOULDER2;
@@ -31,9 +37,15 @@ void InitTextures(void)
     TEXTURE_ROCKS2 = LoadTexture("resources/tiles/rocks2.png");
     TEXTURE_ROCKS3 = LoadTexture("resources/tiles/rocks3.png");
 
-    TEXTURE_MOUNTAIN1 = LoadTexture("resources/tiles/mountain1.png");
-    TEXTURE_MOUNTAIN2 = LoadTexture("resources/tiles/mountain2.png");
-    TEXTURE_MOUNTAIN3 = LoadTexture("resources/tiles/mountain3.png");
+    TEXTURE_MOUNTAIN11 = LoadTexture("resources/tiles/mountain1-1.png");
+    TEXTURE_MOUNTAIN12 = LoadTexture("resources/tiles/mountain1-2.png");
+    TEXTURE_MOUNTAIN13 = LoadTexture("resources/tiles/mountain1-3.png");
+    TEXTURE_MOUNTAIN21 = LoadTexture("resources/tiles/mountain2-1.png");
+    TEXTURE_MOUNTAIN22 = LoadTexture("resources/tiles/mountain2-2.png");
+    TEXTURE_MOUNTAIN23 = LoadTexture("resources/tiles/mountain2-3.png");
+    TEXTURE_MOUNTAIN31 = LoadTexture("resources/tiles/mountain3-1.png");
+    TEXTURE_MOUNTAIN32 = LoadTexture("resources/tiles/mountain3-2.png");
+    TEXTURE_MOUNTAIN33 = LoadTexture("resources/tiles/mountain3-3.png");
 
     TEXTURE_BOULDER1 = LoadTexture("resources/tiles/boulder1.png");
     TEXTURE_BOULDER2 = LoadTexture("resources/tiles/boulder2.png");
@@ -57,9 +69,15 @@ void UnloadTextures(void)
     UnloadTexture(TEXTURE_ROCKS2);
     UnloadTexture(TEXTURE_ROCKS3);
 
-    UnloadTexture(TEXTURE_MOUNTAIN1);
-    UnloadTexture(TEXTURE_MOUNTAIN2);
-    UnloadTexture(TEXTURE_MOUNTAIN3);
+    UnloadTexture(TEXTURE_MOUNTAIN11);
+    UnloadTexture(TEXTURE_MOUNTAIN12);
+    UnloadTexture(TEXTURE_MOUNTAIN13);
+    UnloadTexture(TEXTURE_MOUNTAIN21);
+    UnloadTexture(TEXTURE_MOUNTAIN22);
+    UnloadTexture(TEXTURE_MOUNTAIN23);
+    UnloadTexture(TEXTURE_MOUNTAIN31);
+    UnloadTexture(TEXTURE_MOUNTAIN32);
+    UnloadTexture(TEXTURE_MOUNTAIN33);
 
     UnloadTexture(TEXTURE_BOULDER1);
     UnloadTexture(TEXTURE_BOULDER2);

@@ -55,16 +55,40 @@ static TileData Tiles[] = {
         .texture = &TEXTURE_ROCKS3,
         .kind = TILE_GROUND
     }, {
-        .id = "mountain1",
-        .texture = &TEXTURE_MOUNTAIN1,
+        .id = "mountain1-1",
+        .texture = &TEXTURE_MOUNTAIN11,
         .kind = TILE_MOUNTAIN
     }, {
-        .id = "mountain2",
-        .texture = &TEXTURE_MOUNTAIN2,
+        .id = "mountain1-2",
+        .texture = &TEXTURE_MOUNTAIN12,
         .kind = TILE_MOUNTAIN
     }, {
-        .id = "mountain3",
-        .texture = &TEXTURE_MOUNTAIN3,
+        .id = "mountain1-3",
+        .texture = &TEXTURE_MOUNTAIN13,
+        .kind = TILE_MOUNTAIN
+    }, {
+        .id = "mountain2-1",
+        .texture = &TEXTURE_MOUNTAIN21,
+        .kind = TILE_MOUNTAIN
+    }, {
+        .id = "mountain2-2",
+        .texture = &TEXTURE_MOUNTAIN22,
+        .kind = TILE_MOUNTAIN
+    }, {
+        .id = "mountain2-3",
+        .texture = &TEXTURE_MOUNTAIN23,
+        .kind = TILE_MOUNTAIN
+    }, {
+        .id = "mountain3-1",
+        .texture = &TEXTURE_MOUNTAIN31,
+        .kind = TILE_MOUNTAIN
+    }, {
+        .id = "mountain3-2",
+        .texture = &TEXTURE_MOUNTAIN32,
+        .kind = TILE_MOUNTAIN
+    }, {
+        .id = "mountain3-3",
+        .texture = &TEXTURE_MOUNTAIN33,
         .kind = TILE_MOUNTAIN
     }, {
         .id = "boulder1",

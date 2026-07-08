@@ -19,6 +19,24 @@ void GenerateMars(void)
         GetTileId("boulder2"),
     };
     const size_t boulders_size = sizeof(boulders) / sizeof(boulders[0]);
+    const u8 mountains1[] = {
+        GetTileId("mountain1-1"),
+        GetTileId("mountain1-2"),
+        GetTileId("mountain1-3"),
+    };
+    const size_t mountains1_size = sizeof(mountains1) / sizeof(mountains1[0]);
+    const u8 mountains2[] = {
+        GetTileId("mountain2-1"),
+        GetTileId("mountain2-2"),
+        GetTileId("mountain2-3"),
+    };
+    const size_t mountains2_size = sizeof(mountains2) / sizeof(mountains2[0]);
+    const u8 mountains3[] = {
+        GetTileId("mountain3-1"),
+        GetTileId("mountain3-2"),
+        GetTileId("mountain3-3"),
+    };
+    const size_t mountains3_size = sizeof(mountains3) / sizeof(mountains3[0]);
     for (size_t x = 0; x < MAP_WIDTH; x++)
     for (size_t y = 0; y < MAP_HEIGHT; y++)
     {
@@ -31,11 +49,11 @@ void GenerateMars(void)
         if (perlin > -0.1f)
         {
             if (perlin > 0.3f)
-                SetTile(1, (HexCoord) { x, y }, GetTileId("mountain3"));
+                SetTile(1, (HexCoord) { x, y }, mountains3[rand() % mountains3_size]);
             else if (perlin > 0.15f)
-                SetTile(1, (HexCoord) { x, y }, GetTileId("mountain2"));
+                SetTile(1, (HexCoord) { x, y }, mountains2[rand() % mountains2_size]);
             else if (perlin > 0)
-                SetTile(1, (HexCoord) { x, y }, GetTileId("mountain1"));
+                SetTile(1, (HexCoord) { x, y }, mountains1[rand() % mountains1_size]);
             else
                 SetTile(1, (HexCoord) { x, y }, boulders[rand() % boulders_size]);
         }
