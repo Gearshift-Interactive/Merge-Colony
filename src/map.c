@@ -43,6 +43,10 @@ Vector2 CalculateTileScreenPos(HexCoord coord)
     };
 
 }
+bool IsTileInMap(HexCoord coord)
+{
+    return coord.x >= 0 && coord.y >= 0 && coord.x < MAP_WIDTH && coord.y < MAP_HEIGHT;
+}
 void RenderMap(void)
 {
     for (size_t x = 0; x < 14; x++)

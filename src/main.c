@@ -7,6 +7,7 @@
 #include "textures.h"
 #include "map.h"
 #include "tiles.h"
+#include "cursor.h"
 
 #define WINDOW_TITLE APP_NAME " v" APP_VERSION
 
@@ -64,13 +65,9 @@ void UpdateDrawFrame(void)
     }
 
     BeginTextureMode(Screen);
-        ClearBackground((Color) {
-            .r = 0xCA,
-            .g = 0x70,
-            .b = 0x4E,
-            .a = 255,
-        });
+        ClearBackground((Color) { 0xCA, 0x70, 0x4E, 255 });
         RenderMap();
+        RenderMouseCursor(current, currentTile);
     EndTextureMode();
     BeginDrawing();
         DrawTexturePro(
