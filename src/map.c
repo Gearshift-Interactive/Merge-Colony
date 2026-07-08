@@ -2,6 +2,7 @@
 
 #include "tiles.h"
 #include "textures.h"
+#include "stb_perlin_.h"
 
 static u8 Map[MAP_LAYERS][MAP_WIDTH][MAP_HEIGHT] = { 0 };
 
@@ -26,14 +27,25 @@ void GenerateMars(void)
         GetTileId("rocks3"),
         GetTileId("boulder1"),
         GetTileId("boulder2"),
-        GetTileId("mountain1"),
-        GetTileId("mountain2"),
-        GetTileId("mountain3"),
     };
     const size_t size = sizeof(tiles) / sizeof(tiles[0]);
     for (size_t x = 0; x < MAP_WIDTH; x++)
     for (size_t y = 0; y < MAP_HEIGHT; y++)
-        SetTile(0, (HexCoord) { x, y }, tiles[rand() % size]);
+    {
+        float perlin = stb_perlin_fbm_noise3(x * 0.1f, y * 0.1f, 0, 2, 0.5f, 4);
+        printf("%f\n", perlin);
+        if (perlin > 0)
+        {
+            if (perlin > 0.2f)
+                SetTile(0, (HexCoord) { x, y }, GetTileId("mountain3"));
+            else if (perlin > 0.1f)
+                SetTile(0, (HexCoord) { x, y }, GetTileId("mountain2"));
+            else
+                SetTile(0, (HexCoord) { x, y }, GetTileId("mountain1"));
+        }
+        else
+            SetTile(0, (HexCoord) { x, y }, tiles[rand() % size]);
+    }
 }
 Vector2 CalculateTileScreenPos(HexCoord coord)
 {
