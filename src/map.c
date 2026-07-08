@@ -40,9 +40,9 @@ void GenerateMars(void)
         );
         if (perlin > 0)
         {
-            if (perlin > 0.2f)
+            if (perlin > 0.3f)
                 SetTile(0, (HexCoord) { x, y }, GetTileId("mountain3"));
-            else if (perlin > 0.1f)
+            else if (perlin > 0.15f)
                 SetTile(0, (HexCoord) { x, y }, GetTileId("mountain2"));
             else
                 SetTile(0, (HexCoord) { x, y }, GetTileId("mountain1"));
