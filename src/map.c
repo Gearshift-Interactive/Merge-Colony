@@ -32,7 +32,11 @@ void GenerateMars(void)
     for (size_t x = 0; x < MAP_WIDTH; x++)
     for (size_t y = 0; y < MAP_HEIGHT; y++)
     {
-        float perlin = stb_perlin_fbm_noise3(x * 0.1f, y * 0.1f, 0, 2, 0.5f, 4);
+        float perlin = stb_perlin_fbm_noise3(
+            x * 0.15f, y * 0.15f, 0,
+            /* lacunarity */ 2,
+            /* gain */ 0.5f,
+            /* octaves */ 2);
         printf("%f\n", perlin);
         if (perlin > 0)
         {
