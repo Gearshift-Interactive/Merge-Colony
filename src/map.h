@@ -9,6 +9,8 @@
 #define MAP_ORIGIN_X 8
 #define MAP_ORIGIN_Y 8
 
+extern i32 CurrentOverlay;
+
 void GenerateMars(void);
 Vector2 CalculateTileScreenPos(HexCoord);
 bool IsTileInMap(HexCoord);

@@ -9,6 +9,8 @@
 
 static u8 Map[MAP_LAYERS][MAP_WIDTH][MAP_HEIGHT] = { 0 };
 
+i32 CurrentOverlay = 1;
+
 static u8 Copper[MAP_WIDTH][MAP_HEIGHT] = { 0 };
 static u8 Iron[MAP_WIDTH][MAP_HEIGHT] = { 0 };
 static u8 Water[MAP_WIDTH][MAP_HEIGHT] = { 0 };
@@ -76,29 +78,29 @@ void GenerateMars(void)
         SetTile(0, (HexCoord) { x, y }, tiles[rand() % tiles_size]);
 
         f32 copperPerlin = stb_perlin_fbm_noise3(
-            x * 0.15f, y * 0.15f, 0,
+            x * 0.15f, y * 0.15f, 10000,
             /* lacunarity */ 2,
-            /* gain */ 0.5f,
-            /* octaves */ 2
+            /* gain */ 0.7f,
+            /* octaves */ 4
         );
         if (copperPerlin > 0)
             Copper[x][y] = copperPerlin * 255;
         f32 ironPerlin = stb_perlin_fbm_noise3(
-            x * 0.15f, y * 0.15f, 0,
+            x * 0.15f, y * 0.15f, 20000,
             /* lacunarity */ 2,
-            /* gain */ 0.5f,
-            /* octaves */ 2
+            /* gain */ 0.2f,
+            /* octaves */ 8
         );
         if (ironPerlin > 0.1f)
             Iron[x][y] = (ironPerlin - 0.1f) / 0.9f * 255;
         f32 waterPerlin = stb_perlin_fbm_noise3(
-            x * 0.15f, y * 0.15f, 0,
+            x * 0.15f, y * 0.15f, 30000,
             /* lacunarity */ 2,
             /* gain */ 0.5f,
             /* octaves */ 2
         );
         if (waterPerlin > 0)
-            Iron[x][y] = waterPerlin * 255;
+            Water[x][y] = waterPerlin * 255;
     }
     // const u8 coppers[] = {
     //     GetTileId("copper1"),
@@ -142,16 +144,45 @@ static void RenderTile(int layer, size_t x, size_t y)
             WHITE
         );
 }
+static void RenderOverlay(size_t x, size_t y)
+{
+    if (!CurrentOverlay)
+        return;
+    Color color = { 0 };
+    switch(CurrentOverlay)
+    {
+    case 1:
+        color.b = 255;
+        color.a = Water[x][y];
+        break;
+    case 2:
+        color.r = 255;
+        color.a = Iron[x][y];
+        break;
+    case 3:
+        color.g = 255;
+        color.a = Copper[x][y];
+        break;
+    }
+
+    const HexCoord coord = {x, y};
+    const Vector2 screenPos = CalculateTileScreenPos(coord);
+    DrawTexture(TEXTURE_HEX, screenPos.x, screenPos.y + TEXTURE_HEX.height * 0.5f, color);
+}
 void RenderMap(void)
 {
-    for (int layer = 0; layer < 2; layer++)
-        for (size_t y = 0; y < MAP_HEIGHT; y++)
-        {
-            for (size_t x = 1; x < MAP_WIDTH; x += 2)
+    for (size_t y = 0; y < MAP_HEIGHT; y++)
+    {
+        for (size_t x = 1; x < MAP_WIDTH; x += 2)
+            for (int layer = 0; layer < 2; layer++)
                 RenderTile(layer, x, y);
-            for (size_t x = 0; x < MAP_WIDTH; x += 2)
+        for (size_t x = 0; x < MAP_WIDTH; x += 2)
+            for (int layer = 0; layer < 2; layer++)
                 RenderTile(layer, x, y);
-        }
+    }
+    for (size_t y = 0; y < MAP_HEIGHT; y++)
+        for (size_t x = 0; x < MAP_WIDTH; x++)
+            RenderOverlay(x, y);
 }
 u8 GetTile(u32 layer, HexCoord pos)
 {

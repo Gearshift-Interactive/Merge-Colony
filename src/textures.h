@@ -2,6 +2,8 @@
 
 #include "common.h"
 
+extern Texture2D TEXTURE_HEX;
+
 extern Texture2D TEXTURE_ROCKS1;
 extern Texture2D TEXTURE_ROCKS2;
 extern Texture2D TEXTURE_ROCKS3;

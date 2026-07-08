@@ -1,6 +1,8 @@
 #include "textures.h"
 #include "common.h"
 
+Texture2D TEXTURE_HEX;
+
 Texture2D TEXTURE_ROCKS1;
 Texture2D TEXTURE_ROCKS2;
 Texture2D TEXTURE_ROCKS3;
@@ -43,6 +45,8 @@ Texture2D TEXTURE_GENERATOR_OUTLINE;
 
 void InitTextures(void)
 {
+    TEXTURE_HEX = LoadTexture("resources/tiles/hex.png");
+
     TEXTURE_ROCKS1 = LoadTexture("resources/tiles/rocks1.png");
     TEXTURE_ROCKS2 = LoadTexture("resources/tiles/rocks2.png");
     TEXTURE_ROCKS3 = LoadTexture("resources/tiles/rocks3.png");
@@ -85,6 +89,8 @@ void InitTextures(void)
 }
 void UnloadTextures(void)
 {
+    UnloadTexture(TEXTURE_HEX);
+
     UnloadTexture(TEXTURE_ROCKS1);
     UnloadTexture(TEXTURE_ROCKS2);
     UnloadTexture(TEXTURE_ROCKS3);
