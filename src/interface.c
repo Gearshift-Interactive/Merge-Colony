@@ -4,6 +4,7 @@
 #include "guiwindow.h"
 
 #include "tiles.h"
+#include "state.h"
 
 typedef struct {
     Vector2 position;
@@ -26,7 +27,7 @@ static WindowData DestroyWindow = {
 };
 static WindowData StatisticsWindow = {
     .position = { 10, 30 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT * 2 },
-    .size = { 210, 310 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
+    .size = { 210, 460 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
     .minimized = true
 };
 static const WindowData *WINDOWS[] = {
@@ -39,7 +40,7 @@ static void DrawBuildContent(Vector2 position, __attribute__((unused)) Vector2 s
 {
     if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 10, 190, 40 }, "Biodome"))
         *currentTile = GetTileId("biodome");
-    if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 60, 190, 40 }, "Apartaments"))
+    if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 60, 190, 40  }, "Apartaments"))
         *currentTile = GetTileId("apartaments");
     if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 110, 190, 40 }, "Drill"))
         *currentTile = GetTileId("drill");
@@ -49,6 +50,28 @@ static void DrawBuildContent(Vector2 position, __attribute__((unused)) Vector2 s
         *currentTile = GetTileId("factory");
     if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 260, 190, 40 }, "Generator"))
         *currentTile = GetTileId("generator");
+}
+
+static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 scroll)
+{
+    GuiLabel((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 10, 190, 40 },  TextFormat("#1#               %d",
+                                                                                                                            Tehos));
+    GuiLabel((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 60, 190, 40 },  TextFormat("#1# Population    %d",
+                                                                                                                            Population));
+    GuiLabel((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 110, 190, 40 }, TextFormat("#1# Happiness     %d",
+                                                                                                                            Happiness));
+    GuiLabel((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 160, 190, 40 }, TextFormat("#1# Water         %d",
+                                                                                                                            Water));
+    GuiLabel((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 210, 190, 40 }, TextFormat("#1# Food          %d",
+                                                                                                                            Food));
+    GuiLabel((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 260, 190, 40 }, TextFormat("#1# Electricity   %d",
+                                                                                                                            Electricity));
+    GuiLabel((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 310, 190, 40 }, TextFormat("#1# Iron          %d",
+                                                                                                                            Iron));
+    GuiLabel((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 360, 190, 40 }, TextFormat("#1# Copper        %d",
+                                                                                                                            Copper));
+    GuiLabel((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 410, 190, 40 }, TextFormat("#1# Uranium       %d",
+                                                                                                                            Uranium));
 }
 
 void InitGui(u8 *currentTileVar)
@@ -89,7 +112,7 @@ void UpdateDrawGui(void)
         &StatisticsWindow.minimized,
         &StatisticsWindow.moving,
         &StatisticsWindow.resizing,
-        NULL,
+        DrawStatContent,
         (Vector2) { 0 },
         &StatisticsWindow.scroll,
         "#2#SATISTICS"
