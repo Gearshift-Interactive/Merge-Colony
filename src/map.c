@@ -36,7 +36,7 @@ Vector2 CalculateTileScreenPos(HexCoord coord)
 {
     return (Vector2) {
         MAP_ORIGIN_X + TEXTURE_HIGHLIGHT.width * 0.75f * coord.x,
-        MAP_ORIGIN_Y + TEXTURE_HIGHLIGHT.height * coord.y + ( (coord.x % 2 == 0)
+        MAP_ORIGIN_Y - TEXTURE_HIGHLIGHT.height * 0.5f + TEXTURE_HIGHLIGHT.height * coord.y + ( (coord.x % 2 == 0)
             ? TEXTURE_HIGHLIGHT.height / 2
             : 0
         )
