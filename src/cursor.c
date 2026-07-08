@@ -13,7 +13,6 @@ void RenderMouseCursor(HexCoord tileSelected, u8 currentBuilding)
 {
     if (!IsTileInMap(tileSelected) || IsCursorOnGui(GetMousePosition())) return;
 
-    printf("%f, %f\n", currentCursorPos.x, currentCursorPos.y);
     Vector2 tileCoord = CalculateTileScreenPos(tileSelected);
     targetCursorPos = tileCoord;
     float dt = GetFrameTime();
