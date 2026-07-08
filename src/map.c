@@ -1,8 +1,9 @@
 #include "map.h"
 
 #include "tiles.h"
+#include "textures.h"
 
-static u8 Map[MAP_WIDTH][MAP_HEIGHT] = { 0 };
+static u8 Map[MAP_LAYERS][MAP_WIDTH][MAP_HEIGHT] = { 0 };
 
 void GenerateMars(void)
 {
@@ -29,13 +30,41 @@ void GenerateMars(void)
     const size_t size = sizeof(tiles) / sizeof(tiles[0]);
     for (size_t x = 0; x < MAP_WIDTH; x++)
     for (size_t y = 0; y < MAP_HEIGHT; y++)
-        SetTile((HexCoord) { x, y }, tiles[rand() % size]);
+        SetTile(0, (HexCoord) { x, y }, tiles[rand() % size]);
 }
-u8 GetTile(HexCoord pos)
+Vector2 CalculateTileScreenPos(HexCoord coord)
 {
-    return Map[pos.x][pos.y];
+    return (Vector2) {
+        MAP_ORIGIN_X + TEXTURE_HIGHLIGHT.width * 0.75f * coord.x,
+        MAP_ORIGIN_Y + TEXTURE_HIGHLIGHT.height * coord.y + ( (coord.x % 2 == 0)
+            ? TEXTURE_HIGHLIGHT.height / 2
+            : 0
+        )
+    };
+
 }
-void SetTile(HexCoord pos, u8 tile)
+void RenderMap(void)
 {
-    Map[pos.x][pos.y] = tile;
+    for (size_t x = 0; x < 14; x++)
+    for (size_t y = 0; y < 9; y++)
+    {
+        const HexCoord coord = {x, y};
+        const Vector2 screenPos = CalculateTileScreenPos(coord);
+        const u8 tile = GetTile(0, coord);
+        if (tile)
+            DrawTexture(
+                *GetTileTexture(tile),
+                screenPos.x,
+                screenPos.y,
+                WHITE
+            );
+    }
+}
+u8 GetTile(u32 layer, HexCoord pos)
+{
+    return Map[layer][pos.x][pos.y];
+}
+void SetTile(u32 layer, HexCoord pos, u8 tile)
+{
+    Map[layer][pos.x][pos.y] = tile;
 }

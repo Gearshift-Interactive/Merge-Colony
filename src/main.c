@@ -10,9 +10,6 @@
 
 #define WINDOW_TITLE APP_NAME " v" APP_VERSION
 
-const u32 ORIGIN_X = 8;
-const u32 ORIGIN_Y = 8;
-
 const float TILE_RADIUS = 16.0f;
 
 bool showBuildBox = false;
@@ -23,8 +20,8 @@ u8 currentTile = 0;
 
 HexCoord GetMousePointed(void)
 {
-    const float px = GetMousePosition().x / 2.0f - ORIGIN_X;
-    const float py = GetMousePosition().y / 2.0f - ORIGIN_Y;
+    const float px = GetMousePosition().x / 2.0f - MAP_ORIGIN_X;
+    const float py = GetMousePosition().y / 2.0f - MAP_ORIGIN_Y;
 
     const float q = (px - 16.0f) / 24.0f;
     const float r_ = (py - 16.0f * q - 32.0f) / 32.0f;
@@ -61,9 +58,9 @@ void UpdateDrawFrame(void)
     if (GetMouseY() < 670 && !showBuildBox)
     {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-            SetTile(current, currentTile);
+            SetTile(0, current, currentTile);
         if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
-            SetTile(current, 0);
+            SetTile(0, current, 0);
     }
 
     BeginTextureMode(Screen);
@@ -73,42 +70,7 @@ void UpdateDrawFrame(void)
             .b = 0x4E,
             .a = 255,
         });
-        for (size_t x = 0; x < 14; x++)
-        for (size_t y = 0; y < 9; y++)
-        {
-            const HexCoord coord = {x, y};
-            const Vector2 screenPos = {
-                ORIGIN_X + TEXTURE_HIGHLIGHT.width * 0.75f * x,
-                ORIGIN_Y + TEXTURE_HIGHLIGHT.height * y + ( (x % 2 == 0)
-                    ? TEXTURE_HIGHLIGHT.height / 2
-                    : 0
-                )
-            };
-            const u8 tile = GetTile(coord);
-            if (tile)
-                DrawTexture(
-                    *GetTileTexture(tile),
-                    screenPos.x,
-                    screenPos.y,
-                    WHITE
-                );
-            if (HexEqual(coord, current)) {
-                if (currentTile != 0)
-                    DrawTexture(
-                        *GetTileOutline(currentTile),
-                        screenPos.x,
-                        screenPos.y,
-                        WHITE
-                    );
-                else
-                    DrawTexture(
-                        TEXTURE_HIGHLIGHT,
-                        screenPos.x,
-                        screenPos.y,
-                        WHITE
-                    );
-            }
-        }
+        RenderMap();
     EndTextureMode();
     BeginDrawing();
         DrawTexturePro(
