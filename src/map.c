@@ -9,7 +9,7 @@
 
 static u8 Map[MAP_LAYERS][MAP_WIDTH][MAP_HEIGHT] = { 0 };
 
-i32 CurrentOverlay = 1;
+i32 CurrentOverlay = 0;
 
 static u8 Copper[MAP_WIDTH][MAP_HEIGHT] = { 0 };
 static u8 Iron[MAP_WIDTH][MAP_HEIGHT] = { 0 };

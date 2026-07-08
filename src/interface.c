@@ -5,6 +5,7 @@
 
 #include "tiles.h"
 #include "state.h"
+#include "map.h"
 
 typedef struct {
     Vector2 position;
@@ -30,8 +31,13 @@ static WindowData StatisticsWindow = {
     .size = { 210, 210 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
     .minimized = true
 };
+static WindowData OverlayWindow = {
+    .position = { 10, 40 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT * 3 },
+    .size = { 210, 185 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
+    .minimized = true
+};
 static const WindowData *WINDOWS[] = {
-    &BuildWindow, &DestroyWindow, &StatisticsWindow
+    &BuildWindow, &DestroyWindow, &StatisticsWindow, &OverlayWindow
 };
 
 static u8 *currentTile;
@@ -150,6 +156,19 @@ static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 sc
         TextFormat("%d", Uranium)
     );
 }
+static void DrawOverlayContent(Vector2 position, __attribute__((unused)) Vector2 scroll)
+{
+    GuiToggleGroup(
+        (Rectangle){
+            position.x + 10,
+            position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 10,
+            190,
+            40
+        },
+        "---\n#11# Water\n#14# Iron\n#15# Copper",
+        &CurrentOverlay
+    );
+}
 
 void InitGui(u8 *currentTileVar)
 {
@@ -161,6 +180,17 @@ void UpdateDrawGui(void)
     // (GuiButton((Rectangle){ 230, 670, 210, 40 }, "#1#DESTROY"));
     // (GuiButton((Rectangle){ 450, 670, 210, 40 }, "#2#STATISTICS"));
     // (GuiButton((Rectangle){ 670, 670, 40, 40 }, "#3#"));
+    GuiWindowFloating(
+        &OverlayWindow.position,
+        &OverlayWindow.size,
+        &OverlayWindow.minimized,
+        &OverlayWindow.moving,
+        &OverlayWindow.resizing,
+        DrawOverlayContent,
+        (Vector2) { 0 },
+        &OverlayWindow.scroll,
+        "#2#Overlay"
+    );
     GuiWindowFloating(
         &StatisticsWindow.position,
         &StatisticsWindow.size,
