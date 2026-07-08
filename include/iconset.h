@@ -144,8 +144,8 @@ typedef enum {
     ICON_115                      = 115,
     ICON_116                      = 116,
     ICON_117                      = 117,
-    ICON_118                      = 118,
-    ICON_119                      = 119,
+    ICON_ARROW_LEFT_FILL          = 118,
+    ICON_ARROW_RIGHT_FILL         = 119,
     ICON_120                      = 120,
     ICON_121                      = 121,
     ICON_122                      = 122,
@@ -154,7 +154,7 @@ typedef enum {
     ICON_125                      = 125,
     ICON_126                      = 126,
     ICON_127                      = 127,
-    ICON_128                      = 128,
+    ICON_CROSS_SMALL              = 128,
     ICON_129                      = 129,
     ICON_130                      = 130,
     ICON_131                      = 131,
@@ -545,3 +545,6 @@ static unsigned int guiIcons[RAYGUI_ICON_MAX_ICONS*RAYGUI_ICON_DATA_ELEMENTS] = 
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,      // ICON_254
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,      // ICON_255
 };
+
+static unsigned int *guiIconsPtr = guiIcons;
+

@@ -63,16 +63,32 @@ void GuiWindowFloating(Vector2 *position, Vector2 *size, bool *minimized, bool *
     if(*minimized) {
         GuiStatusBar((Rectangle){ position->x, position->y, size->x, RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT }, title);
 
-        if (GuiButton((Rectangle){ position->x + size->x - RAYGUI_WINDOW_CLOSEBUTTON_SIZE - close_title_size_delta_half,
-                                   position->y + close_title_size_delta_half,
-                                   RAYGUI_WINDOW_CLOSEBUTTON_SIZE,
-                                   RAYGUI_WINDOW_CLOSEBUTTON_SIZE },
-                                   "#120#")) {
+        if (
+            GuiButton((Rectangle){
+                position->x + size->x - RAYGUI_WINDOW_CLOSEBUTTON_SIZE - close_title_size_delta_half,
+                position->y + close_title_size_delta_half,
+                RAYGUI_WINDOW_CLOSEBUTTON_SIZE,
+                RAYGUI_WINDOW_CLOSEBUTTON_SIZE },
+                "#5#"
+            )
+        ) {
             *minimized = false;
         }
 
     } else {
-        *minimized = GuiWindowBox((Rectangle) { position->x, position->y, size->x, size->y }, title);
+        GuiStatusBar((Rectangle){ position->x, position->y, size->x, RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT }, title);
+
+        if (
+            GuiButton((Rectangle){
+                position->x + size->x - RAYGUI_WINDOW_CLOSEBUTTON_SIZE - close_title_size_delta_half,
+                position->y + close_title_size_delta_half,
+                RAYGUI_WINDOW_CLOSEBUTTON_SIZE,
+                RAYGUI_WINDOW_CLOSEBUTTON_SIZE },
+                "#4#"
+            )
+        ) {
+            *minimized = true;
+        }
 
         // scissor and draw content within a scroll panel
         if(draw_content != NULL) {
