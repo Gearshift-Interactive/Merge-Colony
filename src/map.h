@@ -3,7 +3,7 @@
 #include "common.h"
 
 #define MAP_WIDTH  14
-#define MAP_HEIGHT 9
+#define MAP_HEIGHT 10
 #define MAP_LAYERS 2
 
 #define MAP_ORIGIN_X 8

@@ -48,8 +48,8 @@ bool IsTileInMap(HexCoord coord)
 }
 void RenderMap(void)
 {
-    for (size_t x = 0; x < 14; x++)
-    for (size_t y = 0; y < 9; y++)
+    for (size_t x = 0; x < MAP_WIDTH; x++)
+    for (size_t y = 0; y < MAP_HEIGHT; y++)
     {
         const HexCoord coord = {x, y};
         const Vector2 screenPos = CalculateTileScreenPos(coord);
