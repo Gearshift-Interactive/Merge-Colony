@@ -71,20 +71,20 @@ void GenerateMars(void)
             SetTile(1, (HexCoord) { x, y }, 0);
         SetTile(0, (HexCoord) { x, y }, tiles[rand() % tiles_size]);
     }
-    const u8 coppers[] = {
-        GetTileId("copper1"),
-        GetTileId("copper2"),
-    };
-    const usize coppers_size = sizeof(coppers) / sizeof(coppers[0]);
-    for (usize i = 0; i < MAX_COPPER; i++)
-        SetTile(0, FindFree(), coppers[rand() % coppers_size]);
-    const u8 irons[] = {
-        GetTileId("iron1"),
-        GetTileId("iron2"),
-    };
-    const usize ironsSize = sizeof(irons) / sizeof(irons[0]);
-    for (usize i = 0; i < MAX_IRON; i++)
-        SetTile(0, FindFree(), irons[rand() % ironsSize]);
+    // const u8 coppers[] = {
+    //     GetTileId("copper1"),
+    //     GetTileId("copper2"),
+    // };
+    // const usize coppers_size = sizeof(coppers) / sizeof(coppers[0]);
+    // for (usize i = 0; i < MAX_COPPER; i++)
+    //     SetTile(0, FindFree(), coppers[rand() % coppers_size]);
+    // const u8 irons[] = {
+    //     GetTileId("iron1"),
+    //     GetTileId("iron2"),
+    // };
+    // const usize ironsSize = sizeof(irons) / sizeof(irons[0]);
+    // for (usize i = 0; i < MAX_IRON; i++)
+    //     SetTile(0, FindFree(), irons[rand() % ironsSize]);
 }
 Vector2 CalculateTileScreenPos(HexCoord coord)
 {

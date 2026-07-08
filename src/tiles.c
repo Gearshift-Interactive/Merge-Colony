@@ -39,8 +39,8 @@ static TileData Tiles[] = {
         .kind = TILE_BUILDING
     }, {
         .id = "generator",
-        // .texture = &TEXTURE_GENERATOR,
-        // .outline = &TEXTURE_GENERATOR_OUTLINE,
+        .texture = &TEXTURE_GENERATOR,
+        .outline = &TEXTURE_GENERATOR_OUTLINE,
         .kind = TILE_BUILDING
     }, {
         .id = "rocks1",
