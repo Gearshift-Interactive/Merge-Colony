@@ -49,21 +49,27 @@ bool IsTileInMap(HexCoord coord)
 {
     return coord.x >= 0 && coord.y >= 0 && coord.x < MAP_WIDTH && coord.y < MAP_HEIGHT;
 }
+static void RenderTile(size_t x, size_t y)
+{
+    const HexCoord coord = {x, y};
+    const Vector2 screenPos = CalculateTileScreenPos(coord);
+    const u8 tile = GetTile(0, coord);
+    if (tile)
+        DrawTexture(
+            *GetTileTexture(tile),
+            screenPos.x,
+            screenPos.y,
+            WHITE
+        );
+}
 void RenderMap(void)
 {
-    for (size_t x = 0; x < MAP_WIDTH; x++)
     for (size_t y = 0; y < MAP_HEIGHT; y++)
     {
-        const HexCoord coord = {x, y};
-        const Vector2 screenPos = CalculateTileScreenPos(coord);
-        const u8 tile = GetTile(0, coord);
-        if (tile)
-            DrawTexture(
-                *GetTileTexture(tile),
-                screenPos.x,
-                screenPos.y,
-                WHITE
-            );
+        for (size_t x = 1; x < MAP_WIDTH; x += 2)
+            RenderTile(x, y);
+        for (size_t x = 0; x < MAP_WIDTH; x += 2)
+            RenderTile(x, y);
     }
 }
 u8 GetTile(u32 layer, HexCoord pos)
