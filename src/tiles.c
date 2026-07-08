@@ -52,6 +52,15 @@ static TileData Tiles[] = {
         .id = "rocks3",
         .texture = &TEXTURE_ROCKS3
     }, {
+        .id = "mountain1",
+        .texture = &TEXTURE_MOUNTAIN1
+    }, {
+        .id = "mountain2",
+        .texture = &TEXTURE_MOUNTAIN2
+    }, {
+        .id = "mountain3",
+        .texture = &TEXTURE_MOUNTAIN3
+    }, {
         .id = "boulder1",
         .texture = &TEXTURE_BOULDER1,
         .destroyable = true

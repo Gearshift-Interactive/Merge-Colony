@@ -5,6 +5,10 @@ Texture2D TEXTURE_ROCKS1;
 Texture2D TEXTURE_ROCKS2;
 Texture2D TEXTURE_ROCKS3;
 
+Texture2D TEXTURE_MOUNTAIN1;
+Texture2D TEXTURE_MOUNTAIN2;
+Texture2D TEXTURE_MOUNTAIN3;
+
 Texture2D TEXTURE_BOULDER1;
 Texture2D TEXTURE_BOULDER2;
 
@@ -25,6 +29,10 @@ void InitTextures(void)
     TEXTURE_ROCKS2 = LoadTexture("resources/tiles/rocks2.png");
     TEXTURE_ROCKS3 = LoadTexture("resources/tiles/rocks3.png");
 
+    TEXTURE_MOUNTAIN1 = LoadTexture("resources/tiles/mountain1.png");
+    TEXTURE_MOUNTAIN2 = LoadTexture("resources/tiles/mountain2.png");
+    TEXTURE_MOUNTAIN3 = LoadTexture("resources/tiles/mountain3.png");
+
     TEXTURE_BOULDER1 = LoadTexture("resources/tiles/boulder1.png");
     TEXTURE_BOULDER2 = LoadTexture("resources/tiles/boulder2.png");
 
@@ -44,6 +52,10 @@ void UnloadTextures(void)
     UnloadTexture(TEXTURE_ROCKS1);
     UnloadTexture(TEXTURE_ROCKS2);
     UnloadTexture(TEXTURE_ROCKS3);
+
+    UnloadTexture(TEXTURE_MOUNTAIN1);
+    UnloadTexture(TEXTURE_MOUNTAIN2);
+    UnloadTexture(TEXTURE_MOUNTAIN3);
 
     UnloadTexture(TEXTURE_BOULDER1);
     UnloadTexture(TEXTURE_BOULDER2);

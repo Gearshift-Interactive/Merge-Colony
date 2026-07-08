@@ -26,6 +26,9 @@ void GenerateMars(void)
         GetTileId("rocks3"),
         GetTileId("boulder1"),
         GetTileId("boulder2"),
+        GetTileId("mountain1"),
+        GetTileId("mountain2"),
+        GetTileId("mountain3"),
     };
     const size_t size = sizeof(tiles) / sizeof(tiles[0]);
     for (size_t x = 0; x < MAP_WIDTH; x++)

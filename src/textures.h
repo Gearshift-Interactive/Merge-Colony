@@ -6,6 +6,10 @@ extern Texture2D TEXTURE_ROCKS1;
 extern Texture2D TEXTURE_ROCKS2;
 extern Texture2D TEXTURE_ROCKS3;
 
+extern Texture2D TEXTURE_MOUNTAIN1;
+extern Texture2D TEXTURE_MOUNTAIN2;
+extern Texture2D TEXTURE_MOUNTAIN3;
+
 extern Texture2D TEXTURE_BOULDER1;
 extern Texture2D TEXTURE_BOULDER2;
 
