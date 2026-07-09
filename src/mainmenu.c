@@ -62,17 +62,17 @@ void UpdateDrawMenu(void)
 
     RenderStars();
 
-    if (GuiButton((Rectangle){ 260, 300, 200, 50 }, "PLAY"))
+    if (GuiButton((Rectangle){ 260, 300, 200, 50 }, "#20# PLAY"))
     {
         GenerateMars();
         currentScreen = SCREEN_MARS;
     }
 
-    if (GuiButton((Rectangle){ 260, 370, 200, 50 }, "CREDITS"))
+    if (GuiButton((Rectangle){ 260, 370, 200, 50 }, "#7# CREDITS"))
         currentScreen = SCREEN_CREDITS;
 
 #if !defined(PLATFORM_WEB)
-    if (GuiButton((Rectangle){ 260, 440, 200, 50 }, "#1# EXIT"))
+    if (GuiButton((Rectangle){ 260, 440, 200, 50 }, "#19# EXIT"))
     {
         exit(0);
     }
@@ -106,7 +106,7 @@ void UpdateDrawCredits(void)
         y += 30;
     }
 
-    if (GuiButton((Rectangle){ 260, 500, 200, 50 }, "Back"))
+    if (GuiButton((Rectangle){ 260, 500, 200, 50 }, "#19# Back"))
         currentScreen = SCREEN_MENU;
 
     EndDrawing();

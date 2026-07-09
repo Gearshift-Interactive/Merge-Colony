@@ -89,7 +89,7 @@ void UpdateDrawFrame(void)
     }
 
     BeginTextureMode(Screen);
-        ClearBackground((Color) { 0xCA, 0x70, 0x4E, 255 });
+        ClearBackground((Color) { 0xC8, 0x6D, 0x4D, 255 });
         RenderMap();
         RenderMouseCursor(current, currentTile);
     EndTextureMode();
