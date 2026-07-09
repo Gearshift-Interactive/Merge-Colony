@@ -94,7 +94,7 @@ static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 sc
         "#7# Population"
     );
     GuiLabel(
-        (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 10, 190, 40 },
+        (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 10, 190, 40 },
         TextFormat("%d/%d/%d", Population, Housing, Jobs)
     );
     GuiLabel(
@@ -102,7 +102,7 @@ static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 sc
         (Happiness > 66) ? "#8# Happiness" : (Happiness > 33) ? "#9# Happiness" : "#10# Happiness"
     );
     GuiLabel(
-        (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 30, 190, 40 },
+        (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 30, 190, 40 },
         TextFormat("%d%%", Happiness)
     );
     GuiLabel(
@@ -110,7 +110,7 @@ static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 sc
         "#11# Water"
     );
     GuiLabel(
-        (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 60, 190, 40 },
+        (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 60, 190, 40 },
         TextFormat("%d", Water)
     );
     // GuiLabel(
@@ -126,15 +126,15 @@ static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 sc
         "#13# Electricity"
     );
     GuiLabel(
-        (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 80, 190, 40 },
-        TextFormat("%d/%d", ElectricityConsumed, ElectricityGenerated)
+        (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 80, 190, 40 },
+        TextFormat("%dkW/%dkW", ElectricityConsumed, ElectricityGenerated)
     );
     GuiLabel(
         (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 110, 190, 40 },
         "#14# Iron"
     );
     GuiLabel(
-        (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 110, 190, 40 },
+        (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 110, 190, 40 },
         TextFormat("%d", Iron)
     );
     GuiLabel(
@@ -142,7 +142,7 @@ static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 sc
         "#15# Copper"
     );
     GuiLabel(
-        (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 130, 190, 40 },
+        (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 130, 190, 40 },
         TextFormat("%d", Copper)
     );
     // GuiLabel(

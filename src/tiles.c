@@ -23,7 +23,7 @@ static TileData Tiles[] = {
         .kind = TILE_BUILDING_BIODOME,
         .cost = 200,
         .happinessFactor = 10,
-        .powerFactor = -2,
+        .powerFactor = -20,
     }, {
         .id = "apartaments",
         .texture = &TEXTURE_APARTAMENT,
@@ -32,7 +32,7 @@ static TileData Tiles[] = {
         .space = 6,
         .cost = 100,
         .happinessFactor = 3,
-        .powerFactor = -2,
+        .powerFactor = -20,
     }, {
         .id = "drill",
         .texture = &TEXTURE_DRILL,
@@ -41,7 +41,7 @@ static TileData Tiles[] = {
         .space = 3,
         .cost = 150,
         .happinessFactor = -20,
-        .powerFactor = -5,
+        .powerFactor = -50,
     }, {
         .id = "generator",
         .texture = &TEXTURE_GENERATOR,
@@ -50,7 +50,7 @@ static TileData Tiles[] = {
         .space = 3,
         .cost = 100,
         .happinessFactor = -10,
-        .powerFactor = 20,
+        .powerFactor = 200,
     }, {
         .id = "rocks1",
         .texture = &TEXTURE_ROCKS1,
