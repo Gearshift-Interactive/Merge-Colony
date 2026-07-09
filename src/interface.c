@@ -189,7 +189,7 @@ void UpdateDrawGui(void)
         DrawOverlayContent,
         (Vector2) { 0 },
         &OverlayWindow.scroll,
-        "#2#Overlay"
+        "#18#Overlay"
     );
     GuiWindowFloating(
         &StatisticsWindow.position,
