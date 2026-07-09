@@ -18,7 +18,7 @@ typedef struct {
 
 static WindowData BuildWindow = {
     .position = { 10, 10 },
-    .size = { 210, 310 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
+    .size = { 210, 230 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
     .minimized = true
 };
 static WindowData DestroyWindow = {
