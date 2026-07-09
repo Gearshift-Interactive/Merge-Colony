@@ -4,6 +4,7 @@
 #include "map.h"
 #include "tiles.h"
 #include "interface.h"
+#include "state.h"
 
 const double CURSOR_SPEED = 12.0f;
 static Vector2 currentCursorPos = { 0 };
@@ -25,6 +26,12 @@ void RenderMouseCursor(HexCoord tileSelected, u8 currentBuilding)
         else
         {
             DrawTexture(*GetTileOutline(currentBuilding), currentCursorPos.x, currentCursorPos.y, WHITE);
+            u32 cost = GetTileCost(currentBuilding);
+            Color color = (Copper >= cost) ? RAYWHITE : RED;
+            const char *text = TextFormat("%d", cost);
+            DrawText(text, currentCursorPos.x + 16, currentCursorPos.y + 4, 8, color);
+            GuiDrawIcon(15, currentCursorPos.x, currentCursorPos.y, 1, color);
+            return;
         }
     else
         DrawTexture(TEXTURE_HIGHLIGHT, currentCursorPos.x, currentCursorPos.y + TEXTURE_HIGHLIGHT.height * 0.5f, WHITE);

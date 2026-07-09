@@ -15,3 +15,4 @@ u8 GetTileId(const char *);
 Texture2D *GetTileTexture(u8 tileId);
 Texture2D *GetTileOutline(u8 tileId);
 TileKind GetTileKind(u8 tileId);
+u32 GetTileCost(u8 tileId);

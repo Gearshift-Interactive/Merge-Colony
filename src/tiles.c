@@ -136,3 +136,7 @@ TileKind GetTileKind(u8 tileId)
 {
     return Tiles[tileId].kind;
 }
+u32 GetTileCost(u8 tileId)
+{
+    return Tiles[tileId].cost;
+}
