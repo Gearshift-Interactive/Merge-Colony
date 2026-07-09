@@ -20,7 +20,7 @@ static TileData Tiles[] = {
         .texture = &TEXTURE_BIODOME,
         .outline = &TEXTURE_BIODOME_OUTLINE,
         .kind = TILE_BUILDING_BIODOME,
-        .cost = 50,
+        .cost = 200,
         .happinessFactor = 10,
     }, {
         .id = "apartaments",
@@ -28,7 +28,7 @@ static TileData Tiles[] = {
         .outline = &TEXTURE_APARTAMENT_OUTLINE,
         .kind = TILE_BUILDING_APARTAMENTS,
         .space = 6,
-        .cost = 50,
+        .cost = 100,
         .happinessFactor = 3,
     }, {
         .id = "drill",
@@ -36,7 +36,7 @@ static TileData Tiles[] = {
         .outline = &TEXTURE_DRILL_OUTLINE,
         .kind = TILE_BUILDING_DRILL,
         .space = 3,
-        .cost = 50,
+        .cost = 150,
         .happinessFactor = -20,
     }, {
         .id = "generator",
@@ -44,7 +44,7 @@ static TileData Tiles[] = {
         .outline = &TEXTURE_GENERATOR_OUTLINE,
         .kind = TILE_BUILDING_GENERATOR,
         .space = 3,
-        .cost = 50,
+        .cost = 100,
         .happinessFactor = -10,
     }, {
         .id = "rocks1",
