@@ -2,6 +2,8 @@
 
 #include "common.h"
 
+void ResetState(void);
+
 extern u32 Tehos;
 extern u32 Population;
 extern u32 Jobs;

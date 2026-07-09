@@ -12,6 +12,8 @@
 #include "state.h"
 #include "map_updater.h"
 
+#include "mainmenu.h"
+
 #define WINDOW_TITLE APP_NAME " v" APP_VERSION
 
 const float TILE_RADIUS = 16.0f;
@@ -59,6 +61,14 @@ HexCoord GetMousePointed(void)
 
 void UpdateDrawFrame(void)
 {
+
+    switch (currentScreen)
+    {
+        case SCREEN_MENU: UpdateDrawMenu(); return;
+        case SCREEN_CREDITS: UpdateDrawCredits(); return;
+        default: {}
+    }
+
     HexCoord current = GetMousePointed();
 
     if (IsTileInMap(current) && !IsCursorOnGui(GetMousePosition()))
@@ -108,7 +118,7 @@ int main(int argc, char **argv)
 
     Screen = LoadRenderTexture(360, 360);
 
-    GenerateMars();
+    InitMenu();
 
 #if defined(PLATFORM_WEB)
     emscripten_set_main_loop(UpdateDrawFrame, 0, 1);
