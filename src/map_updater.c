@@ -6,6 +6,7 @@
 
 #define BASE_DRILL_EFFICENSY 5  // for 255
 #define BASE_HAPPINESS 50
+#define MAX_POWER_HAPPINESS_DEBUFF 20
 
 static float populationEfficency = 1;
 static u8 ticksSincePopulationTick = 0;
@@ -31,7 +32,7 @@ static void UpdateTile(HexCoord pos)
 
 static u8 CheckHappiness(HexCoord pos)
 {
-    u8 happiness = BASE_HAPPINESS;
+    u8 happiness = BASE_HAPPINESS - (1.0f - powerRatio) * MAX_POWER_HAPPINESS_DEBUFF;
     happiness += GetHappinessFactor(GetTile(1, HexNeighbourTop(pos)));
     happiness += GetHappinessFactor(GetTile(1, HexNeighbourTopRight(pos)));
     happiness += GetHappinessFactor(GetTile(1, HexNeighbourBottomRight(pos)));
