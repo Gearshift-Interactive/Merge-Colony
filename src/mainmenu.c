@@ -36,34 +36,43 @@ void InitMenu(void)
     }
 }
 
-void UpdateDrawMenu(void)
+static void UpdateStars(void)
 {
     for (int i = 0; i < starCount; i++)
     {
         stars[i].pos.y += stars[i].speed;
         if (stars[i].pos.y > 720) ResetStar(i);
     }
-
-    BeginDrawing();
-    ClearBackground(BLACK);
-
+}
+static void RenderStars(void)
+{
     for (int i = 0; i < starCount; i++)
     {
         Color c = Fade(WHITE, stars[i].alpha);
         DrawCircleV(stars[i].pos, stars[i].size, c);
     }
+}
 
-    if (GuiButton((Rectangle){ 260, 300, 200, 50 }, "game"))
+void UpdateDrawMenu(void)
+{
+    UpdateStars();
+
+    BeginDrawing();
+    ClearBackground(BLACK);
+
+    RenderStars();
+
+    if (GuiButton((Rectangle){ 260, 300, 200, 50 }, "PLAY"))
     {
         GenerateMars();
         currentScreen = SCREEN_MARS;
     }
 
-    if (GuiButton((Rectangle){ 260, 370, 200, 50 }, "credits"))
+    if (GuiButton((Rectangle){ 260, 370, 200, 50 }, "CREDITS"))
         currentScreen = SCREEN_CREDITS;
 
 #if !defined(PLATFORM_WEB)
-    if (GuiButton((Rectangle){ 260, 440, 200, 50 }, "#1#"))
+    if (GuiButton((Rectangle){ 260, 440, 200, 50 }, "#1# EXIT"))
     {
         exit(0);
     }
@@ -74,24 +83,30 @@ void UpdateDrawMenu(void)
 
 void UpdateDrawCredits(void)
 {
+    UpdateStars();
+
     BeginDrawing();
     ClearBackground(BLACK);
 
+    RenderStars();
+
     int y = 200;
-    const char *names[] = {
-        "Grand CEO Gigoretto",
-        "koff",
-        "Marc",
-        "SaiTess"
+    const char *text[] = {
+        "Big thanks to these awesome peple that",
+        "were involved in this game's development:",
+        "Priklen - Lead Programmer & Artist",
+        "koff - Programmer",
+        "Marc - Composer & Sound designer",
+        "Sai-Tess - Artist"
     };
-    for (size_t i = 0; i < sizeof(names)/sizeof(names[0]); i++)
+    for (size_t i = 0; i < sizeof(text)/sizeof(text[0]); i++)
     {
-        int tw = MeasureText(names[i], 20);
-        DrawText(names[i], 360 - tw/2, y, 20, WHITE);
+        int tw = MeasureText(text[i], 20);
+        DrawText(text[i], 360 - tw/2, y, 20, WHITE);
         y += 30;
     }
 
-    if (GuiButton((Rectangle){ 260, 500, 200, 50 }, "back"))
+    if (GuiButton((Rectangle){ 260, 500, 200, 50 }, "Back"))
         currentScreen = SCREEN_MENU;
 
     EndDrawing();
