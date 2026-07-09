@@ -6,6 +6,7 @@
 #include "tiles.h"
 #include "state.h"
 #include "map.h"
+#include "mainmenu.h"
 
 typedef struct {
     Vector2 position;
@@ -174,6 +175,10 @@ void InitGui(u8 *currentTileVar)
 }
 void UpdateDrawGui(void)
 {
+    if (GuiButton((Rectangle){ 700, 700, 20, 20 }, "#1#"))
+    {
+        currentScreen = SCREEN_MENU;
+    }
     // (GuiButton((Rectangle){ 10, 670, 210, 40 }, "#0#BUILD"));
     // (GuiButton((Rectangle){ 230, 670, 210, 40 }, "#1#DESTROY"));
     // (GuiButton((Rectangle){ 450, 670, 210, 40 }, "#2#STATISTICS"));

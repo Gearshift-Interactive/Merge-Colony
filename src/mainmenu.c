@@ -20,6 +20,13 @@ void UpdateDrawMenu(void)
         currentScreen = SCREEN_MARS;
     }
 
+#if !defined(PLATFORM_WEB)
+    if (GuiButton((Rectangle){ 260, 440, 200, 50 }, "#1#"))
+    {
+        exit(0);
+    }
+#endif
+
     if (GuiButton((Rectangle){ 260, 370, 200, 50 }, "credits"))
         currentScreen = SCREEN_CREDITS;
 
