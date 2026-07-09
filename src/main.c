@@ -9,6 +9,8 @@
 #include "tiles.h"
 #include "cursor.h"
 #include "interface.h"
+#include "state.h"
+#include "map_updater.h"
 
 #define WINDOW_TITLE APP_NAME " v" APP_VERSION
 
@@ -19,6 +21,8 @@ bool showBuildBox = false;
 static RenderTexture2D Screen;
 
 u8 currentTile = 0;
+
+static double sinceLastTick = 0;
 
 HexCoord GetMousePointed(void)
 {
@@ -60,8 +64,18 @@ void UpdateDrawFrame(void)
     if (IsTileInMap(current) && !IsCursorOnGui(GetMousePosition()))
     {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-            if (!GetTile(1, current))
+            if (!GetTile(1, current) && Copper >= GetTileCost(currentTile))
+            {
                 SetTile(1, current, currentTile);
+                Copper -= GetTileCost(currentTile);
+            }
+    }
+
+    sinceLastTick += GetFrameTime();
+    if (sinceLastTick > 1)
+    {
+        sinceLastTick -= 1;
+        UpdateMap();
     }
 
     BeginTextureMode(Screen);

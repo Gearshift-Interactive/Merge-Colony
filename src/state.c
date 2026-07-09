@@ -10,5 +10,5 @@ u32 Food = 1000;
 u32 Electricity = 150;
 
 u32 Iron = 0;
-u32 Copper = 100;
+u32 Copper = 50;
 u32 Uranium = 10;
