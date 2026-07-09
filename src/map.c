@@ -152,15 +152,21 @@ static void RenderOverlay(size_t x, size_t y)
     switch(CurrentOverlay)
     {
     case 1:
-        color.b = 255;
+        color.r = 10;
+        color.g = 120;
+        color.b = 230;
         color.a = Water[x][y];
         break;
     case 2:
-        color.r = 255;
+        color.r = 9;
+        color.g = 28;
+        color.b = 52;
         color.a = Iron[x][y];
         break;
     case 3:
-        color.g = 255;
+        color.r = 101;
+        color.g = 240;
+        color.b = 196;
         color.a = Copper[x][y];
         break;
     }
