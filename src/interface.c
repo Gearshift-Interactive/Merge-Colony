@@ -95,7 +95,7 @@ static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 sc
     );
     GuiLabel(
         (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 10, 190, 40 },
-        TextFormat("%d", Population)
+        TextFormat("%d/%d/%d", Population, Housing, Jobs)
     );
     GuiLabel(
         (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 30, 190, 40 },

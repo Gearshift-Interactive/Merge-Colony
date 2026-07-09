@@ -19,3 +19,5 @@ Texture2D *GetTileTexture(u8 tileId);
 Texture2D *GetTileOutline(u8 tileId);
 TileKind GetTileKind(u8 tileId);
 u32 GetTileCost(u8 tileId);
+u32 GetTileSpace(u8 tileId);
+i32 GetHappinessFactor(u8 tileId);
