@@ -35,7 +35,6 @@ static u8 CheckHappiness(HexCoord pos)
     happiness += GetHappinessFactor(GetTile(1, HexNeighbourTopRight(pos)));
     happiness += GetHappinessFactor(GetTile(1, HexNeighbourBottomRight(pos)));
     happiness += GetHappinessFactor(GetTile(1, HexNeighbourBottom(pos)));
-    printf("%d\n", GetHappinessFactor(GetTile(1, HexNeighbourBottom(pos))));
     happiness += GetHappinessFactor(GetTile(1, HexNeighbourBottomLeft(pos)));
     happiness += GetHappinessFactor(GetTile(1, HexNeighbourTopLeft(pos)));
     return happiness;
