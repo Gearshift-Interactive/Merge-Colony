@@ -10,7 +10,8 @@ extern u32 Happiness;
 
 extern u32 Water;
 extern u32 Food;
-extern u32 Electricity;
+extern u32 ElectricityConsumed;
+extern u32 ElectricityGenerated;
 
 extern u32 Iron;
 extern u32 Copper;

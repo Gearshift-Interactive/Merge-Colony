@@ -7,17 +7,18 @@
 #define BASE_DRILL_EFFICENSY 5  // for 255
 #define BASE_HAPPINESS 50
 
-static float globalEfficency = 1;
+static float populationEfficency = 1;
 static u8 ticksSincePopulationTick = 0;
+static float powerRatio = 1;
 
 static void UpdateBuildingDrill(HexCoord pos)
 {
     u8 copper = GetCopper(pos);
-    if (copper) Copper += round(BASE_DRILL_EFFICENSY * (copper / 255.0f) * globalEfficency);
+    if (copper) Copper += round(BASE_DRILL_EFFICENSY * (copper / 255.0f) * populationEfficency * powerRatio);
     u8 iron = GetIron(pos);
-    if (iron) Iron += round(BASE_DRILL_EFFICENSY * (iron / 255.0f) * globalEfficency);
+    if (iron) Iron += round(BASE_DRILL_EFFICENSY * (iron / 255.0f) * populationEfficency * powerRatio);
     u8 water = GetWater(pos);
-    if (water) water += round(BASE_DRILL_EFFICENSY * (water / 255.0f) * globalEfficency);
+    if (water) water += round(BASE_DRILL_EFFICENSY * (water / 255.0f) * populationEfficency * powerRatio);
 }
 static void UpdateTile(HexCoord pos)
 {
@@ -39,12 +40,15 @@ static u8 CheckHappiness(HexCoord pos)
     happiness += GetHappinessFactor(GetTile(1, HexNeighbourTopLeft(pos)));
     return happiness;
 }
-static void UpdateJobsAndHousing(void)
+static void UpdateJobsHousingAndElectricity(void)
 {
+    ElectricityGenerated = 0;
+    ElectricityConsumed = 0;
     Jobs = 0;
     Housing = 0;
     for (usize x = 0; x < MAP_WIDTH; x++)
     for (usize y = 0; y < MAP_HEIGHT; y++)
+    {
         switch (GetTileKind(GetTile(1, (HexCoord) { x, y })))
         {
         case TILE_BUILDING_DRILL:
@@ -57,14 +61,24 @@ static void UpdateJobsAndHousing(void)
         default:
             break;
         }
-    if (Jobs <= Population) globalEfficency = 1;
-    else globalEfficency = (float)Population / (float)Jobs;
+        i32 powerFactor = GetPowerFactor(GetTile(1, (HexCoord) { x, y }));
+        if (powerFactor > 0)
+            ElectricityGenerated += powerFactor;
+        else if (powerFactor < 0)
+            ElectricityConsumed -= powerFactor;
+    }
+    if (Jobs <= Population) populationEfficency = 1;
+    else populationEfficency = (float)Population / (float)Jobs;
+
+    powerRatio = (float)ElectricityGenerated / (float)ElectricityConsumed;
+    if (powerRatio > 1) powerRatio = 1;
 }
 
 static void PopulationTick(void)
 {
     const float occupancy = (float)Population / (float)Housing;
     u32 happinessCount = 0;
+    // Calculate happiness
     for (usize x = 0; x < MAP_WIDTH; x++)
     for (usize y = 0; y < MAP_HEIGHT; y++)
         if (GetTileKind(GetTile(1, (HexCoord) { x, y })) == TILE_BUILDING_APARTAMENTS)
@@ -82,7 +96,7 @@ void UpdateMap(void)
 {
     if (Population > Housing) Population = Housing;
 
-    UpdateJobsAndHousing();
+    UpdateJobsHousingAndElectricity();
 
     ticksSincePopulationTick++;
     if (ticksSincePopulationTick >= 5)

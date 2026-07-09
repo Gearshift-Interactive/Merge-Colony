@@ -127,7 +127,7 @@ static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 sc
     );
     GuiLabel(
         (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 80, 190, 40 },
-        TextFormat("%d", Electricity)
+        TextFormat("%d/%d", ElectricityConsumed, ElectricityGenerated)
     );
     GuiLabel(
         (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 110, 190, 40 },

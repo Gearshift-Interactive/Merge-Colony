@@ -9,7 +9,8 @@ u32 Happiness = 60;
 
 u32 Water = 1000;
 u32 Food = 1000;
-u32 Electricity = 150;
+u32 ElectricityConsumed = 0;
+u32 ElectricityGenerated = 0;
 
 u32 Iron = 0;
 u32 Copper = 1000;

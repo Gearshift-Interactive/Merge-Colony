@@ -10,6 +10,7 @@ typedef struct {
     u32 space;  // how many people can live/work here
     u32 cost;  // of copper
     i32 happinessFactor;
+    i32 powerFactor;
 } TileData;
 
 static TileData Tiles[] = {
@@ -22,6 +23,7 @@ static TileData Tiles[] = {
         .kind = TILE_BUILDING_BIODOME,
         .cost = 200,
         .happinessFactor = 10,
+        .powerFactor = -2,
     }, {
         .id = "apartaments",
         .texture = &TEXTURE_APARTAMENT,
@@ -30,6 +32,7 @@ static TileData Tiles[] = {
         .space = 6,
         .cost = 100,
         .happinessFactor = 3,
+        .powerFactor = -2,
     }, {
         .id = "drill",
         .texture = &TEXTURE_DRILL,
@@ -38,6 +41,7 @@ static TileData Tiles[] = {
         .space = 3,
         .cost = 150,
         .happinessFactor = -20,
+        .powerFactor = -5,
     }, {
         .id = "generator",
         .texture = &TEXTURE_GENERATOR,
@@ -46,6 +50,7 @@ static TileData Tiles[] = {
         .space = 3,
         .cost = 100,
         .happinessFactor = -10,
+        .powerFactor = 20,
     }, {
         .id = "rocks1",
         .texture = &TEXTURE_ROCKS1,
@@ -152,4 +157,8 @@ u32 GetTileSpace(u8 tileId)
 i32 GetHappinessFactor(u8 tileId)
 {
     return Tiles[tileId].happinessFactor;
+}
+i32 GetPowerFactor(u8 tileId)
+{
+    return Tiles[tileId].powerFactor;
 }
