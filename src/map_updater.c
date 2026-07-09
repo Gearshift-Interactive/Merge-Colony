@@ -15,7 +15,7 @@ static void UpdateBuildingDrill(HexCoord pos)
     u8 copper = GetCopper(pos);
     if (copper) Copper += round(BASE_DRILL_EFFICENSY * (copper / 255.0f) * globalEfficency);
     u8 iron = GetIron(pos);
-    if (copper) Iron += round(BASE_DRILL_EFFICENSY * (iron / 255.0f) * globalEfficency);
+    if (iron) Iron += round(BASE_DRILL_EFFICENSY * (iron / 255.0f) * globalEfficency);
     u8 water = GetWater(pos);
     if (water) water += round(BASE_DRILL_EFFICENSY * (water / 255.0f) * globalEfficency);
 }
