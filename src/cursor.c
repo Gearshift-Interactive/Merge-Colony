@@ -26,4 +26,29 @@ void RenderMouseCursor(HexCoord tileSelected, u8 currentBuilding)
             DrawTexture(*GetTileOutline(currentBuilding), currentCursorPos.x, currentCursorPos.y, WHITE);
     else
         DrawTexture(TEXTURE_HIGHLIGHT, currentCursorPos.x, currentCursorPos.y + TEXTURE_HIGHLIGHT.height * 0.5f, WHITE);
+
+    if (!CurrentOverlay)
+    {
+        GuiDisableTooltip();
+        return;
+    }
+
+    u8 data = 0;
+    switch (CurrentOverlay)
+    {
+        case 1:
+            data = GetWater(tileSelected);
+            break;
+        case 2:
+            data = GetIron(tileSelected);
+            break;
+        case 3:
+            data = GetCopper(tileSelected);
+            break;
+    }
+    if (data)
+    {
+        const char *text = TextFormat("%.2f%%", data / 255.0f * 100);
+        DrawText(text, currentCursorPos.x, currentCursorPos.y, GuiGetFont().baseSize, RAYWHITE);
+    }
 }
