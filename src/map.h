@@ -16,4 +16,7 @@ Vector2 CalculateTileScreenPos(HexCoord);
 bool IsTileInMap(HexCoord);
 void RenderMap(void);
 u8 GetTile(u32 layer, HexCoord);
+u8 GetWater(HexCoord);
+u8 GetIron(HexCoord);
+u8 GetCopper(HexCoord);
 void SetTile(u32 layer, HexCoord, u8);

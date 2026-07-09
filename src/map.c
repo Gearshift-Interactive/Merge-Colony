@@ -194,6 +194,18 @@ u8 GetTile(u32 layer, HexCoord pos)
 {
     return Map[layer][pos.x][pos.y];
 }
+u8 GetWater(HexCoord pos)
+{
+    return Water[pos.x][pos.y];
+}
+u8 GetIron(HexCoord pos)
+{
+    return Iron[pos.x][pos.y];
+}
+u8 GetCopper(HexCoord pos)
+{
+    return Copper[pos.x][pos.y];
+}
 void SetTile(u32 layer, HexCoord pos, u8 tile)
 {
     Map[layer][pos.x][pos.y] = tile;

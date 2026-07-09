@@ -65,7 +65,7 @@ static void DrawBuildContent(Vector2 position, __attribute__((unused)) Vector2 s
             190,
             40
         },
-        "---\nBiodome\nApartaments\nDrill\nLab\nFactory\nGenerator",
+        "---\nBiodome\nApartaments\nDrill\nGenerator",
         &selected
     );
     if (selected != prexSelect)
@@ -75,9 +75,7 @@ static void DrawBuildContent(Vector2 position, __attribute__((unused)) Vector2 s
         case 1: *currentTile = GetTileId("biodome"); break;
         case 2: *currentTile = GetTileId("apartaments"); break;
         case 3: *currentTile = GetTileId("drill"); break;
-        case 4: *currentTile = GetTileId("lab"); break;
-        case 5: *currentTile = GetTileId("factory"); break;
-        case 6: *currentTile = GetTileId("generator"); break;
+        case 4: *currentTile = GetTileId("generator"); break;
         }
 }
 
