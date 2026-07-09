@@ -5,7 +5,7 @@ u32 Tehos = 1200;
 u32 Population = 0;
 u32 Jobs = 0;
 u32 Housing = 0;
-u32 Happiness = 60;
+u32 Happiness = 50;
 
 u32 Water = 1000;
 u32 Food = 1000;
@@ -20,11 +20,12 @@ void ResetState(void)
 {
     Tehos = 1200;
     Population = 6;
-    Happiness = 100;
+    Happiness = 50;
     Water = 1000;
     Food = 1000;
-    Electricity = 150;
+    ElectricityConsumed = 0;
+    ElectricityGenerated = 0;
     Iron = 0;
-    Copper = 50;
+    Copper = 1000;
     Uranium = 10;
 }

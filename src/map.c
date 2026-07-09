@@ -13,7 +13,7 @@ i32 CurrentOverlay = 0;
 
 static u8 Copper[MAP_WIDTH][MAP_HEIGHT] = { 0 };
 static u8 Iron[MAP_WIDTH][MAP_HEIGHT] = { 0 };
-static u8 Water[MAP_WIDTH][MAP_HEIGHT] = { 0 };
+// static u8 Water[MAP_WIDTH][MAP_HEIGHT] = { 0 };
 
 static HexCoord FindFree()
 {
@@ -93,14 +93,14 @@ void GenerateMars(void)
         );
         if (ironPerlin > 0.1f)
             Iron[x][y] = (ironPerlin - 0.1f) / 0.9f * 255;
-        f32 waterPerlin = stb_perlin_fbm_noise3(
-            x * 0.15f, y * 0.15f, 30000,
-            /* lacunarity */ 2,
-            /* gain */ 0.5f,
-            /* octaves */ 2
-        );
-        if (waterPerlin > 0)
-            Water[x][y] = waterPerlin * 255;
+        // f32 waterPerlin = stb_perlin_fbm_noise3(
+        //     x * 0.15f, y * 0.15f, 30000,
+        //     /* lacunarity */ 2,
+        //     /* gain */ 0.5f,
+        //     /* octaves */ 2
+        // );
+        // if (waterPerlin > 0)
+        //     Water[x][y] = waterPerlin * 255;
     }
     // const u8 coppers[] = {
     //     GetTileId("copper1"),
@@ -151,23 +151,23 @@ static void RenderOverlay(size_t x, size_t y)
     Color color = { 0 };
     switch(CurrentOverlay)
     {
+    // case 1:
+    //     color.r = 10;
+    //     color.g = 120;
+    //     color.b = 230;
+    //     color.a = Water[x][y];
+    //     break;
     case 1:
-        color.r = 10;
-        color.g = 120;
-        color.b = 230;
-        color.a = Water[x][y];
+        color.r = 101;
+        color.g = 240;
+        color.b = 196;
+        color.a = Copper[x][y];
         break;
     case 2:
         color.r = 9;
         color.g = 28;
         color.b = 52;
         color.a = Iron[x][y];
-        break;
-    case 3:
-        color.r = 101;
-        color.g = 240;
-        color.b = 196;
-        color.a = Copper[x][y];
         break;
     }
 
@@ -194,10 +194,10 @@ u8 GetTile(u32 layer, HexCoord pos)
 {
     return Map[layer][pos.x][pos.y];
 }
-u8 GetWater(HexCoord pos)
-{
-    return Water[pos.x][pos.y];
-}
+// u8 GetWater(HexCoord pos)
+// {
+//     return Water[pos.x][pos.y];
+// }
 u8 GetIron(HexCoord pos)
 {
     return Iron[pos.x][pos.y];

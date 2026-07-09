@@ -45,14 +45,14 @@ void RenderMouseCursor(HexCoord tileSelected, u8 currentBuilding)
     u8 data = 0;
     switch (CurrentOverlay)
     {
+        // case 1:
+        //     data = GetWater(tileSelected);
+        //     break;
         case 1:
-            data = GetWater(tileSelected);
+            data = GetCopper(tileSelected);
             break;
         case 2:
             data = GetIron(tileSelected);
-            break;
-        case 3:
-            data = GetCopper(tileSelected);
             break;
     }
     if (data)

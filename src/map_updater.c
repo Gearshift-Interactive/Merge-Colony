@@ -18,8 +18,8 @@ static void UpdateBuildingDrill(HexCoord pos)
     if (copper) Copper += round(BASE_DRILL_EFFICENSY * (copper / 255.0f) * populationEfficency * powerRatio);
     u8 iron = GetIron(pos);
     if (iron) Iron += round(BASE_DRILL_EFFICENSY * (iron / 255.0f) * populationEfficency * powerRatio);
-    u8 water = GetWater(pos);
-    if (water) water += round(BASE_DRILL_EFFICENSY * (water / 255.0f) * populationEfficency * powerRatio);
+    // u8 water = GetWater(pos);
+    // if (water) water += round(BASE_DRILL_EFFICENSY * (water / 255.0f) * populationEfficency * powerRatio);
 }
 static void UpdateTile(HexCoord pos)
 {
