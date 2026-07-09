@@ -23,7 +23,9 @@ void RenderMouseCursor(HexCoord tileSelected, u8 currentBuilding)
         if (GetTile(1, tileSelected))
             DrawTexture(TEXTURE_CROSS, currentCursorPos.x, currentCursorPos.y, WHITE);
         else
+        {
             DrawTexture(*GetTileOutline(currentBuilding), currentCursorPos.x, currentCursorPos.y, WHITE);
+        }
     else
         DrawTexture(TEXTURE_HIGHLIGHT, currentCursorPos.x, currentCursorPos.y + TEXTURE_HIGHLIGHT.height * 0.5f, WHITE);
 

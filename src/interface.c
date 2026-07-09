@@ -28,7 +28,7 @@ static WindowData DestroyWindow = {
 };
 static WindowData StatisticsWindow = {
     .position = { 10, 30 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT * 2 },
-    .size = { 210, 210 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
+    .size = { 210, 170 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
     .minimized = true
 };
 static WindowData OverlayWindow = {
@@ -113,46 +113,46 @@ static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 sc
         (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 60, 190, 40 },
         TextFormat("%d", Water)
     );
+    // GuiLabel(
+    //     (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 80, 190, 40 },
+    //     "#12# Food"
+    // );
+    // GuiLabel(
+    //     (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 80, 190, 40 },
+    //     TextFormat("%d", Food)
+    // );
     GuiLabel(
         (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 80, 190, 40 },
-        "#12# Food"
-    );
-    GuiLabel(
-        (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 80, 190, 40 },
-        TextFormat("%d", Food)
-    );
-    GuiLabel(
-        (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 100, 190, 40 },
         "#13# Electricity"
     );
     GuiLabel(
-        (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 100, 190, 40 },
+        (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 80, 190, 40 },
         TextFormat("%d", Electricity)
     );
     GuiLabel(
-        (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 130, 190, 40 },
+        (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 110, 190, 40 },
         "#14# Iron"
     );
     GuiLabel(
-        (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 130, 190, 40 },
+        (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 110, 190, 40 },
         TextFormat("%d", Iron)
     );
     GuiLabel(
-        (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 150, 190, 40 },
+        (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 130, 190, 40 },
         "#15# Copper"
     );
     GuiLabel(
-        (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 150, 190, 40 },
+        (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 130, 190, 40 },
         TextFormat("%d", Copper)
     );
-    GuiLabel(
-        (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 170, 190, 40 },
-        "#16# Uranium"
-    );
-    GuiLabel(
-        (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 170, 190, 40 },
-        TextFormat("%d", Uranium)
-    );
+    // GuiLabel(
+    //     (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 150, 190, 40 },
+    //     "#16# Uranium"
+    // );
+    // GuiLabel(
+    //     (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 150, 190, 40 },
+    //     TextFormat("%d", Uranium)
+    // );
 }
 static void DrawOverlayContent(Vector2 position, __attribute__((unused)) Vector2 scroll)
 {

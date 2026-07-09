@@ -7,41 +7,40 @@ typedef struct {
     Texture2D *texture;
     Texture2D *outline;
     TileKind kind;
+    u32 space;  // how many people can live/work here
+    u32 cost;  // of copper
 } TileData;
 
 static TileData Tiles[] = {
     {
-        .id = "void"
+        .id = "void",
     }, {
         .id = "biodome",
         .texture = &TEXTURE_BIODOME,
         .outline = &TEXTURE_BIODOME_OUTLINE,
-        .kind = TILE_BUILDING
+        .kind = TILE_BUILDING,
+        .cost = 50,
     }, {
         .id = "apartaments",
         .texture = &TEXTURE_APARTAMENT,
         .outline = &TEXTURE_APARTAMENT_OUTLINE,
-        .kind = TILE_BUILDING
+        .kind = TILE_BUILDING,
+        .space = 6,
+        .cost = 50,
     }, {
         .id = "drill",
         .texture = &TEXTURE_DRILL,
         .outline = &TEXTURE_DRILL_OUTLINE,
-        .kind = TILE_BUILDING
-    }, {
-        .id = "lab",
-        .texture = &TEXTURE_LAB,
-        .outline = &TEXTURE_LAB_OUTLINE,
-        .kind = TILE_BUILDING
-    }, {
-        .id = "factory",
-        .texture = &TEXTURE_FACTORY,
-        .outline = &TEXTURE_FACTORY_OUTLINE,
-        .kind = TILE_BUILDING
+        .kind = TILE_BUILDING,
+        .space = 3,
+        .cost = 50,
     }, {
         .id = "generator",
         .texture = &TEXTURE_GENERATOR,
         .outline = &TEXTURE_GENERATOR_OUTLINE,
-        .kind = TILE_BUILDING
+        .kind = TILE_BUILDING,
+        .space = 3,
+        .cost = 50,
     }, {
         .id = "rocks1",
         .texture = &TEXTURE_ROCKS1,
