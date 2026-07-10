@@ -11,6 +11,7 @@ typedef struct {
     u32 cost;  // of copper
     i32 happinessFactor;
     i32 powerFactor;
+    f32 performanceFactor;
 } TileData;
 
 static const TileKind Buildings[] = {
@@ -64,6 +65,23 @@ static const TileData Tiles[] = {
         .cost = 150,
         .happinessFactor = -20,
         .powerFactor = -50,
+        .performanceFactor = 1,
+    }, {
+        .id = "drillL2",
+        .texture = &TEXTURE_DRILLL2,
+        .kind = TILE_BUILDING_DRILL,
+        .space = 5,
+        .happinessFactor = -30,
+        .powerFactor = -80,
+        .performanceFactor = 2,
+    }, {
+        .id = "drillL3",
+        .texture = &TEXTURE_DRILLL3,
+        .kind = TILE_BUILDING_DRILL,
+        .space = 10,
+        .happinessFactor = -40,
+        .powerFactor = -140,
+        .performanceFactor = 3.5,
     }, {
         .id = "generator",
         .texture = &TEXTURE_GENERATOR,
@@ -195,4 +213,8 @@ bool TileIsBuilding(u8 tileId)
         if (kind == Buildings[i])
             return true;
     return false;
+}
+f32 GetPerformanceFactor(u8 tileId)
+{
+    return Tiles[tileId].performanceFactor;
 }

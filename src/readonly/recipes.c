@@ -12,7 +12,15 @@ const MergeRecipe RECIPES[] = {
         .inputA = "apartamentsL2",
         .inputB = "apartamentsL2",
         .result = "apartamentsL3",
-    },
+    }, {
+        .inputA = "drill",
+        .inputB = "drill",
+        .result = "drillL2",
+    }, {
+        .inputA = "drillL2",
+        .inputB = "drillL2",
+        .result = "drillL3",
+    }
 };
 static const usize RECIPES_LEN = sizeof(RECIPES) / sizeof(RECIPES[0]);
 

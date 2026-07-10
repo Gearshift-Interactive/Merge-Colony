@@ -14,10 +14,11 @@ static float powerRatio = 1;
 
 static void UpdateBuildingDrill(HexCoord pos)
 {
+    f32 const PERFORMANCE_FACTOR = GetPerformanceFactor(GetTile(1, pos));
     u8 copper = GetCopper(pos);
-    if (copper) Copper += round(BASE_DRILL_EFFICENSY * (copper / 255.0f) * populationEfficency * powerRatio);
+    if (copper) Copper += round(BASE_DRILL_EFFICENSY * (copper / 255.0f) * populationEfficency * powerRatio * PERFORMANCE_FACTOR);
     u8 iron = GetIron(pos);
-    if (iron) Iron += round(BASE_DRILL_EFFICENSY * (iron / 255.0f) * populationEfficency * powerRatio);
+    if (iron) Iron += round(BASE_DRILL_EFFICENSY * (iron / 255.0f) * populationEfficency * powerRatio * PERFORMANCE_FACTOR);
     // u8 water = GetWater(pos);
     // if (water) water += round(BASE_DRILL_EFFICENSY * (water / 255.0f) * populationEfficency * powerRatio);
 }

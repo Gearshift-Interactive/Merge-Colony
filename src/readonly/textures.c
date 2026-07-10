@@ -36,6 +36,8 @@ Texture2D TEXTURE_APARTAMENT;
 Texture2D TEXTURE_APARTAMENTL2;
 Texture2D TEXTURE_APARTAMENTL3;
 Texture2D TEXTURE_DRILL;
+Texture2D TEXTURE_DRILLL2;
+Texture2D TEXTURE_DRILLL3;
 Texture2D TEXTURE_BIODOME;
 Texture2D TEXTURE_LAB;
 Texture2D TEXTURE_GENERATOR;
@@ -84,6 +86,8 @@ void InitTextures(void)
     TEXTURE_APARTAMENTL2 = LoadTexture("resources/tiles/apartament_2.png");
     TEXTURE_APARTAMENTL3 = LoadTexture("resources/tiles/apartament_3.png");
     TEXTURE_DRILL        = LoadTexture("resources/tiles/drill.png");
+    TEXTURE_DRILLL2      = LoadTexture("resources/tiles/drill2.png");
+    TEXTURE_DRILLL3      = LoadTexture("resources/tiles/drill3.png");
     TEXTURE_BIODOME      = LoadTexture("resources/tiles/biodome.png");
     TEXTURE_LAB          = LoadTexture("resources/tiles/laboratory.png");
     TEXTURE_GENERATOR    = LoadTexture("resources/tiles/generator.png");
@@ -132,6 +136,8 @@ void UnloadTextures(void)
     UnloadTexture(TEXTURE_APARTAMENTL2);
     UnloadTexture(TEXTURE_APARTAMENTL3);
     UnloadTexture(TEXTURE_DRILL);
+    UnloadTexture(TEXTURE_DRILLL2);
+    UnloadTexture(TEXTURE_DRILLL3);
     UnloadTexture(TEXTURE_BIODOME);
     UnloadTexture(TEXTURE_LAB);
     UnloadTexture(TEXTURE_GENERATOR);

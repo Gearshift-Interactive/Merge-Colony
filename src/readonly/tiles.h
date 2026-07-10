@@ -24,3 +24,4 @@ i32 GetHappinessFactor(u8 tileId);
 i32 GetPowerFactor(u8 tileId);
 const char *GetStringId(u8 tileId);
 bool TileIsBuilding(u8 tileId);
+f32 GetPerformanceFactor(u8 tileId);

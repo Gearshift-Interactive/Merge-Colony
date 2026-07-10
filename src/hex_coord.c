@@ -72,11 +72,11 @@ HexCoord HexNeighbourBottomLeft(HexCoord origin)
     if (origin.x % 2 == 0)
         return (HexCoord) {
             .x = origin.x - 1,
-            .y = origin.y
+            .y = origin.y + 1
         };
     else
         return (HexCoord) {
             .x = origin.x - 1,
-            .y = origin.y + 1
+            .y = origin.y
         };
 }
