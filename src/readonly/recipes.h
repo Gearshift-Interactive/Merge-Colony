@@ -6,4 +6,6 @@ typedef struct {
     const char *result;
 } MergeRecipe;
 
-extern const MergeRecipe recipes[];
+extern const MergeRecipe RECIPES[];
+
+const char *SearchOutput(const char *inputA, const char *inputB);
