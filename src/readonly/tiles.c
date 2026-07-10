@@ -13,6 +13,14 @@ typedef struct {
     i32 powerFactor;
 } TileData;
 
+static const TileKind Buildings[] = {
+    TILE_BUILDING_DRILL,
+    TILE_BUILDING_APARTAMENTS,
+    TILE_BUILDING_GENERATOR,
+    TILE_BUILDING_BIODOME,
+};
+static const usize BUILDINGS_LEN = sizeof(Buildings) / sizeof(Buildings[0]);
+
 static const TileData Tiles[] = {
     {
         .id = "void",
@@ -179,4 +187,12 @@ i32 GetPowerFactor(u8 tileId)
 const char *GetStringId(u8 tileId)
 {
     return Tiles[tileId].id;
+}
+bool TileIsBuilding(u8 tileId)
+{
+    TileKind kind = GetTileKind(tileId);
+    for (usize i = 0; i < BUILDINGS_LEN; i++)
+        if (kind == Buildings[i])
+            return true;
+    return false;
 }

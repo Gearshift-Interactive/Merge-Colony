@@ -2,13 +2,58 @@
 
 #include "logic/map.h"
 #include "logic/state.h"
+#include "logic/actions.h"
 #include "readonly/textures.h"
 #include "readonly/tiles.h"
+#include "readonly/recipes.h"
 #include "ui/interface.h"
 
 const double CURSOR_SPEED = 12.0f;
 static Vector2 currentCursorPos = { 0 };
 static Vector2 targetCursorPos  = { 0 };
+
+static void RenderBuildingCursor(HexCoord tileSelected, u8 currentBuilding)
+{
+    if (GetTile(1, tileSelected))
+        DrawTexture(TEXTURE_CROSS, currentCursorPos.x, currentCursorPos.y, WHITE);
+    else
+    {
+        DrawTexture(*GetTileOutline(currentBuilding), currentCursorPos.x, currentCursorPos.y, WHITE);
+        u32 cost = GetTileCost(currentBuilding);
+        Color color = (Copper >= cost) ? RAYWHITE : RED;
+        const char *text = TextFormat("%d", cost);
+        DrawText(text, currentCursorPos.x + 16, currentCursorPos.y + 4, 8, color);
+        GuiDrawIcon(15, currentCursorPos.x, currentCursorPos.y, 1, color);
+        return;
+    }
+}
+static void RenderActionCursor(HexCoord tileSelected)
+{
+    Texture2D *TEXTURE = NULL;
+    if (HexEqual(GetMergeFrom(), (HexCoord) { -100, -100 }))
+    {
+        if (TileIsBuilding(GetTile(1, tileSelected)))
+            TEXTURE = &TEXTURE_HIGHLIGHT_GREEN;
+        else
+            TEXTURE = &TEXTURE_CROSS;
+    }
+    else
+        if (
+            SearchOutput(
+                GetStringId(GetTile(1, GetMergeFrom())),
+                GetStringId(GetTile(1, tileSelected))
+            ) && HexIsNeighbour(GetMergeFrom(), tileSelected)
+        ) TEXTURE = &TEXTURE_HIGHLIGHT_GREEN;
+        else TEXTURE = &TEXTURE_CROSS;
+
+    if (TEXTURE)
+    {
+        if (TEXTURE == &TEXTURE_CROSS)
+            DrawTexture(*TEXTURE, currentCursorPos.x, currentCursorPos.y, WHITE);
+        else
+            DrawTexture(*TEXTURE, currentCursorPos.x, currentCursorPos.y + TEXTURE_HIGHLIGHT.height * 0.5f, WHITE);
+    }
+}
 
 void RenderMouseCursor(HexCoord tileSelected, u8 currentBuilding)
 {
@@ -20,19 +65,14 @@ void RenderMouseCursor(HexCoord tileSelected, u8 currentBuilding)
     currentCursorPos.x += (targetCursorPos.x - currentCursorPos.x) * CURSOR_SPEED * dt;
     currentCursorPos.y += (targetCursorPos.y - currentCursorPos.y) * CURSOR_SPEED * dt;
 
-    if (currentBuilding)
-        if (GetTile(1, tileSelected))
-            DrawTexture(TEXTURE_CROSS, currentCursorPos.x, currentCursorPos.y, WHITE);
-        else
-        {
-            DrawTexture(*GetTileOutline(currentBuilding), currentCursorPos.x, currentCursorPos.y, WHITE);
-            u32 cost = GetTileCost(currentBuilding);
-            Color color = (Copper >= cost) ? RAYWHITE : RED;
-            const char *text = TextFormat("%d", cost);
-            DrawText(text, currentCursorPos.x + 16, currentCursorPos.y + 4, 8, color);
-            GuiDrawIcon(15, currentCursorPos.x, currentCursorPos.y, 1, color);
-            return;
-        }
+    if (currentBuilding) {
+        RenderBuildingCursor(tileSelected, currentBuilding);
+        return;
+    }
+    else if (currentAction) {
+        RenderActionCursor(tileSelected);
+        return;
+    }
     else
         DrawTexture(TEXTURE_HIGHLIGHT, currentCursorPos.x, currentCursorPos.y + TEXTURE_HIGHLIGHT.height * 0.5f, WHITE);
 

@@ -40,3 +40,7 @@ void DrawActions(void)
     pos.y += TEXTURE_HIGHLIGHT_BLUE.height / 2;
     DrawTexture(TEXTURE_HIGHLIGHT_BLUE, pos.x, pos.y, WHITE);
 }
+HexCoord GetMergeFrom(void)
+{
+    return mergeFrom;
+}
