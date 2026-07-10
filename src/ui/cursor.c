@@ -29,7 +29,7 @@ static void RenderBuildingCursor(HexCoord tileSelected, u8 currentBuilding)
         return;
     }
 }
-static void RenderActionCursor(HexCoord tileSelected)
+static void RenderMergeActionCursor(HexCoord tileSelected)
 {
     Texture2D *TEXTURE = NULL;
     if (HexEqual(GetMergeFrom(), (HexCoord) { -100, -100 }))
@@ -68,6 +68,59 @@ static void RenderActionCursor(HexCoord tileSelected)
             DrawTexture(*TEXTURE, currentCursorPos.x, currentCursorPos.y, WHITE);
         else
             DrawTexture(*TEXTURE, currentCursorPos.x, currentCursorPos.y + TEXTURE_HIGHLIGHT.height * 0.5f, WHITE);
+    }
+}
+static void RenderDestroyBuildingCursor(HexCoord tileSelected)
+{
+    if (!TileIsBuilding(GetTile(1, tileSelected)))
+    {
+        DrawTexture(TEXTURE_CROSS, currentCursorPos.x, currentCursorPos.y, WHITE);
+        return;
+    }
+    Color color = { 0 };
+    if (Iron >= DESTROY_BUILDING_COST)
+    {
+        DrawTexture(TEXTURE_HIGHLIGHT, currentCursorPos.x, currentCursorPos.y + TEXTURE_HIGHLIGHT.height * 0.5f, WHITE);
+        color = RAYWHITE;
+    }
+    else
+    {
+        DrawTexture(TEXTURE_CROSS, currentCursorPos.x, currentCursorPos.y, WHITE);
+        color = RED;
+    }
+    const char *text = TextFormat("%d", DESTROY_BUILDING_COST);
+    DrawText(text, currentCursorPos.x + 16, currentCursorPos.y + 4, GuiGetFont().baseSize, color);
+    GuiDrawIcon(14, currentCursorPos.x, currentCursorPos.y, 1, color);
+}
+static void RenderDestroyBoulderCursor(HexCoord tileSelected)
+{
+    if (GetTileKind(GetTile(1, tileSelected)) != TILE_BOULDER)
+    {
+        DrawTexture(TEXTURE_CROSS, currentCursorPos.x, currentCursorPos.y, WHITE);
+        return;
+    }
+    Color color = { 0 };
+    if (Iron >= DESTROY_BOULDER_COST)
+    {
+        DrawTexture(TEXTURE_HIGHLIGHT, currentCursorPos.x, currentCursorPos.y + TEXTURE_HIGHLIGHT.height * 0.5f, WHITE);
+        color = RAYWHITE;
+    }
+    else
+    {
+        DrawTexture(TEXTURE_CROSS, currentCursorPos.x, currentCursorPos.y, WHITE);
+        color = RED;
+    }
+    const char *text = TextFormat("%d", DESTROY_BOULDER_COST);
+    DrawText(text, currentCursorPos.x + 16, currentCursorPos.y + 4, GuiGetFont().baseSize, color);
+    GuiDrawIcon(14, currentCursorPos.x, currentCursorPos.y, 1, color);
+}
+static void RenderActionCursor(HexCoord tileSelected)
+{
+    switch (currentAction)
+    {
+        case 1: RenderDestroyBuildingCursor(tileSelected); break;
+        case 2: RenderDestroyBoulderCursor(tileSelected); break;
+        case 3: RenderMergeActionCursor(tileSelected); break;
     }
 }
 
