@@ -48,7 +48,7 @@ static void UpdateTile(HexCoord pos)
     }
 }
 
-static u8 CheckHappiness(HexCoord pos)
+u8 CheckHappiness(HexCoord pos)
 {
     u8 happiness = BASE_HAPPINESS - (1.0f - powerRatio) * MAX_POWER_HAPPINESS_DEBUFF;
     if (GetInternalHappinessBoost(GetTile(1, pos))) happiness += GetHappinessFactor(GetTile(1, pos));
