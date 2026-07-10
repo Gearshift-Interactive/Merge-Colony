@@ -62,3 +62,10 @@ void UnloadMusic(void)
     UnloadMusicStream(planetMusic[2]);
     CloseAudioDevice();
 }
+void SetVolume(float volume)
+{
+    if (currentScreen == SCREEN_MARS)
+        SetMusicVolume(planetMusic[currentSong], volume);
+    else
+        SetMusicVolume(mainMenuMusic, volume);
+}

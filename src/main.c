@@ -14,6 +14,7 @@
 #include "ui/cursor.h"
 #include "ui/interface.h"
 #include "ui/mainmenu.h"
+#include "ui/music_slider.h"
 #include "music.h"
 
 #include <time.h>
@@ -70,9 +71,9 @@ void UpdateDrawFrame(void)
 
     switch (currentScreen)
     {
-        case SCREEN_MENU: UpdateDrawMenu(); return;
-        case SCREEN_CREDITS: UpdateDrawCredits(); return;
-        case SCREEN_SEED: UpdateDrawSeed(); return;
+        case SCREEN_MENU: UpdateDrawMenu(); UpdateDrawMusic(); return;
+        case SCREEN_CREDITS: UpdateDrawCredits(); UpdateDrawMusic(); return;
+        case SCREEN_SEED: UpdateDrawSeed(); UpdateDrawMusic(); return;
         default: {}
     }
 
@@ -116,6 +117,7 @@ void UpdateDrawFrame(void)
             WHITE
         );
         UpdateDrawGui();
+        UpdateDrawMusic();
     EndDrawing();
 }
 
