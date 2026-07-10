@@ -92,6 +92,20 @@ static const TileData Tiles[] = {
         .happinessFactor = -10,
         .powerFactor = 200,
     }, {
+        .id = "generatorL2",
+        .texture = &TEXTURE_GENERATORL2,
+        .kind = TILE_BUILDING_GENERATOR,
+        .space = 5,
+        .happinessFactor = -30,
+        .powerFactor = 400,
+    }, {
+        .id = "generatorL3",
+        .texture = &TEXTURE_GENERATORL3,
+        .kind = TILE_BUILDING_GENERATOR,
+        .space = 10,
+        .happinessFactor = -40,
+        .powerFactor = 800,
+    }, {
         .id = "rocks1",
         .texture = &TEXTURE_ROCKS1,
         .kind = TILE_GROUND
