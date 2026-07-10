@@ -215,7 +215,7 @@ void UpdateDrawGui(void)
         DrawStatContent,
         (Vector2) { 0 },
         &StatisticsWindow.scroll,
-        "#2#SATISTICS"
+        "#2#STATISTICS"
     );
     GuiWindowFloating(
         &DestroyWindow.position,

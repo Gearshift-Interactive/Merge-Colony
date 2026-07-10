@@ -8,7 +8,7 @@ extern u32 Tehos;
 extern u32 Population;
 extern u32 Jobs;
 extern u32 Housing;
-extern u32 Happiness;
+extern i32 Happiness;
 
 extern u32 Water;
 extern u32 Food;
