@@ -12,6 +12,7 @@ typedef struct {
     i32 happinessFactor;
     i32 powerFactor;
     f32 performanceFactor;
+    bool internalHappinessBoost;
 } TileData;
 
 static const TileKind Buildings[] = {
@@ -56,6 +57,30 @@ static const TileData Tiles[] = {
         .space = 24,
         .happinessFactor = 6,
         .powerFactor = -40,
+    }, {
+        .id = "bio_apartaments",
+        .texture = &TEXTURE_BIO_APARTAMENT,
+        .kind = TILE_BUILDING_APARTAMENTS,
+        .space = 6,
+        .happinessFactor = 13,
+        .powerFactor = -40,
+        .internalHappinessBoost = true,
+    }, {
+        .id = "bio_apartamentsL2",
+        .texture = &TEXTURE_BIO_APARTAMENTL2,
+        .kind = TILE_BUILDING_APARTAMENTS,
+        .space = 12,
+        .happinessFactor = 13,
+        .powerFactor = -50,
+        .internalHappinessBoost = true,
+    }, {
+        .id = "bio_apartamentsL3",
+        .texture = &TEXTURE_BIO_APARTAMENTL3,
+        .kind = TILE_BUILDING_APARTAMENTS,
+        .space = 24,
+        .happinessFactor = 16,
+        .powerFactor = -60,
+        .internalHappinessBoost = true,
     }, {
         .id = "drill",
         .texture = &TEXTURE_DRILL,
@@ -246,4 +271,8 @@ bool TileIsBuilding(u8 tileId)
 f32 GetPerformanceFactor(u8 tileId)
 {
     return Tiles[tileId].performanceFactor;
+}
+bool GetInternalHappinessBoost(u8 tileId)
+{
+    return Tiles[tileId].internalHappinessBoost;
 }

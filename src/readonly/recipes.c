@@ -40,6 +40,18 @@ const MergeRecipe RECIPES[] = {
         .inputA = "solarPanelL2",
         .inputB = "solarPanelL2",
         .result = "solarPanelL3",
+    }, {
+        .inputA = "biodome",
+        .inputB = "apartaments",
+        .result = "bio_apartaments",
+    }, {
+        .inputA = "bio_apartaments",
+        .inputB = "bio_apartaments",
+        .result = "bio_apartamentsL2",
+    }, {
+        .inputA = "bio_apartamentsL2",
+        .inputB = "bio_apartamentsL2",
+        .result = "bio_apartamentsL3",
     }
 };
 static const usize RECIPES_LEN = sizeof(RECIPES) / sizeof(RECIPES[0]);

@@ -26,6 +26,6 @@ void ResetState(void)
     ElectricityConsumed = 0;
     ElectricityGenerated = 0;
     Iron = 0;
-    Copper = 1000;
+    Copper = 100000;
     Uranium = 10;
 }
