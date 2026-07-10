@@ -13,6 +13,7 @@
 #include "ui/cursor.h"
 #include "ui/interface.h"
 #include "ui/mainmenu.h"
+#include "music.h"
 
 #include <time.h>
 
@@ -64,6 +65,7 @@ HexCoord GetMousePointed(void)
 
 void UpdateDrawFrame(void)
 {
+    UpdateMusic();
 
     switch (currentScreen)
     {
@@ -121,6 +123,7 @@ int main(void)
 	InitWindow(720, 720, WINDOW_TITLE);
     InitTextures();
     InitGui(&currentTile);
+    InitMusic();
 
 #if !defined(PLATFORM_WEB)
     GuiLoadStyle("resources/raygui_styles/amber/style_amber.rgs");
@@ -140,6 +143,7 @@ int main(void)
 
     UnloadTextures();
     UnloadRenderTexture(Screen);
+    UnloadMusic();
 	CloseWindow();
 
 	return 0;
