@@ -53,6 +53,9 @@ static void RenderStars(void)
     }
 }
 
+static char seedText[256] = "";
+static bool seedEditMode = false;
+
 void UpdateDrawMenu(void)
 {
     UpdateStars();
@@ -64,9 +67,9 @@ void UpdateDrawMenu(void)
 
     if (GuiButton((Rectangle){ 260, 300, 200, 50 }, "#20# PLAY"))
     {
-        ResetState();
-        GenerateMars(rand());
-        currentScreen = SCREEN_MARS;
+        seedText[0] = '\0';
+        seedEditMode = false;
+        currentScreen = SCREEN_SEED;
     }
 
     if (GuiButton((Rectangle){ 260, 370, 200, 50 }, "#7# CREDITS"))
@@ -108,6 +111,49 @@ void UpdateDrawCredits(void)
     }
 
     if (GuiButton((Rectangle){ 260, 500, 200, 50 }, "#19# Back"))
+        currentScreen = SCREEN_MENU;
+
+    EndDrawing();
+}
+
+static u32 HashString(const char *s)
+{
+    u32 hash = 5381;
+    int c;
+    while ((c = *s++))
+        hash = ((hash << 5) + hash) + (unsigned char)c;
+    return hash;
+}
+
+void UpdateDrawSeed(void)
+{
+    UpdateStars();
+
+    BeginDrawing();
+    ClearBackground(BLACK);
+
+    RenderStars();
+
+    if (GuiTextBox((Rectangle){ 260, 300, 140, 50 }, seedText, sizeof(seedText), seedEditMode))
+        seedEditMode = !seedEditMode;
+
+
+    if (GuiButton((Rectangle){ 410, 300, 50, 50 }, "#20#"))
+    {
+        ResetState();
+        u32 seed = (seedText[0] != '\0') ? HashString(seedText) : (u32)rand();
+        GenerateMars(seed);
+        currentScreen = SCREEN_MARS;
+    }
+
+    if (GuiButton((Rectangle){ 260, 370, 200, 50 }, "#20# RANDOM"))
+    {
+        u32 rnd = (u32)rand();
+        snprintf(seedText, sizeof(seedText), "%u", rnd);
+        seedEditMode = false;
+    }
+
+    if (GuiButton((Rectangle){ 260, 440, 200, 50 }, "#19# BACK"))
         currentScreen = SCREEN_MENU;
 
     EndDrawing();
