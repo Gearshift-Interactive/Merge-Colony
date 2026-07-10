@@ -20,6 +20,7 @@ static const TileKind Buildings[] = {
     TILE_BUILDING_APARTAMENTS,
     TILE_BUILDING_GENERATOR,
     TILE_BUILDING_BIODOME,
+    TILE_BUILDING_CONTROL,
 };
 static const usize BUILDINGS_LEN = sizeof(Buildings) / sizeof(Buildings[0]);
 
@@ -90,7 +91,7 @@ static const TileData Tiles[] = {
         .cost = 150,
         .happinessFactor = -20,
         .powerFactor = -50,
-        .performanceFactor = 1,
+        .performanceFactor = 1.0f,
     }, {
         .id = "drillL2",
         .texture = &TEXTURE_DRILLL2,
@@ -98,7 +99,7 @@ static const TileData Tiles[] = {
         .space = 5,
         .happinessFactor = -30,
         .powerFactor = -80,
-        .performanceFactor = 2,
+        .performanceFactor = 2.0f,
     }, {
         .id = "drillL3",
         .texture = &TEXTURE_DRILLL3,
@@ -106,7 +107,15 @@ static const TileData Tiles[] = {
         .space = 10,
         .happinessFactor = -40,
         .powerFactor = -140,
-        .performanceFactor = 3.5,
+        .performanceFactor = 3.0f,
+    }, {
+        .id = "control",
+        .texture = &TEXTURE_CONTROL,
+        .kind = TILE_BUILDING_CONTROL,
+        .space = 10,
+        .happinessFactor = -10,
+        .powerFactor = -20,
+        .performanceFactor = 1.5f,
     }, {
         .id = "generator",
         .texture = &TEXTURE_GENERATOR,

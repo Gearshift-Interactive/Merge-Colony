@@ -8,13 +8,30 @@
 #define BASE_HAPPINESS 50
 #define MAX_POWER_HAPPINESS_DEBUFF 20
 
-static float populationEfficency = 1;
+static f32 populationEfficency = 1;
 static u8 ticksSincePopulationTick = 0;
-static float powerRatio = 1;
+static f32 powerRatio = 1;
 
+static f32 CheckDrillPerformance(HexCoord pos)
+{
+    f32 result = GetPerformanceFactor(GetTile(1, pos));
+    if (GetTileKind(GetTile(1, HexNeighbourTop(pos))) == TILE_BUILDING_CONTROL)
+        result *= GetPerformanceFactor(GetTile(1, HexNeighbourTop(pos)));
+    if (GetTileKind(GetTile(1, HexNeighbourTopRight(pos))) == TILE_BUILDING_CONTROL)
+        result *= GetPerformanceFactor(GetTile(1, HexNeighbourTopRight(pos)));
+    if (GetTileKind(GetTile(1, HexNeighbourBottomRight(pos))) == TILE_BUILDING_CONTROL)
+        result *= GetPerformanceFactor(GetTile(1, HexNeighbourBottomRight(pos)));
+    if (GetTileKind(GetTile(1, HexNeighbourBottom(pos))) == TILE_BUILDING_CONTROL)
+        result *= GetPerformanceFactor(GetTile(1, HexNeighbourBottom(pos)));
+    if (GetTileKind(GetTile(1, HexNeighbourBottomLeft(pos))) == TILE_BUILDING_CONTROL)
+        result *= GetPerformanceFactor(GetTile(1, HexNeighbourBottomLeft(pos)));
+    if (GetTileKind(GetTile(1, HexNeighbourTopLeft(pos))) == TILE_BUILDING_CONTROL)
+        result *= GetPerformanceFactor(GetTile(1, HexNeighbourTopLeft(pos)));
+    return result;
+}
 static void UpdateBuildingDrill(HexCoord pos)
 {
-    f32 const PERFORMANCE_FACTOR = GetPerformanceFactor(GetTile(1, pos));
+    f32 const PERFORMANCE_FACTOR = CheckDrillPerformance(pos);
     u8 copper = GetCopper(pos);
     if (copper) Copper += round(BASE_DRILL_EFFICENSY * (copper / 255.0f) * populationEfficency * powerRatio * PERFORMANCE_FACTOR);
     u8 iron = GetIron(pos);
