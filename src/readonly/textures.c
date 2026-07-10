@@ -43,6 +43,9 @@ Texture2D TEXTURE_LAB;
 Texture2D TEXTURE_GENERATOR;
 Texture2D TEXTURE_GENERATORL2;
 Texture2D TEXTURE_GENERATORL3;
+Texture2D TEXTURE_SOLAR_PANEL;
+Texture2D TEXTURE_SOLAR_PANELL2;
+Texture2D TEXTURE_SOLAR_PANELL3;
 
 Texture2D TEXTURE_FACTORY_OUTLINE;
 Texture2D TEXTURE_APARTAMENT_OUTLINE;
@@ -95,6 +98,9 @@ void InitTextures(void)
     TEXTURE_GENERATOR    = LoadTexture("resources/tiles/generator.png");
     TEXTURE_GENERATORL2  = LoadTexture("resources/tiles/generator_2.png");
     TEXTURE_GENERATORL3  = LoadTexture("resources/tiles/generator_3.png");
+    TEXTURE_SOLAR_PANEL    = LoadTexture("resources/tiles/solar_panel_1.png");
+    TEXTURE_SOLAR_PANELL2  = LoadTexture("resources/tiles/solar_panel_2.png");
+    TEXTURE_SOLAR_PANELL3  = LoadTexture("resources/tiles/solar_panel_3.png");
 
     TEXTURE_APARTAMENT_OUTLINE = LoadTexture("resources/tiles/apartament_outline.png");
     TEXTURE_DRILL_OUTLINE      = LoadTexture("resources/tiles/drill_outline.png");
@@ -147,6 +153,9 @@ void UnloadTextures(void)
     UnloadTexture(TEXTURE_GENERATOR);
     UnloadTexture(TEXTURE_GENERATORL2);
     UnloadTexture(TEXTURE_GENERATORL3);
+    UnloadTexture(TEXTURE_SOLAR_PANEL);
+    UnloadTexture(TEXTURE_SOLAR_PANELL2);
+    UnloadTexture(TEXTURE_SOLAR_PANELL3);
 
     UnloadTexture(TEXTURE_FACTORY_OUTLINE);
     UnloadTexture(TEXTURE_APARTAMENT_OUTLINE);

@@ -106,6 +106,21 @@ static const TileData Tiles[] = {
         .happinessFactor = -40,
         .powerFactor = 800,
     }, {
+        .id = "solarPanelL1",
+        .texture = &TEXTURE_SOLAR_PANEL,
+        .kind = TILE_BUILDING_GENERATOR,
+        .powerFactor = 150,
+    }, {
+        .id = "solarPanelL2",
+        .texture = &TEXTURE_SOLAR_PANELL2,
+        .kind = TILE_BUILDING_GENERATOR,
+        .powerFactor = 300,
+    }, {
+        .id = "solarPanelL3",
+        .texture = &TEXTURE_SOLAR_PANELL3,
+        .kind = TILE_BUILDING_GENERATOR,
+        .powerFactor = 600,
+    }, {
         .id = "rocks1",
         .texture = &TEXTURE_ROCKS1,
         .kind = TILE_GROUND
