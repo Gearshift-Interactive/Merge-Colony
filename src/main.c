@@ -67,6 +67,7 @@ void UpdateDrawFrame(void)
     {
         case SCREEN_MENU: UpdateDrawMenu(); return;
         case SCREEN_CREDITS: UpdateDrawCredits(); return;
+        case SCREEN_SEED: UpdateDrawSeed(); return;
         default: {}
     }
 
