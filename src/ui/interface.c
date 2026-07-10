@@ -47,7 +47,7 @@ static WindowData InfoWindow = {
     .minimized = true
 };
 static const WindowData *WINDOWS[] = {
-    &BuildWindow, &DestroyWindow, &StatisticsWindow, &OverlayWindow
+    &BuildWindow, &DestroyWindow, &StatisticsWindow, &OverlayWindow, &InfoWindow
 };
 
 static u8 *currentTile;
@@ -75,7 +75,7 @@ static void DrawBuildContent(Vector2 position, __attribute__((unused)) Vector2 s
             190,
             40
         },
-        "---\nBiodome\nApartaments\nDrill\nGenerator",
+        "---\nBiodome\nHabitat\nDrill\nGenerator",
         &selected
     );
     if (selected != prexSelect)

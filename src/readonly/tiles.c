@@ -40,7 +40,7 @@ static const TileData Tiles[] = {
         .happinessFactor = 10,
         .powerFactor = -20,
     }, {
-        .name = "Apartaments Level 1",
+        .name = "Habitat Level 1",
         .comment = "Houses people.",
         .id = "apartaments",
         .texture = &TEXTURE_APARTAMENT,
@@ -51,7 +51,7 @@ static const TileData Tiles[] = {
         .happinessFactor = 3,
         .powerFactor = -20,
     }, {
-        .name = "Apartaments Level 2",
+        .name = "Habitat Level 2",
         .comment = "Houses people.",
         .id = "apartamentsL2",
         .texture = &TEXTURE_APARTAMENTL2,
@@ -60,7 +60,7 @@ static const TileData Tiles[] = {
         .happinessFactor = 3,
         .powerFactor = -30,
     }, {
-        .name = "Apartaments Level 3",
+        .name = "Habitat Level 3",
         .comment = "Houses people.",
         .id = "apartamentsL3",
         .texture = &TEXTURE_APARTAMENTL3,
@@ -69,7 +69,7 @@ static const TileData Tiles[] = {
         .happinessFactor = 6,
         .powerFactor = -40,
     }, {
-        .name = "Bio Apartaments Level 1",
+        .name = "Eden Habitat Level 1",
         .comment = "Houses people with increased happiness by default.",
         .id = "bio_apartaments",
         .texture = &TEXTURE_BIO_APARTAMENT,
@@ -79,7 +79,7 @@ static const TileData Tiles[] = {
         .powerFactor = -40,
         .internalHappinessBoost = true,
     }, {
-        .name = "Bio Apartaments Level 2",
+        .name = "Eden Habitat Level 2",
         .comment = "Houses people with increased happiness by default.",
         .id = "bio_apartamentsL2",
         .texture = &TEXTURE_BIO_APARTAMENTL2,
@@ -89,7 +89,7 @@ static const TileData Tiles[] = {
         .powerFactor = -50,
         .internalHappinessBoost = true,
     }, {
-        .name = "Bio Apartaments Level 3",
+        .name = "Eden Habitat Level 3",
         .comment = "Houses people with increased happiness by default.",
         .id = "bio_apartamentsL3",
         .texture = &TEXTURE_BIO_APARTAMENTL3,
