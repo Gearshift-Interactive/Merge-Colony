@@ -65,7 +65,7 @@ void UpdateDrawMenu(void)
     if (GuiButton((Rectangle){ 260, 300, 200, 50 }, "#20# PLAY"))
     {
         ResetState();
-        GenerateMars();
+        GenerateMars(rand());
         currentScreen = SCREEN_MARS;
     }
 

@@ -25,7 +25,7 @@ static HexCoord FindFree()
     return result;
 }
 
-void GenerateMars(void)
+void GenerateMars(u32 seed)
 {
     const u8 tiles[] = {
         GetTileId("rocks1"),
@@ -56,22 +56,25 @@ void GenerateMars(void)
         GetTileId("mountain3-3"),
     };
     const usize mountains3_size = sizeof(mountains3) / sizeof(mountains3[0]);
+    f32 sx = (f32)(seed & 0xFFFF);
+    f32 sy = (f32)(seed >> 16);
+    srand(seed);
     for (size_t x = 0; x < MAP_WIDTH; x++)
     for (size_t y = 0; y < MAP_HEIGHT; y++)
     {
         f32 perlin = stb_perlin_fbm_noise3(
-            x * 0.15f, y * 0.15f, 0,
+            sx + x * 0.15f, sy + y * 0.15f, 0,
             /* lacunarity */ 2,
             /* gain */ 0.5f,
             /* octaves */ 2
         );
-        if (perlin > -0.1f)
+        if (perlin > -0.05f)
         {
-            if (perlin > 0.3f)
+            if (perlin > 0.4f)
                 SetTile(1, (HexCoord) { x, y }, mountains3[rand() % mountains3_size]);
-            else if (perlin > 0.15f)
+            else if (perlin > 0.3f)
                 SetTile(1, (HexCoord) { x, y }, mountains2[rand() % mountains2_size]);
-            else if (perlin > 0)
+            else if (perlin > 0.2f)
                 SetTile(1, (HexCoord) { x, y }, mountains1[rand() % mountains1_size]);
             else
                 SetTile(1, (HexCoord) { x, y }, boulders[rand() % boulders_size]);
@@ -81,21 +84,21 @@ void GenerateMars(void)
         SetTile(0, (HexCoord) { x, y }, tiles[rand() % tiles_size]);
 
         f32 copperPerlin = stb_perlin_fbm_noise3(
-            x * 0.15f, y * 0.15f, 10000,
+            sx + x * 0.15f, sy + y * 0.15f, 10000,
             /* lacunarity */ 2,
             /* gain */ 0.7f,
             /* octaves */ 4
         );
-        if (copperPerlin > 0)
-            CopperMap[x][y] = copperPerlin * 255;
+        if (copperPerlin > 0.3f)
+            CopperMap[x][y] = ( copperPerlin - 0.3f ) / 0.7f * 255;
         f32 ironPerlin = stb_perlin_fbm_noise3(
-            x * 0.15f, y * 0.15f, 20000,
+            sx + x * 0.15f, sy + y * 0.15f, 20000,
             /* lacunarity */ 2,
             /* gain */ 0.2f,
             /* octaves */ 8
         );
-        if (ironPerlin > 0.1f)
-            IronMap[x][y] = (ironPerlin - 0.1f) / 0.9f * 255;
+        if (ironPerlin > 0.4f)
+            IronMap[x][y] = (ironPerlin - 0.4f) / 0.6f * 255;
         // f32 waterPerlin = stb_perlin_fbm_noise3(
         //     x * 0.15f, y * 0.15f, 30000,
         //     /* lacunarity */ 2,

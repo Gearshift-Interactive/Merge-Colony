@@ -11,7 +11,7 @@
 
 extern i32 CurrentOverlay;
 
-void GenerateMars(void);
+void GenerateMars(u32 seed);
 Vector2 CalculateTileScreenPos(HexCoord);
 bool IsTileInMap(HexCoord);
 void RenderMap(void);
