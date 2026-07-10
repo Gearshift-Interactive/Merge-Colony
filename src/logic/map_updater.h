@@ -3,4 +3,4 @@
 #include "common.h"
 
 void UpdateMap(void);
-u8 CheckHappiness(HexCoord pos);
+i16 CheckHappiness(HexCoord pos);

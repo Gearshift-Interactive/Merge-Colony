@@ -1,12 +1,14 @@
 #include "ui/cursor.h"
 
 #include "logic/map.h"
+#include "logic/map_updater.h"
 #include "logic/state.h"
 #include "logic/actions.h"
 #include "readonly/textures.h"
 #include "readonly/tiles.h"
 #include "readonly/recipes.h"
 #include "ui/interface.h"
+#include "raymath.h"
 
 const double CURSOR_SPEED = 12.0f;
 static Vector2 currentCursorPos = { 0 };
@@ -83,6 +85,7 @@ void RenderMouseCursor(HexCoord tileSelected, u8 currentBuilding)
     }
 
     u8 data = 0;
+    i32 happ = 0;
     switch (CurrentOverlay)
     {
         // case 1:
@@ -94,10 +97,18 @@ void RenderMouseCursor(HexCoord tileSelected, u8 currentBuilding)
         case 2:
             data = GetIron(tileSelected);
             break;
+        case 3:
+            happ = CheckHappiness(tileSelected);
+            break;
     }
     if (data)
     {
         const char *text = TextFormat("%.2f%%", data / 255.0f * 100);
         DrawText(text, currentCursorPos.x, currentCursorPos.y, GuiGetFont().baseSize, RAYWHITE);
+    }
+    else if (happ)
+    {
+        const char *text = TextFormat("%d%%", Clamp(happ, 0, 100));
+        DrawText(text, currentCursorPos.x + 5, currentCursorPos.y, GuiGetFont().baseSize, RAYWHITE);
     }
 }

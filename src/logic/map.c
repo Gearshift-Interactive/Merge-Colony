@@ -147,7 +147,7 @@ static void RenderTile(int layer, size_t x, size_t y)
             WHITE
         );
 }
-Color Gradient(int value)
+static Color Gradient(int value)
 {
     value = Clamp(value, 0, 100);
 
