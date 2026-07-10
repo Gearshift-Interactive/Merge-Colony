@@ -134,23 +134,24 @@ void UpdateDrawSeed(void)
 
     RenderStars();
 
+    GuiLabel((Rectangle){ 260, 280, 140, 16 }, "Seed:");
     if (GuiTextBox((Rectangle){ 260, 300, 140, 50 }, seedText, sizeof(seedText), seedEditMode))
         seedEditMode = !seedEditMode;
 
 
-    if (GuiButton((Rectangle){ 410, 300, 50, 50 }, "#20#"))
+    if (GuiButton((Rectangle){ 410, 300, 50, 50 }, "#22#"))
+    {
+        u32 rnd = (u32)rand();
+        snprintf(seedText, sizeof(seedText), "%u", rnd);
+        seedEditMode = false;
+    }
+
+    if (GuiButton((Rectangle){ 260, 370, 200, 50 }, "#20# PLAY"))
     {
         ResetState();
         u32 seed = (seedText[0] != '\0') ? HashString(seedText) : (u32)rand();
         GenerateMars(seed);
         currentScreen = SCREEN_MARS;
-    }
-
-    if (GuiButton((Rectangle){ 260, 370, 200, 50 }, "#20# RANDOM"))
-    {
-        u32 rnd = (u32)rand();
-        snprintf(seedText, sizeof(seedText), "%u", rnd);
-        seedEditMode = false;
     }
 
     if (GuiButton((Rectangle){ 260, 440, 200, 50 }, "#19# BACK"))

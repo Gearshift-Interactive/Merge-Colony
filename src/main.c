@@ -14,6 +14,8 @@
 #include "ui/interface.h"
 #include "ui/mainmenu.h"
 
+#include <time.h>
+
 
 #define WINDOW_TITLE APP_NAME " v" APP_VERSION
 
@@ -113,8 +115,9 @@ void UpdateDrawFrame(void)
     EndDrawing();
 }
 
-int main(int argc, char **argv)
+int main(void)
 {
+    srand(time(NULL));
 	InitWindow(720, 720, WINDOW_TITLE);
     InitTextures();
     InitGui(&currentTile);
