@@ -10,6 +10,7 @@
 #include "logic/actions.h"
 #include "readonly/textures.h"
 #include "readonly/tiles.h"
+#include "readonly/sfx.h"
 #include "ui/cursor.h"
 #include "ui/interface.h"
 #include "ui/mainmenu.h"
@@ -85,6 +86,7 @@ void UpdateDrawFrame(void)
             {
                 SetTile(1, current, currentTile);
                 Copper -= GetTileCost(currentTile);
+                PlaySound(SFX_BUILD);
             }
             else
                 UpdateActions(current);
@@ -124,6 +126,7 @@ int main(void)
     InitTextures();
     InitGui(&currentTile);
     InitMusic();
+    InitSFX();
 
 #if !defined(PLATFORM_WEB)
     GuiLoadStyle("resources/raygui_styles/amber/style_amber.rgs");
@@ -143,6 +146,7 @@ int main(void)
 
     UnloadTextures();
     UnloadRenderTexture(Screen);
+    UnloadSFX();
     UnloadMusic();
 	CloseWindow();
 

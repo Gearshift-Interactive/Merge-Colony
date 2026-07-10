@@ -5,6 +5,7 @@
 #include "readonly/tiles.h"
 #include "readonly/recipes.h"
 #include "readonly/textures.h"
+#include "readonly/sfx.h"
 #include "ui/interface.h"
 
 i32 currentAction = 0;
@@ -16,6 +17,7 @@ static void Action1(HexCoord mousePoint)
     if (TileIsBuilding(GetTile(1, mousePoint)) && Iron >= DESTROY_BUILDING_COST) {
         SetTile(1, mousePoint, 0);
         Iron -= DESTROY_BUILDING_COST;
+        PlaySound(SFX_DESTROY_BUILDING);
     }
 }
 static void Action2(HexCoord mousePoint)
@@ -23,15 +25,18 @@ static void Action2(HexCoord mousePoint)
     if (GetTileKind(GetTile(1, mousePoint)) == TILE_BOULDER && Iron >= DESTROY_BOULDER_COST) {
         SetTile(1, mousePoint, 0);
         Iron -= DESTROY_BOULDER_COST;
+        PlaySound(SFX_DESTROY_BOULDER);
     }
 }
 static void Action3(HexCoord mousePoint)
 {
     if (HexEqual(mergeFrom, mousePoint)) {
         mergeFrom = (HexCoord) { -100, -100 };
+        PlaySound(SFX_BUTTON);
         return;
     } else if (HexEqual(mergeFrom, (HexCoord) { -100, -100 })) {
         mergeFrom = mousePoint;
+        PlaySound(SFX_BUTTON);
         return;
     }
     MergeRecipe RECIPE_RESULT = SearchRecipe(
@@ -44,6 +49,7 @@ static void Action3(HexCoord mousePoint)
         SetTile(1, mousePoint, GetTileId(RECIPE_RESULT.result));
         mergeFrom = (HexCoord) { -100, -100 };
         Iron -= RECIPE_RESULT.cost;
+        PlaySound(SFX_MERGE);
     }
 }
 static void Action4(HexCoord mousePoint)

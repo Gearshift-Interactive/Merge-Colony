@@ -12,11 +12,14 @@ static GameScreen prev;
 void InitMusic(void)
 {
     InitAudioDevice();
-    mainMenuMusic = LoadMusicStream("resources/audio/main_menu.mp3");
+    mainMenuMusic = LoadMusicStream("resources/audio/main_menu.wav");
     mainMenuMusic.looping = true;
-    planetMusic[0] = LoadMusicStream("resources/audio/planet1.mp3");
-    planetMusic[1] = LoadMusicStream("resources/audio/planet2.mp3");
-    planetMusic[2] = LoadMusicStream("resources/audio/planet3.mp3");
+    planetMusic[0] = LoadMusicStream("resources/audio/planet1.wav");
+    planetMusic[0].looping = false;
+    planetMusic[1] = LoadMusicStream("resources/audio/planet2.wav");
+    planetMusic[1].looping = false;
+    planetMusic[2] = LoadMusicStream("resources/audio/planet3.wav");
+    planetMusic[2].looping = false;
     PlayMusicStream(mainMenuMusic);
 }
 static void UpdateNext(void)
@@ -34,7 +37,7 @@ void UpdateMusic(void)
             StopMusicStream(mainMenuMusic);
             PlayMusicStream(planetMusic[currentSong]);
         }
-        else
+        else if (prev == SCREEN_MARS)
         {
             StopMusicStream(planetMusic[currentSong]);
             PlayMusicStream(mainMenuMusic);

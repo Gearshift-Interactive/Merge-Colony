@@ -1,6 +1,7 @@
 #include "ui/mainmenu.h"
 #include "logic/map.h"
 #include "logic/state.h"
+#include "readonly/sfx.h"
 
 GameScreen currentScreen = SCREEN_MENU;
 
@@ -70,10 +71,14 @@ void UpdateDrawMenu(void)
         seedText[0] = '\0';
         seedEditMode = false;
         currentScreen = SCREEN_SEED;
+        PlaySound(SFX_BUTTON);
     }
 
     if (GuiButton((Rectangle){ 260, 370, 200, 50 }, "#7# CREDITS"))
+    {
         currentScreen = SCREEN_CREDITS;
+        PlaySound(SFX_BUTTON);
+    }
 
 #if !defined(PLATFORM_WEB)
     if (GuiButton((Rectangle){ 260, 440, 200, 50 }, "#19# EXIT"))
@@ -111,7 +116,10 @@ void UpdateDrawCredits(void)
     }
 
     if (GuiButton((Rectangle){ 260, 500, 200, 50 }, "#19# Back"))
+    {
         currentScreen = SCREEN_MENU;
+        PlaySound(SFX_BUTTON);
+    }
 
     EndDrawing();
 }
@@ -144,6 +152,7 @@ void UpdateDrawSeed(void)
         u32 rnd = (u32)rand();
         snprintf(seedText, sizeof(seedText), "%u", rnd);
         seedEditMode = false;
+        PlaySound(SFX_BUTTON);
     }
 
     if (GuiButton((Rectangle){ 260, 370, 200, 50 }, "#20# PLAY"))
@@ -152,10 +161,14 @@ void UpdateDrawSeed(void)
         u32 seed = (seedText[0] != '\0') ? HashString(seedText) : (u32)rand();
         GenerateMars(seed);
         currentScreen = SCREEN_MARS;
+        PlaySound(SFX_PLAY);
     }
 
     if (GuiButton((Rectangle){ 260, 440, 200, 50 }, "#19# BACK"))
+    {
         currentScreen = SCREEN_MENU;
+        PlaySound(SFX_BUTTON);
+    }
 
     EndDrawing();
 }
