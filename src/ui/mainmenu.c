@@ -1,6 +1,6 @@
-#include "mainmenu.h"
-#include "map.h"
-#include "state.h"
+#include "ui/mainmenu.h"
+#include "logic/map.h"
+#include "logic/state.h"
 
 GameScreen currentScreen = SCREEN_MENU;
 

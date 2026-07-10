@@ -1,6 +1,6 @@
-#include "tiles.h"
-#include "textures.h"
-#include "string.h"
+#include "readonly/tiles.h"
+#include "readonly/textures.h"
+#include <string.h>
 
 typedef struct {
     char *id;
@@ -13,7 +13,7 @@ typedef struct {
     i32 powerFactor;
 } TileData;
 
-static TileData Tiles[] = {
+static const TileData Tiles[] = {
     {
         .id = "void",
     }, {
@@ -33,6 +33,20 @@ static TileData Tiles[] = {
         .cost = 100,
         .happinessFactor = 3,
         .powerFactor = -20,
+    }, {
+        .id = "apartamentsL2",
+        .texture = &TEXTURE_APARTAMENTL2,
+        .kind = TILE_BUILDING_APARTAMENTS,
+        .space = 12,
+        .happinessFactor = 3,
+        .powerFactor = -30,
+    }, {
+        .id = "apartamentsL3",
+        .texture = &TEXTURE_APARTAMENTL3,
+        .kind = TILE_BUILDING_APARTAMENTS,
+        .space = 24,
+        .happinessFactor = 6,
+        .powerFactor = -40,
     }, {
         .id = "drill",
         .texture = &TEXTURE_DRILL,

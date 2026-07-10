@@ -4,15 +4,15 @@
 #    include <emscripten/emscripten.h>
 #endif
 
-#include "textures.h"
-#include "map.h"
-#include "tiles.h"
-#include "cursor.h"
-#include "interface.h"
-#include "state.h"
-#include "map_updater.h"
+#include "logic/map.h"
+#include "logic/state.h"
+#include "logic/map_updater.h"
+#include "readonly/textures.h"
+#include "readonly/tiles.h"
+#include "ui/cursor.h"
+#include "ui/interface.h"
+#include "ui/mainmenu.h"
 
-#include "mainmenu.h"
 
 #define WINDOW_TITLE APP_NAME " v" APP_VERSION
 

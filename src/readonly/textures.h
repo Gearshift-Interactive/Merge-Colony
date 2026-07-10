@@ -32,6 +32,8 @@ extern Texture2D TEXTURE_CROSS;
 
 extern Texture2D TEXTURE_FACTORY;
 extern Texture2D TEXTURE_APARTAMENT;
+extern Texture2D TEXTURE_APARTAMENTL2;
+extern Texture2D TEXTURE_APARTAMENTL3;
 extern Texture2D TEXTURE_DRILL;
 extern Texture2D TEXTURE_BIODOME;
 extern Texture2D TEXTURE_LAB;

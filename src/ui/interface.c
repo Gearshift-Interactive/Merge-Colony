@@ -1,12 +1,12 @@
-#include "interface.h"
+#include "ui/interface.h"
 
 #define RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT 20
-#include "guiwindow.h"
+#include "ui/guiwindow.h"
 
-#include "tiles.h"
-#include "state.h"
-#include "map.h"
-#include "mainmenu.h"
+#include "ui/mainmenu.h"
+#include "readonly/tiles.h"
+#include "logic/state.h"
+#include "logic/map.h"
 
 typedef struct {
     Vector2 position;

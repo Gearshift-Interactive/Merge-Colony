@@ -1,4 +1,4 @@
-#include "textures.h"
+#include "readonly/textures.h"
 #include "common.h"
 
 Texture2D TEXTURE_HEX;
@@ -31,6 +31,8 @@ Texture2D TEXTURE_CROSS;
 
 Texture2D TEXTURE_FACTORY;
 Texture2D TEXTURE_APARTAMENT;
+Texture2D TEXTURE_APARTAMENTL2;
+Texture2D TEXTURE_APARTAMENTL3;
 Texture2D TEXTURE_DRILL;
 Texture2D TEXTURE_BIODOME;
 Texture2D TEXTURE_LAB;
@@ -73,12 +75,14 @@ void InitTextures(void)
     TEXTURE_HIGHLIGHT = LoadTexture("resources/tiles/template2.png");
     TEXTURE_CROSS     = LoadTexture("resources/tiles/coross.png");
 
-    TEXTURE_FACTORY    = LoadTexture("resources/tiles/factory.png");
-    TEXTURE_APARTAMENT = LoadTexture("resources/tiles/apartament.png");
-    TEXTURE_DRILL      = LoadTexture("resources/tiles/drill.png");
-    TEXTURE_BIODOME    = LoadTexture("resources/tiles/biodome.png");
-    TEXTURE_LAB        = LoadTexture("resources/tiles/laboratory.png");
-    TEXTURE_GENERATOR  = LoadTexture("resources/tiles/generator.png");
+    TEXTURE_FACTORY      = LoadTexture("resources/tiles/factory.png");
+    TEXTURE_APARTAMENT   = LoadTexture("resources/tiles/apartament.png");
+    TEXTURE_APARTAMENTL2 = LoadTexture("resources/tiles/apartament_2.png");
+    TEXTURE_APARTAMENTL3 = LoadTexture("resources/tiles/apartament_3.png");
+    TEXTURE_DRILL        = LoadTexture("resources/tiles/drill.png");
+    TEXTURE_BIODOME      = LoadTexture("resources/tiles/biodome.png");
+    TEXTURE_LAB          = LoadTexture("resources/tiles/laboratory.png");
+    TEXTURE_GENERATOR    = LoadTexture("resources/tiles/generator.png");
 
     TEXTURE_APARTAMENT_OUTLINE = LoadTexture("resources/tiles/apartament_outline.png");
     TEXTURE_DRILL_OUTLINE      = LoadTexture("resources/tiles/drill_outline.png");
@@ -119,6 +123,8 @@ void UnloadTextures(void)
 
     UnloadTexture(TEXTURE_FACTORY);
     UnloadTexture(TEXTURE_APARTAMENT);
+    UnloadTexture(TEXTURE_APARTAMENTL2);
+    UnloadTexture(TEXTURE_APARTAMENTL3);
     UnloadTexture(TEXTURE_DRILL);
     UnloadTexture(TEXTURE_BIODOME);
     UnloadTexture(TEXTURE_LAB);

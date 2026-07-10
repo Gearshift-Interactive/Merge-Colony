@@ -1,10 +1,10 @@
-#pragma once
+#include "ui/cursor.h"
 
-#include "textures.h"
-#include "map.h"
-#include "tiles.h"
-#include "interface.h"
-#include "state.h"
+#include "logic/map.h"
+#include "logic/state.h"
+#include "readonly/textures.h"
+#include "readonly/tiles.h"
+#include "ui/interface.h"
 
 const double CURSOR_SPEED = 12.0f;
 static Vector2 currentCursorPos = { 0 };

@@ -1,4 +1,4 @@
-#include "state.h"
+#include "logic/state.h"
 #include "common.h"
 
 u32 Tehos = 1200;

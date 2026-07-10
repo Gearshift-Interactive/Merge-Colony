@@ -1,8 +1,8 @@
-#include "map_updater.h"
+#include "logic/map_updater.h"
 
-#include "map.h"
-#include "tiles.h"
-#include "state.h"
+#include "logic/map.h"
+#include "readonly/tiles.h"
+#include "logic/state.h"
 
 #define BASE_DRILL_EFFICENSY 5  // for 255
 #define BASE_HAPPINESS 50

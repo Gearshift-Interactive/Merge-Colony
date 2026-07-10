@@ -1,7 +1,7 @@
-#include "map.h"
+#include "logic/map.h"
 
-#include "tiles.h"
-#include "textures.h"
+#include "readonly/tiles.h"
+#include "readonly/textures.h"
 #include "stb_perlin_.h"
 
 #define MAX_COPPER 5
