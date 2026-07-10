@@ -2,6 +2,7 @@
 #include "logic/map.h"
 #include "logic/state.h"
 #include "readonly/sfx.h"
+#include "readonly/textures.h"
 
 GameScreen currentScreen = SCREEN_MENU;
 
@@ -79,6 +80,8 @@ void UpdateDrawMenu(void)
         currentScreen = SCREEN_CREDITS;
         PlaySound(SFX_BUTTON);
     }
+
+    DrawTextureEx(TEXTURE_LOGO, (Vector2) { 90, 100 }, 0, 2, WHITE);
 
 #if !defined(PLATFORM_WEB)
     if (GuiButton((Rectangle){ 260, 440, 200, 50 }, "#19# EXIT"))

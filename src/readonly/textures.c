@@ -1,6 +1,8 @@
 #include "readonly/textures.h"
 #include "common.h"
 
+Texture2D TEXTURE_LOGO;
+
 Texture2D TEXTURE_HEX;
 
 Texture2D TEXTURE_ROCKS1;
@@ -62,6 +64,8 @@ void InitTextures(void)
 {
     TEXTURE_HEX = LoadTexture("resources/tiles/hex.png");
 
+    TEXTURE_LOGO = LoadTexture("resources/logo.png");
+
     TEXTURE_ROCKS1 = LoadTexture("resources/tiles/rocks1.png");
     TEXTURE_ROCKS2 = LoadTexture("resources/tiles/rocks2.png");
     TEXTURE_ROCKS3 = LoadTexture("resources/tiles/rocks3.png");
@@ -119,6 +123,8 @@ void InitTextures(void)
 }
 void UnloadTextures(void)
 {
+    UnloadTexture(TEXTURE_LOGO);
+
     UnloadTexture(TEXTURE_HEX);
 
     UnloadTexture(TEXTURE_ROCKS1);
