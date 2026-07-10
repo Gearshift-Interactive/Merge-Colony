@@ -7,6 +7,7 @@ typedef struct {
 } HexCoord;
 
 bool HexEqual(HexCoord, HexCoord);
+bool HexIsNeighbour(HexCoord, HexCoord);
 
 HexCoord HexNeighbourTop(HexCoord origin);
 HexCoord HexNeighbourBottom(HexCoord origin);

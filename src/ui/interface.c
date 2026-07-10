@@ -7,6 +7,7 @@
 #include "readonly/tiles.h"
 #include "logic/state.h"
 #include "logic/map.h"
+#include "logic/actions.h"
 
 typedef struct {
     Vector2 position;
@@ -24,7 +25,7 @@ static WindowData BuildWindow = {
 };
 static WindowData DestroyWindow = {
     .position = { 10, 20 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
-    .size = { 210, 310 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
+    .size = { 210, 190 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
     .minimized = true
 };
 static WindowData StatisticsWindow = {
@@ -155,6 +156,19 @@ static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 sc
     //     TextFormat("%d", Uranium)
     // );
 }
+static void DrawToolsContent(Vector2 position, __attribute__((unused)) Vector2 scroll)
+{
+    GuiToggleGroup(
+        (Rectangle){
+            position.x + 10,
+            position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 10,
+            190,
+            40
+        },
+        "---\nDestroy building\nDestroy boulder\nMerge",
+        &currentAction
+    );
+}
 static void DrawOverlayContent(Vector2 position, __attribute__((unused)) Vector2 scroll)
 {
     GuiToggleGroup(
@@ -209,7 +223,7 @@ void UpdateDrawGui(void)
         &DestroyWindow.minimized,
         &DestroyWindow.moving,
         &DestroyWindow.resizing,
-        NULL,
+        DrawToolsContent,
         (Vector2) { 0 },
         &DestroyWindow.scroll,
         "#21#TOOLS"

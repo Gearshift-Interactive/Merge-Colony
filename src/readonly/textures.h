@@ -28,6 +28,8 @@ extern Texture2D TEXTURE_BOULDER1;
 extern Texture2D TEXTURE_BOULDER2;
 
 extern Texture2D TEXTURE_HIGHLIGHT;
+extern Texture2D TEXTURE_HIGHLIGHT_BLUE;
+extern Texture2D TEXTURE_HIGHLIGHT_GREEN;
 extern Texture2D TEXTURE_CROSS;
 
 extern Texture2D TEXTURE_FACTORY;

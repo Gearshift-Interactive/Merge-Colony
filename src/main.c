@@ -7,6 +7,7 @@
 #include "logic/map.h"
 #include "logic/state.h"
 #include "logic/map_updater.h"
+#include "logic/actions.h"
 #include "readonly/textures.h"
 #include "readonly/tiles.h"
 #include "ui/cursor.h"
@@ -74,11 +75,15 @@ void UpdateDrawFrame(void)
     if (IsTileInMap(current) && !IsCursorOnGui(GetMousePosition()))
     {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-            if (!GetTile(1, current) && Copper >= GetTileCost(currentTile))
+        {
+            if (!GetTile(1, current) && Copper >= GetTileCost(currentTile) && currentTile)
             {
                 SetTile(1, current, currentTile);
                 Copper -= GetTileCost(currentTile);
             }
+            else
+                UpdateActions(current);
+        }
     }
 
     sinceLastTick += GetFrameTime();
@@ -91,6 +96,7 @@ void UpdateDrawFrame(void)
     BeginTextureMode(Screen);
         ClearBackground((Color) { 0xC8, 0x6D, 0x4D, 255 });
         RenderMap();
+        DrawActions();
         RenderMouseCursor(current, currentTile);
     EndTextureMode();
     BeginDrawing();

@@ -27,6 +27,8 @@ Texture2D TEXTURE_BOULDER1;
 Texture2D TEXTURE_BOULDER2;
 
 Texture2D TEXTURE_HIGHLIGHT;
+Texture2D TEXTURE_HIGHLIGHT_GREEN;
+Texture2D TEXTURE_HIGHLIGHT_BLUE;
 Texture2D TEXTURE_CROSS;
 
 Texture2D TEXTURE_FACTORY;
@@ -72,8 +74,10 @@ void InitTextures(void)
     TEXTURE_BOULDER1 = LoadTexture("resources/tiles/boulder1.png");
     TEXTURE_BOULDER2 = LoadTexture("resources/tiles/boulder2.png");
 
-    TEXTURE_HIGHLIGHT = LoadTexture("resources/tiles/template2.png");
-    TEXTURE_CROSS     = LoadTexture("resources/tiles/coross.png");
+    TEXTURE_HIGHLIGHT       = LoadTexture("resources/tiles/template2.png");
+    TEXTURE_HIGHLIGHT_GREEN = LoadTexture("resources/tiles/highlight_green.png");
+    TEXTURE_HIGHLIGHT_BLUE  = LoadTexture("resources/tiles/highlight_blue.png");
+    TEXTURE_CROSS           = LoadTexture("resources/tiles/coross.png");
 
     TEXTURE_FACTORY      = LoadTexture("resources/tiles/factory.png");
     TEXTURE_APARTAMENT   = LoadTexture("resources/tiles/apartament.png");
@@ -119,6 +123,8 @@ void UnloadTextures(void)
     UnloadTexture(TEXTURE_BOULDER2);
 
     UnloadTexture(TEXTURE_HIGHLIGHT);
+    UnloadTexture(TEXTURE_HIGHLIGHT_GREEN);
+    UnloadTexture(TEXTURE_HIGHLIGHT_BLUE);
     UnloadTexture(TEXTURE_CROSS);
 
     UnloadTexture(TEXTURE_FACTORY);

@@ -176,3 +176,7 @@ i32 GetPowerFactor(u8 tileId)
 {
     return Tiles[tileId].powerFactor;
 }
+const char *GetStringId(u8 tileId)
+{
+    return Tiles[tileId].id;
+}
