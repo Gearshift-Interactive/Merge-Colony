@@ -48,16 +48,22 @@ static void UpdateTile(HexCoord pos)
     }
 }
 
+static void GetHapp(i16 *happ, HexCoord (*func)(HexCoord), HexCoord pos)
+{
+    HexCoord toCheck = func(pos);
+    if (IsTileInMap(toCheck))
+        *happ += GetHappinessFactor(GetTile(1, toCheck));
+}
 i16 CheckHappiness(HexCoord pos)
 {
     i16 happiness = BASE_HAPPINESS - (1.0f - powerRatio) * MAX_POWER_HAPPINESS_DEBUFF;
     if (GetInternalHappinessBoost(GetTile(1, pos))) happiness += GetHappinessFactor(GetTile(1, pos));
-    happiness += GetHappinessFactor(GetTile(1, HexNeighbourTop(pos)));
-    happiness += GetHappinessFactor(GetTile(1, HexNeighbourTopRight(pos)));
-    happiness += GetHappinessFactor(GetTile(1, HexNeighbourBottomRight(pos)));
-    happiness += GetHappinessFactor(GetTile(1, HexNeighbourBottom(pos)));
-    happiness += GetHappinessFactor(GetTile(1, HexNeighbourBottomLeft(pos)));
-    happiness += GetHappinessFactor(GetTile(1, HexNeighbourTopLeft(pos)));
+    GetHapp(&happiness, HexNeighbourTop, pos);
+    GetHapp(&happiness, HexNeighbourTopRight, pos);
+    GetHapp(&happiness, HexNeighbourBottomRight, pos);
+    GetHapp(&happiness, HexNeighbourBottom, pos);
+    GetHapp(&happiness, HexNeighbourBottomLeft, pos);
+    GetHapp(&happiness, HexNeighbourTopLeft, pos);
     return happiness;
 }
 static void UpdateJobsHousingAndElectricity(void)

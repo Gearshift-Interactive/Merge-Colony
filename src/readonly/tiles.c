@@ -122,7 +122,7 @@ static const TileData Tiles[] = {
         .outline = &TEXTURE_GENERATOR_OUTLINE,
         .kind = TILE_BUILDING_GENERATOR,
         .space = 3,
-        .cost = 100,
+        .cost = 150,
         .happinessFactor = -10,
         .powerFactor = 200,
     }, {

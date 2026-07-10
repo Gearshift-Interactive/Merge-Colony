@@ -40,13 +40,27 @@ static void RenderActionCursor(HexCoord tileSelected)
             TEXTURE = &TEXTURE_CROSS;
     }
     else
-        if (
-            SearchOutput(
-                GetStringId(GetTile(1, GetMergeFrom())),
-                GetStringId(GetTile(1, tileSelected))
-            ) && HexIsNeighbour(GetMergeFrom(), tileSelected)
-        ) TEXTURE = &TEXTURE_HIGHLIGHT_GREEN;
-        else TEXTURE = &TEXTURE_CROSS;
+    {
+        MergeRecipe recipe = SearchRecipe(
+            GetStringId(GetTile(1, GetMergeFrom())),
+            GetStringId(GetTile(1, tileSelected))
+        );
+        Color textColor = { 0 };
+        if (recipe.result && HexIsNeighbour(GetMergeFrom(), tileSelected) && recipe.cost <= Iron)
+        {
+            textColor = RAYWHITE;
+            TEXTURE = &TEXTURE_HIGHLIGHT_GREEN;
+        } else {
+            textColor = RED;
+            TEXTURE = &TEXTURE_CROSS;
+        }
+        if (recipe.result && !HexEqual(tileSelected, GetMergeFrom()))
+        {
+            const char *text = TextFormat("%d", recipe.cost);
+            DrawText(text, currentCursorPos.x + 16, currentCursorPos.y + 4, 8, textColor);
+            GuiDrawIcon(14, currentCursorPos.x, currentCursorPos.y, 1, textColor);
+        }
+    }
 
     if (TEXTURE)
     {
@@ -108,7 +122,7 @@ void RenderMouseCursor(HexCoord tileSelected, u8 currentBuilding)
     }
     else if (happ)
     {
-        const char *text = TextFormat("%d%%", Clamp(happ, 0, 100));
+        const char *text = TextFormat("%d%%", happ);
         DrawText(text, currentCursorPos.x + 5, currentCursorPos.y, GuiGetFont().baseSize, RAYWHITE);
     }
 }

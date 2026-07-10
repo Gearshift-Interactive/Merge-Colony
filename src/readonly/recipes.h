@@ -1,11 +1,14 @@
 #pragma once
 
+#include "common.h"
+
 typedef struct {
     const char *inputA;
     const char *inputB;
     const char *result;
+    u16 cost; // iron
 } MergeRecipe;
 
 extern const MergeRecipe RECIPES[];
 
-const char *SearchOutput(const char *inputA, const char *inputB);
+MergeRecipe SearchRecipe(const char *inputA, const char *inputB);

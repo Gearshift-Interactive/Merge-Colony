@@ -1,6 +1,7 @@
 #include "logic/actions.h"
 
 #include "logic/map.h"
+#include "logic/state.h"
 #include "readonly/tiles.h"
 #include "readonly/recipes.h"
 #include "readonly/textures.h"
@@ -20,15 +21,16 @@ void UpdateActions(HexCoord mousePoint)
             mergeFrom = mousePoint;
             return;
         }
-        const char * const RECIPE_RESULT = SearchOutput(
+        MergeRecipe RECIPE_RESULT = SearchRecipe(
             GetStringId(GetTile(1, mergeFrom)),
             GetStringId(GetTile(1, mousePoint))
         );
-        if (HexIsNeighbour(mergeFrom, mousePoint) && RECIPE_RESULT)
+        if (HexIsNeighbour(mergeFrom, mousePoint) && RECIPE_RESULT.result && RECIPE_RESULT.cost <= Iron)
         {
             SetTile(1, mergeFrom, 0);
-            SetTile(1, mousePoint, GetTileId(RECIPE_RESULT));
+            SetTile(1, mousePoint, GetTileId(RECIPE_RESULT.result));
             mergeFrom = (HexCoord) { -100, -100 };
+            Iron -= RECIPE_RESULT.cost;
         }
     }
 }
