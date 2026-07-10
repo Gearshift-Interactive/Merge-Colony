@@ -192,6 +192,7 @@ static void DrawOverlayContent(Vector2 position, __attribute__((unused)) Vector2
 }
 static void DrawInfoContent(Vector2 position, __attribute__((unused)) Vector2 scroll)
 {
+    Vector2 oldpos = position;
     position.x += 10;
     position.y += 30 + TEXTURE_HEX.height;
     DrawTextureEx(TEXTURE_HEX, position, 0, 2, (Color) { 0xC8, 0x6D, 0x4D, 255 });
@@ -207,6 +208,43 @@ static void DrawInfoContent(Vector2 position, __attribute__((unused)) Vector2 sc
         GuiLabel((Rectangle) { position.x, position.y, 190, 40 }, GetTileComment(inspected));
         GuiSetStyle(DEFAULT, TEXT_WRAP_MODE, TEXT_WRAP_NONE);
         GuiSetStyle(DEFAULT, TEXT_ALIGNMENT_VERTICAL, TEXT_ALIGN_CENTER);
+    }
+    position = oldpos;
+    position.y += 40;
+    position.x += 20 + TEXTURE_HEX.width * 2;
+    if (GetTileSpace(inspected))
+    {
+        const char *text;
+        if (GetTileKind(inspected) == TILE_BUILDING_APARTAMENTS)
+            text = TextFormat("#7#Beds: %d", GetTileSpace(inspected));
+        else
+            text = TextFormat("#7#Jobs: %d", GetTileSpace(inspected));
+        GuiLabel((Rectangle) { position.x, position.y, 130, 16 }, text);
+        position.y += 20;
+    }
+    if (GetHappinessFactor(inspected))
+    {
+        const char *text;
+        if (GetHappinessFactor(inspected) > 0)
+            text = TextFormat("#8#Happiness: +%d%%", GetHappinessFactor(inspected));
+        else
+            text = TextFormat("#10#Happiness: %d%%", GetHappinessFactor(inspected));
+        GuiLabel((Rectangle) { position.x, position.y, 130, 16 }, text);
+        if (!GetInternalHappinessBoost(inspected)) {
+            position.y += 16;
+            GuiLabel((Rectangle) { position.x, position.y, 130, 16 }, "    (for nearby)");
+        }
+        position.y += 20;
+    }
+    if (GetPowerFactor(inspected))
+    {
+        const char *text;
+        if (GetPowerFactor(inspected) > 0)
+            text = TextFormat("#13#Generates: %dkW", GetPowerFactor(inspected));
+        else
+            text = TextFormat("#13#Consumes: %dkW", -GetPowerFactor(inspected));
+        GuiLabel((Rectangle) { position.x, position.y, 130, 16 }, text);
+        position.y += 20;
     }
 }
 
