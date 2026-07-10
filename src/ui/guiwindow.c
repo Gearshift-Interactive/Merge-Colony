@@ -1,6 +1,6 @@
 #include "ui/guiwindow.h"
 
-void GuiWindowFloating(Vector2 *position, Vector2 *size, bool *minimized, bool *moving, bool *resizing, void (*draw_content)(Vector2, Vector2), Vector2 content_size, Vector2 *scroll, const char* title) {
+void GuiWindowFloating(Vector2 *position, Vector2 *size, bool *minimized, bool *moving, bool *resizing, void (*draw_content)(Vector2, Vector2), Vector2 content_size, Vector2 *scroll, const char* title, bool crossIcon) {
     #if !defined(RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT)
         #define RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT 24
     #endif
@@ -84,7 +84,7 @@ void GuiWindowFloating(Vector2 *position, Vector2 *size, bool *minimized, bool *
                 position->y + close_title_size_delta_half,
                 RAYGUI_WINDOW_CLOSEBUTTON_SIZE,
                 RAYGUI_WINDOW_CLOSEBUTTON_SIZE },
-                "#4#"
+                crossIcon ? "#26#" : "#4#"
             )
         ) {
             *minimized = true;

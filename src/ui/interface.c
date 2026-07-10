@@ -270,7 +270,8 @@ void UpdateDrawGui(void)
             DrawInfoContent,
             (Vector2) { 0 },
             &InfoWindow.scroll,
-            "#23#INFO"
+            "#23#INFO",
+            true
         );
     GuiWindowFloating(
         &StatisticsWindow.position,
@@ -281,7 +282,8 @@ void UpdateDrawGui(void)
         DrawStatContent,
         (Vector2) { 0 },
         &StatisticsWindow.scroll,
-        "#2#STATISTICS"
+        "#2#STATISTICS",
+        false
     );
     GuiWindowFloating(
         &OverlayWindow.position,
@@ -292,7 +294,8 @@ void UpdateDrawGui(void)
         DrawOverlayContent,
         (Vector2) { 0 },
         &OverlayWindow.scroll,
-        "#18#OVERLAY"
+        "#18#OVERLAY",
+        false
     );
     GuiWindowFloating(
         &DestroyWindow.position,
@@ -303,7 +306,8 @@ void UpdateDrawGui(void)
         DrawToolsContent,
         (Vector2) { 0 },
         &DestroyWindow.scroll,
-        "#21#TOOLS"
+        "#21#TOOLS",
+        false
     );
     GuiWindowFloating(
         &BuildWindow.position,
@@ -314,12 +318,16 @@ void UpdateDrawGui(void)
         DrawBuildContent,
         (Vector2) { 0 },
         &BuildWindow.scroll,
-        "#0#BUILD"
+        "#0#BUILD",
+        false
     );
+    if (selected && currentAction)
+        currentAction = 0;
     if (IsKeyPressed(KEY_Q))
     {
         selected = 0;
         *currentTile = 0;
+        currentAction = 0;
     }
 }
 bool IsCursorOnGui(Vector2 cursorPos)
