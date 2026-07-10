@@ -5,6 +5,7 @@
 
 #include "ui/mainmenu.h"
 #include "readonly/tiles.h"
+#include "readonly/textures.h"
 #include "logic/state.h"
 #include "logic/map.h"
 #include "logic/actions.h"
@@ -18,6 +19,8 @@ typedef struct {
     Vector2 scroll;
 } WindowData;
 
+static u8 inspected = 0;
+
 static WindowData BuildWindow = {
     .position = { 10, 10 },
     .size = { 210, 230 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
@@ -25,7 +28,7 @@ static WindowData BuildWindow = {
 };
 static WindowData DestroyWindow = {
     .position = { 10, 20 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
-    .size = { 210, 190 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
+    .size = { 210, 225 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
     .minimized = true
 };
 static WindowData StatisticsWindow = {
@@ -36,6 +39,11 @@ static WindowData StatisticsWindow = {
 static WindowData OverlayWindow = {
     .position = { 10, 30 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT * 2 },
     .size = { 210, 190 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
+    .minimized = true
+};
+static WindowData InfoWindow = {
+    .position = { 10, 50 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT * 4 },
+    .size = { 210, 170 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
     .minimized = true
 };
 static const WindowData *WINDOWS[] = {
@@ -165,7 +173,7 @@ static void DrawToolsContent(Vector2 position, __attribute__((unused)) Vector2 s
             190,
             40
         },
-        "---\nDestroy building\nDestroy boulder\nMerge",
+        "---\n#1#Destroy building\n#1#Destroy boulder\n#25#Merge\n#18#Inspect",
         &currentAction
     );
 }
@@ -182,6 +190,25 @@ static void DrawOverlayContent(Vector2 position, __attribute__((unused)) Vector2
         &CurrentOverlay
     );
 }
+static void DrawInfoContent(Vector2 position, __attribute__((unused)) Vector2 scroll)
+{
+    position.x += 10;
+    position.y += 30 + TEXTURE_HEX.height;
+    DrawTextureEx(TEXTURE_HEX, position, 0, 2, (Color) { 0xC8, 0x6D, 0x4D, 255 });
+    position.y -= TEXTURE_HEX.height;
+    DrawTextureEx(*GetTileTexture(inspected), position, 0, 2, WHITE);
+    position.y += TEXTURE_HEX.height * 1.5f * 2.1f;
+    GuiLabel((Rectangle) { position.x, position.y, 190, 20 }, GetTileName(inspected));
+    if (GetTileComment(inspected))
+    {
+        position.y += 20;
+        GuiSetStyle(DEFAULT, TEXT_WRAP_MODE, TEXT_WRAP_WORD);
+        GuiSetStyle(DEFAULT, TEXT_ALIGNMENT_VERTICAL, TEXT_ALIGN_TOP);
+        GuiLabel((Rectangle) { position.x, position.y, 190, 40 }, GetTileComment(inspected));
+        GuiSetStyle(DEFAULT, TEXT_WRAP_MODE, TEXT_WRAP_NONE);
+        GuiSetStyle(DEFAULT, TEXT_ALIGNMENT_VERTICAL, TEXT_ALIGN_CENTER);
+    }
+}
 
 void InitGui(u8 *currentTileVar)
 {
@@ -195,17 +222,18 @@ void UpdateDrawGui(void)
     // (GuiButton((Rectangle){ 230, 670, 210, 40 }, "#1#DESTROY"));
     // (GuiButton((Rectangle){ 450, 670, 210, 40 }, "#2#STATISTICS"));
     // (GuiButton((Rectangle){ 670, 670, 40, 40 }, "#3#"));
-    GuiWindowFloating(
-        &OverlayWindow.position,
-        &OverlayWindow.size,
-        &OverlayWindow.minimized,
-        &OverlayWindow.moving,
-        &OverlayWindow.resizing,
-        DrawOverlayContent,
-        (Vector2) { 0 },
-        &OverlayWindow.scroll,
-        "#18#OVERLAY"
-    );
+    if (!InfoWindow.minimized)
+        GuiWindowFloating(
+            &InfoWindow.position,
+            &InfoWindow.size,
+            &InfoWindow.minimized,
+            &InfoWindow.moving,
+            &InfoWindow.resizing,
+            DrawInfoContent,
+            (Vector2) { 0 },
+            &InfoWindow.scroll,
+            "#23#INFO"
+        );
     GuiWindowFloating(
         &StatisticsWindow.position,
         &StatisticsWindow.size,
@@ -216,6 +244,17 @@ void UpdateDrawGui(void)
         (Vector2) { 0 },
         &StatisticsWindow.scroll,
         "#2#STATISTICS"
+    );
+    GuiWindowFloating(
+        &OverlayWindow.position,
+        &OverlayWindow.size,
+        &OverlayWindow.minimized,
+        &OverlayWindow.moving,
+        &OverlayWindow.resizing,
+        DrawOverlayContent,
+        (Vector2) { 0 },
+        &OverlayWindow.scroll,
+        "#18#OVERLAY"
     );
     GuiWindowFloating(
         &DestroyWindow.position,
@@ -257,4 +296,9 @@ bool IsCursorOnGui(Vector2 cursorPos)
         ))
             return true;
     return false;
+}
+void SetInspectedTile(u8 tileId)
+{
+    inspected = tileId;
+    InfoWindow.minimized = false;
 }

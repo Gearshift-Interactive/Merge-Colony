@@ -25,7 +25,7 @@ void ResetState(void)
     Food = 1000;
     ElectricityConsumed = 0;
     ElectricityGenerated = 0;
-    Iron = 0;
+    Iron = 1000000;
     Copper = 100000;
     Uranium = 10;
 }

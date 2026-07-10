@@ -5,6 +5,7 @@
 #include "readonly/tiles.h"
 #include "readonly/recipes.h"
 #include "readonly/textures.h"
+#include "ui/interface.h"
 
 i32 currentAction = 0;
 
@@ -45,6 +46,12 @@ static void Action3(HexCoord mousePoint)
         Iron -= RECIPE_RESULT.cost;
     }
 }
+static void Action4(HexCoord mousePoint)
+{
+    u8 tile = GetTile(1, mousePoint);
+    if (tile)
+        SetInspectedTile(tile);
+}
 
 void UpdateActions(HexCoord mousePoint)
 {
@@ -53,6 +60,7 @@ void UpdateActions(HexCoord mousePoint)
         case 1: Action1(mousePoint); break;
         case 2: Action2(mousePoint); break;
         case 3: Action3(mousePoint); break;
+        case 4: Action4(mousePoint); break;
     }
 }
 void DrawActions(void)

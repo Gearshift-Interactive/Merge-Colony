@@ -27,3 +27,5 @@ const char *GetStringId(u8 tileId);
 bool TileIsBuilding(u8 tileId);
 f32 GetPerformanceFactor(u8 tileId);
 bool GetInternalHappinessBoost(u8 tileId);
+char *GetTileName(u8 tileId);
+char *GetTileComment(u8 tileId);

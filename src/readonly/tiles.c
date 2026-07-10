@@ -13,6 +13,8 @@ typedef struct {
     i32 powerFactor;
     f32 performanceFactor;
     bool internalHappinessBoost;
+    char *name;
+    char *comment;
 } TileData;
 
 static const TileKind Buildings[] = {
@@ -28,6 +30,8 @@ static const TileData Tiles[] = {
     {
         .id = "void",
     }, {
+        .name = "Biodome",
+        .comment = "Increases happiness for nearby apartaments.",
         .id = "biodome",
         .texture = &TEXTURE_BIODOME,
         .outline = &TEXTURE_BIODOME_OUTLINE,
@@ -36,6 +40,8 @@ static const TileData Tiles[] = {
         .happinessFactor = 10,
         .powerFactor = -20,
     }, {
+        .name = "Apartaments Level 1",
+        .comment = "Houses people.",
         .id = "apartaments",
         .texture = &TEXTURE_APARTAMENT,
         .outline = &TEXTURE_APARTAMENT_OUTLINE,
@@ -45,6 +51,8 @@ static const TileData Tiles[] = {
         .happinessFactor = 3,
         .powerFactor = -20,
     }, {
+        .name = "Apartaments Level 2",
+        .comment = "Houses people.",
         .id = "apartamentsL2",
         .texture = &TEXTURE_APARTAMENTL2,
         .kind = TILE_BUILDING_APARTAMENTS,
@@ -52,6 +60,8 @@ static const TileData Tiles[] = {
         .happinessFactor = 3,
         .powerFactor = -30,
     }, {
+        .name = "Apartaments Level 3",
+        .comment = "Houses people.",
         .id = "apartamentsL3",
         .texture = &TEXTURE_APARTAMENTL3,
         .kind = TILE_BUILDING_APARTAMENTS,
@@ -59,6 +69,8 @@ static const TileData Tiles[] = {
         .happinessFactor = 6,
         .powerFactor = -40,
     }, {
+        .name = "Bio Apartaments Level 1",
+        .comment = "Houses people with increased happiness by default.",
         .id = "bio_apartaments",
         .texture = &TEXTURE_BIO_APARTAMENT,
         .kind = TILE_BUILDING_APARTAMENTS,
@@ -67,6 +79,8 @@ static const TileData Tiles[] = {
         .powerFactor = -40,
         .internalHappinessBoost = true,
     }, {
+        .name = "Bio Apartaments Level 2",
+        .comment = "Houses people with increased happiness by default.",
         .id = "bio_apartamentsL2",
         .texture = &TEXTURE_BIO_APARTAMENTL2,
         .kind = TILE_BUILDING_APARTAMENTS,
@@ -75,6 +89,8 @@ static const TileData Tiles[] = {
         .powerFactor = -50,
         .internalHappinessBoost = true,
     }, {
+        .name = "Bio Apartaments Level 3",
+        .comment = "Houses people with increased happiness by default.",
         .id = "bio_apartamentsL3",
         .texture = &TEXTURE_BIO_APARTAMENTL3,
         .kind = TILE_BUILDING_APARTAMENTS,
@@ -83,6 +99,8 @@ static const TileData Tiles[] = {
         .powerFactor = -60,
         .internalHappinessBoost = true,
     }, {
+        .name = "Drill Level 1",
+        .comment = "Mines resources up from the ground.",
         .id = "drill",
         .texture = &TEXTURE_DRILL,
         .outline = &TEXTURE_DRILL_OUTLINE,
@@ -93,6 +111,8 @@ static const TileData Tiles[] = {
         .powerFactor = -50,
         .performanceFactor = 1.0f,
     }, {
+        .name = "Drill Level 2",
+        .comment = "Mines resources up from the ground.",
         .id = "drillL2",
         .texture = &TEXTURE_DRILLL2,
         .kind = TILE_BUILDING_DRILL,
@@ -101,6 +121,8 @@ static const TileData Tiles[] = {
         .powerFactor = -80,
         .performanceFactor = 2.0f,
     }, {
+        .name = "Drill Level 3",
+        .comment = "Mines resources up from the ground.",
         .id = "drillL3",
         .texture = &TEXTURE_DRILLL3,
         .kind = TILE_BUILDING_DRILL,
@@ -109,6 +131,8 @@ static const TileData Tiles[] = {
         .powerFactor = -140,
         .performanceFactor = 3.0f,
     }, {
+        .name = "Control Centre",
+        .comment = "Increases eficcency for nearby drills.",
         .id = "control",
         .texture = &TEXTURE_CONTROL,
         .kind = TILE_BUILDING_CONTROL,
@@ -117,6 +141,8 @@ static const TileData Tiles[] = {
         .powerFactor = -20,
         .performanceFactor = 1.5f,
     }, {
+        .name = "Generator Level 1",
+        .comment = "Generates electricity.",
         .id = "generator",
         .texture = &TEXTURE_GENERATOR,
         .outline = &TEXTURE_GENERATOR_OUTLINE,
@@ -126,6 +152,8 @@ static const TileData Tiles[] = {
         .happinessFactor = -10,
         .powerFactor = 200,
     }, {
+        .name = "Generator Level 2",
+        .comment = "Generates electricity.",
         .id = "generatorL2",
         .texture = &TEXTURE_GENERATORL2,
         .kind = TILE_BUILDING_GENERATOR,
@@ -133,6 +161,8 @@ static const TileData Tiles[] = {
         .happinessFactor = -30,
         .powerFactor = 400,
     }, {
+        .name = "Generator Level 3",
+        .comment = "Generates electricity.",
         .id = "generatorL3",
         .texture = &TEXTURE_GENERATORL3,
         .kind = TILE_BUILDING_GENERATOR,
@@ -140,16 +170,22 @@ static const TileData Tiles[] = {
         .happinessFactor = -40,
         .powerFactor = 800,
     }, {
+        .name = "Solar Panel Level 1",
+        .comment = "Generates electricity with much less noise.",
         .id = "solarPanelL1",
         .texture = &TEXTURE_SOLAR_PANEL,
         .kind = TILE_BUILDING_GENERATOR,
         .powerFactor = 150,
     }, {
+        .name = "Solar Panel Level 2",
+        .comment = "Generates electricity with much less noise.",
         .id = "solarPanelL2",
         .texture = &TEXTURE_SOLAR_PANELL2,
         .kind = TILE_BUILDING_GENERATOR,
         .powerFactor = 300,
     }, {
+        .name = "Solar Panel Level 3",
+        .comment = "Generates electricity with much less noise.",
         .id = "solarPanelL3",
         .texture = &TEXTURE_SOLAR_PANELL3,
         .kind = TILE_BUILDING_GENERATOR,
@@ -183,46 +219,68 @@ static const TileData Tiles[] = {
         .texture = &TEXTURE_IRON2,
         .kind = TILE_GROUND_ORE_IRON
     }, {
+        .name = "Small Mountain",
+        .comment = "Impassable.",
         .id = "mountain1-1",
         .texture = &TEXTURE_MOUNTAIN11,
         .kind = TILE_MOUNTAIN
     }, {
+        .name = "Small Mountain",
+        .comment = "Impassable.",
         .id = "mountain1-2",
         .texture = &TEXTURE_MOUNTAIN12,
         .kind = TILE_MOUNTAIN
     }, {
+        .name = "Small Mountain",
+        .comment = "Impassable.",
         .id = "mountain1-3",
         .texture = &TEXTURE_MOUNTAIN13,
         .kind = TILE_MOUNTAIN
     }, {
+        .name = "Medium Mountain",
+        .comment = "Impassable.",
         .id = "mountain2-1",
         .texture = &TEXTURE_MOUNTAIN21,
         .kind = TILE_MOUNTAIN
     }, {
+        .name = "Medium Mountain",
+        .comment = "Impassable.",
         .id = "mountain2-2",
         .texture = &TEXTURE_MOUNTAIN22,
         .kind = TILE_MOUNTAIN
     }, {
+        .name = "Medium Mountain",
+        .comment = "Impassable.",
         .id = "mountain2-3",
         .texture = &TEXTURE_MOUNTAIN23,
         .kind = TILE_MOUNTAIN
     }, {
+        .name = "Big Mountain",
+        .comment = "Impassable.",
         .id = "mountain3-1",
         .texture = &TEXTURE_MOUNTAIN31,
         .kind = TILE_MOUNTAIN
     }, {
+        .name = "Big Mountain",
+        .comment = "Impassable.",
         .id = "mountain3-2",
         .texture = &TEXTURE_MOUNTAIN32,
         .kind = TILE_MOUNTAIN
     }, {
+        .name = "Big Mountain",
+        .comment = "Impassable.",
         .id = "mountain3-3",
         .texture = &TEXTURE_MOUNTAIN33,
         .kind = TILE_MOUNTAIN
     }, {
+        .name = "Boulder",
+        .comment = "Somewhat passable.",
         .id = "boulder1",
         .texture = &TEXTURE_BOULDER1,
         .kind = TILE_BOULDER
     }, {
+        .name = "Boulder",
+        .comment = "Somewhat passable.",
         .id = "boulder2",
         .texture = &TEXTURE_BOULDER2,
         .kind = TILE_BOULDER
@@ -284,4 +342,12 @@ f32 GetPerformanceFactor(u8 tileId)
 bool GetInternalHappinessBoost(u8 tileId)
 {
     return Tiles[tileId].internalHappinessBoost;
+}
+char *GetTileName(u8 tileId)
+{
+    return Tiles[tileId].name;
+}
+char *GetTileComment(u8 tileId)
+{
+    return Tiles[tileId].comment;
 }
