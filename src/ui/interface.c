@@ -35,7 +35,7 @@ static WindowData StatisticsWindow = {
 };
 static WindowData OverlayWindow = {
     .position = { 10, 30 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT * 2 },
-    .size = { 210, 145 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
+    .size = { 210, 190 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
     .minimized = true
 };
 static const WindowData *WINDOWS[] = {
@@ -178,7 +178,7 @@ static void DrawOverlayContent(Vector2 position, __attribute__((unused)) Vector2
             190,
             40
         },
-        "---\n#15# Copper\n#14# Iron",
+        "---\n#15# Copper\n#14# Iron\n#8# Happiness",
         &CurrentOverlay
     );
 }

@@ -3,6 +3,9 @@
 #include "readonly/tiles.h"
 #include "readonly/textures.h"
 #include "stb_perlin_.h"
+#include "logic/map_updater.h"
+#include "logic/state.h"
+#include "raymath.h"
 
 #define MAX_COPPER 5
 #define MAX_IRON 3
@@ -11,8 +14,8 @@ static u8 Map[MAP_LAYERS][MAP_WIDTH][MAP_HEIGHT] = { 0 };
 
 i32 CurrentOverlay = 0;
 
-static u8 Copper[MAP_WIDTH][MAP_HEIGHT] = { 0 };
-static u8 Iron[MAP_WIDTH][MAP_HEIGHT] = { 0 };
+static u8 CopperMap[MAP_WIDTH][MAP_HEIGHT] = { 0 };
+static u8 IronMap[MAP_WIDTH][MAP_HEIGHT] = { 0 };
 // static u8 Water[MAP_WIDTH][MAP_HEIGHT] = { 0 };
 
 static HexCoord FindFree()
@@ -84,7 +87,7 @@ void GenerateMars(void)
             /* octaves */ 4
         );
         if (copperPerlin > 0)
-            Copper[x][y] = copperPerlin * 255;
+            CopperMap[x][y] = copperPerlin * 255;
         f32 ironPerlin = stb_perlin_fbm_noise3(
             x * 0.15f, y * 0.15f, 20000,
             /* lacunarity */ 2,
@@ -92,7 +95,7 @@ void GenerateMars(void)
             /* octaves */ 8
         );
         if (ironPerlin > 0.1f)
-            Iron[x][y] = (ironPerlin - 0.1f) / 0.9f * 255;
+            IronMap[x][y] = (ironPerlin - 0.1f) / 0.9f * 255;
         // f32 waterPerlin = stb_perlin_fbm_noise3(
         //     x * 0.15f, y * 0.15f, 30000,
         //     /* lacunarity */ 2,
@@ -144,6 +147,29 @@ static void RenderTile(int layer, size_t x, size_t y)
             WHITE
         );
 }
+Color Gradient(int value)
+{
+    value = Clamp(value, 0, 100);
+
+    if (value <= 50)
+    {
+        return (Color){
+            .r = 255,
+            .g = (unsigned char)(255 * value / 50),
+            .b = 0,
+            .a = 50
+        };
+    }
+    else
+    {
+        return (Color){
+            .r = (unsigned char)(255 * (100 - value) / 50),
+            .g = 255,
+            .b = 0,
+            .a = 50
+        };
+    }
+}
 static void RenderOverlay(size_t x, size_t y)
 {
     if (!CurrentOverlay)
@@ -161,13 +187,16 @@ static void RenderOverlay(size_t x, size_t y)
         color.r = 101;
         color.g = 240;
         color.b = 196;
-        color.a = Copper[x][y];
+        color.a = CopperMap[x][y];
         break;
     case 2:
         color.r = 9;
         color.g = 28;
         color.b = 52;
-        color.a = Iron[x][y];
+        color.a = IronMap[x][y];
+        break;
+    case 3:
+        color = Gradient(CheckHappiness((HexCoord){ x, y }));
         break;
     }
 
@@ -200,11 +229,11 @@ u8 GetTile(u32 layer, HexCoord pos)
 // }
 u8 GetIron(HexCoord pos)
 {
-    return Iron[pos.x][pos.y];
+    return IronMap[pos.x][pos.y];
 }
 u8 GetCopper(HexCoord pos)
 {
-    return Copper[pos.x][pos.y];
+    return CopperMap[pos.x][pos.y];
 }
 void SetTile(u32 layer, HexCoord pos, u8 tile)
 {
