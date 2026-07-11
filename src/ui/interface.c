@@ -52,7 +52,7 @@ static WindowData OverlayWindow = {
     .minimized = true
 };
 static WindowData InfoWindow = {
-    .position = { 10, 50 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT * 4 },
+    .position = { 255, 275 },
     .size = { 210, 170 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
     .minimized = true
 };
