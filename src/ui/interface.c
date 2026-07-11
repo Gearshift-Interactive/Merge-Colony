@@ -26,6 +26,7 @@ typedef struct {
     char *title;
     void (*func)(Vector2, Vector2);
     bool closable;
+    bool alwaysActive;
 } Window;
 
 static u8 inspected = 0;
@@ -270,8 +271,8 @@ static Window windows[] = {
     { .data=&BuildWindow, .title="#0#BUILD", .func=DrawBuildContent },
     { .data=&DestroyWindow, .title="#21#TOOLS", .func=DrawToolsContent },
     { .data=&OverlayWindow, .title="#18#OVERLAY", .func=DrawOverlayContent },
-    { .data=&StatisticsWindow, .title="#2#STATISTICS", .func=DrawStatContent },
-    { .data=&InfoWindow, .title="#23#INFO", .func=DrawInfoContent, .closable=true },
+    { .data=&StatisticsWindow, .title="#2#STATISTICS", .func=DrawStatContent, .alwaysActive=true },
+    { .data=&InfoWindow, .title="#23#INFO", .func=DrawInfoContent, .closable=true, .alwaysActive=true },
 };
 static const usize windowCount = sizeof(windows) / sizeof(windows[0]);
 static void BringToFront(usize index)
@@ -389,7 +390,8 @@ void UpdateDrawGui(void)
             &windows[i].data->scroll,
             windows[i].title,
             windows[i].closable,
-            (int)i == activeIndex
+            (int)i == activeIndex,
+            windows[i].alwaysActive
         );
     }
     if (IsKeyPressed(KEY_Q))

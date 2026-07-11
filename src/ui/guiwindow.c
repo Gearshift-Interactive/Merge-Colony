@@ -1,6 +1,6 @@
 #include "ui/guiwindow.h"
 
-void GuiWindowFloating(Vector2 *position, Vector2 *size, bool *minimized, bool *moving, bool *resizing, void (*draw_content)(Vector2, Vector2), Vector2 content_size, Vector2 *scroll, const char* title, bool crossIcon, bool interactive) {
+void GuiWindowFloating(Vector2 *position, Vector2 *size, bool *minimized, bool *moving, bool *resizing, void (*draw_content)(Vector2, Vector2), Vector2 content_size, Vector2 *scroll, const char* title, bool crossIcon, bool interactive, bool alwaysActive) {
     #if !defined(RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT)
         #define RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT 24
     #endif
@@ -105,9 +105,9 @@ void GuiWindowFloating(Vector2 *position, Vector2 *size, bool *minimized, bool *
                 BeginScissorMode(scissor.x, scissor.y, scissor.width, scissor.height);
             }
 
-            if (!interactive) GuiDisable();
+            if (!interactive && !alwaysActive) GuiDisable();
             draw_content(*position, *scroll);
-            if (!interactive) GuiEnable();
+            if (!interactive && !alwaysActive) GuiEnable();
 
             if(require_scissor) {
                 EndScissorMode();
