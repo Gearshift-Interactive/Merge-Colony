@@ -9,4 +9,5 @@ void UpdateDrawMusic(void)
 {
     GuiSlider((Rectangle) { 2, 710, 100, 10 }, "", "Volume", &volume, 0, 1);
     SetVolume(volume);
+    GuiLabel((Rectangle) { 152, 710, 100, 10 }, TextFormat("%d FPS", GetFPS()));
 }
