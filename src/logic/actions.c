@@ -56,7 +56,10 @@ static void Action4(HexCoord mousePoint)
 {
     u8 tile = GetTile(1, mousePoint);
     if (tile)
+    {
         SetInspectedTile(tile);
+        PlaySound(SFX_INSPECT);
+    }
 }
 
 void PerformAction(HexCoord mousePoint)
