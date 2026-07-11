@@ -132,10 +132,6 @@ int main(void)
     InitMusic();
     InitSFX();
 
-#if !defined(PLATFORM_WEB)
-    GuiLoadStyle("resources/raygui_styles/amber/style_amber.rgs");
-#endif
-
     Screen = LoadRenderTexture(360, 360);
 
     InitMenu();
