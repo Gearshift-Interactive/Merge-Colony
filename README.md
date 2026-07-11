@@ -15,8 +15,8 @@ You can play this game online on [itch.io page](https://gearshift-interactive.it
 ### Building from source
 
 Requirements:
-- **OS**: Windows or Linux
-- **Compiler**: GCC or MinGW (also Emscripten if you want to build for WASM)
+- **OS**: Windows
+- **Compiler**: GCC (also Emscripten if you want to build for WASM)
 - **Task runner**: Just
 
 To build this game simply clone the repo and run `just build` or `just build-web`:
