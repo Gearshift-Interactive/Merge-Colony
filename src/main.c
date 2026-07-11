@@ -90,10 +90,11 @@ void UpdateDrawFrame(void)
                 PlaySound(SFX_BUILD);
             }
             else
-                UpdateActions(current);
+                PerformAction(current);
         }
     }
 
+    UpdateActions();
     sinceLastTick += GetFrameTime();
     if (sinceLastTick > 1)
     {

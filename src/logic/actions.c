@@ -59,7 +59,7 @@ static void Action4(HexCoord mousePoint)
         SetInspectedTile(tile);
 }
 
-void UpdateActions(HexCoord mousePoint)
+void PerformAction(HexCoord mousePoint)
 {
     switch (currentAction)
     {
@@ -68,6 +68,11 @@ void UpdateActions(HexCoord mousePoint)
         case 3: Action3(mousePoint); break;
         case 4: Action4(mousePoint); break;
     }
+}
+void UpdateActions(void)
+{
+    if (currentAction != 3)
+        mergeFrom = (HexCoord) { -100, -100 };
 }
 void DrawActions(void)
 {

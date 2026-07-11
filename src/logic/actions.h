@@ -7,6 +7,7 @@
 
 extern i32 currentAction;
 
-void UpdateActions(HexCoord mousePoint);
+void PerformAction(HexCoord mousePoint);
+void UpdateActions(void);
 void DrawActions(void);
 HexCoord GetMergeFrom(void);
