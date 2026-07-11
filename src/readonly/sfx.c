@@ -9,12 +9,12 @@ Sound SFX_MERGE;
 
 void InitSFX(void)
 {
-    SFX_BUTTON = LoadSound("resources/audio/button.wav");
-    SFX_BUILD = LoadSound("resources/audio/build.wav");
-    SFX_DESTROY_BUILDING = LoadSound("resources/audio/destroy_building.wav");
-    SFX_DESTROY_BOULDER = LoadSound("resources/audio/destroy_boulder.wav");
-    SFX_PLAY = LoadSound("resources/audio/play.wav");
-    SFX_MERGE = LoadSound("resources/audio/merge.wav");
+    SFX_BUTTON = LoadSound("resources/audio/button.ogg");
+    SFX_BUILD = LoadSound("resources/audio/build.ogg");
+    SFX_DESTROY_BUILDING = LoadSound("resources/audio/destroy_building.ogg");
+    SFX_DESTROY_BOULDER = LoadSound("resources/audio/destroy_boulder.ogg");
+    SFX_PLAY = LoadSound("resources/audio/play.ogg");
+    SFX_MERGE = LoadSound("resources/audio/merge.ogg");
 }
 void UnloadSFX(void)
 {
