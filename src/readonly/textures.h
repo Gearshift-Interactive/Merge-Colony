@@ -5,6 +5,7 @@
 extern Texture2D TEXTURE_HEX;
 
 extern Texture2D TEXTURE_LOGO;
+extern Texture2D TEXTURE_LOGO_GEARSHIFT;
 
 extern Texture2D TEXTURE_ROCKS1;
 extern Texture2D TEXTURE_ROCKS2;

@@ -117,6 +117,7 @@ void UpdateDrawCredits(void)
         currentScreen = SCREEN_MENU;
         PlaySound(SFX_BUTTON);
     }
+    DrawTexture(TEXTURE_LOGO_GEARSHIFT, 172, 400, WHITE);
 
     EndDrawing();
 }

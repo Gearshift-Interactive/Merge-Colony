@@ -2,6 +2,7 @@
 #include "common.h"
 
 Texture2D TEXTURE_LOGO;
+Texture2D TEXTURE_LOGO_GEARSHIFT;
 
 Texture2D TEXTURE_HEX;
 
@@ -72,6 +73,7 @@ void InitTextures(void)
     TEXTURE_HEX = LoadTexture("resources/tiles/hex.png");
 
     TEXTURE_LOGO = LoadTexture("resources/logo.png");
+    TEXTURE_LOGO_GEARSHIFT = LoadTexture("resources/gearshift_logo.png");
 
     TEXTURE_ROCKS1 = LoadTexture("resources/tiles/rocks1.png");
     TEXTURE_ROCKS2 = LoadTexture("resources/tiles/rocks2.png");
@@ -138,6 +140,7 @@ void InitTextures(void)
 void UnloadTextures(void)
 {
     UnloadTexture(TEXTURE_LOGO);
+    UnloadTexture(TEXTURE_LOGO_GEARSHIFT);
 
     UnloadTexture(TEXTURE_HEX);
 
