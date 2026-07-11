@@ -243,10 +243,11 @@ static void DrawInfoContent(Vector2 position, __attribute__((unused)) Vector2 sc
         else
             text = TextFormat("#10#Happiness: %d%%", GetHappinessFactor(inspected));
         GuiLabel((Rectangle) { position.x, position.y, 130, 16 }, text);
-        if (!GetInternalHappinessBoost(inspected)) {
             position.y += 16;
+        if (!GetInternalHappinessBoost(inspected))
             GuiLabel((Rectangle) { position.x, position.y, 130, 16 }, "    (for nearby)");
-        }
+        else
+            GuiLabel((Rectangle) { position.x, position.y, 130, 16 }, "    (for all)");
         position.y += 20;
     }
     if (GetPowerFactor(inspected))
