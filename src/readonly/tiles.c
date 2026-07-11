@@ -23,6 +23,7 @@ static const TileKind Buildings[] = {
     TILE_BUILDING_GENERATOR,
     TILE_BUILDING_BIODOME,
     TILE_BUILDING_CONTROL,
+    TILE_BUILDING_UTILITY,
 };
 static const usize BUILDINGS_LEN = sizeof(Buildings) / sizeof(Buildings[0]);
 
