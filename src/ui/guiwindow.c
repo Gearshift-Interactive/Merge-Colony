@@ -1,6 +1,6 @@
 #include "ui/guiwindow.h"
 
-void GuiWindowFloating(Vector2 *position, Vector2 *size, bool *minimized, bool *moving, bool *resizing, void (*draw_content)(Vector2, Vector2), Vector2 content_size, Vector2 *scroll, const char* title, bool crossIcon) {
+void GuiWindowFloating(Vector2 *position, Vector2 *size, bool *minimized, bool *moving, bool *resizing, void (*draw_content)(Vector2, Vector2), Vector2 content_size, Vector2 *scroll, const char* title, bool crossIcon, bool interactive) {
     #if !defined(RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT)
         #define RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT 24
     #endif
@@ -12,7 +12,7 @@ void GuiWindowFloating(Vector2 *position, Vector2 *size, bool *minimized, bool *
     int close_title_size_delta_half = (RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT - RAYGUI_WINDOW_CLOSEBUTTON_SIZE) / 2;
 
     // window movement and resize input and collision check
-    if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !*moving && !*resizing) {
+    if(interactive && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !*moving && !*resizing) {
         Vector2 mouse_position = GetMousePosition();
 
         Rectangle title_collision_rect = { position->x, position->y, size->x - (RAYGUI_WINDOW_CLOSEBUTTON_SIZE + close_title_size_delta_half), RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT };
@@ -63,7 +63,7 @@ void GuiWindowFloating(Vector2 *position, Vector2 *size, bool *minimized, bool *
     if(*minimized) {
         GuiStatusBar((Rectangle){ position->x, position->y, size->x, RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT }, title);
 
-        if (
+        if (interactive &&
             GuiButton((Rectangle){
                 position->x + size->x - RAYGUI_WINDOW_CLOSEBUTTON_SIZE - close_title_size_delta_half,
                 position->y + close_title_size_delta_half,
@@ -78,7 +78,7 @@ void GuiWindowFloating(Vector2 *position, Vector2 *size, bool *minimized, bool *
     } else {
         GuiStatusBar((Rectangle){ position->x, position->y, size->x, RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT }, title);
 
-        if (
+        if (interactive &&
             GuiButton((Rectangle){
                 position->x + size->x - RAYGUI_WINDOW_CLOSEBUTTON_SIZE - close_title_size_delta_half,
                 position->y + close_title_size_delta_half,

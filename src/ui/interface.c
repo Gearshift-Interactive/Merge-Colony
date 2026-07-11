@@ -10,6 +10,8 @@
 #include "logic/map.h"
 #include "logic/actions.h"
 
+#include "string.h"
+
 typedef struct {
     Vector2 position;
     Vector2 size;
@@ -18,6 +20,13 @@ typedef struct {
     bool resizing;
     Vector2 scroll;
 } WindowData;
+
+typedef struct {
+    WindowData *data;
+    char *title;
+    void (*func)(Vector2, Vector2);
+    bool closable;
+} Window;
 
 static u8 inspected = 0;
 
@@ -46,10 +55,6 @@ static WindowData InfoWindow = {
     .size = { 210, 170 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
     .minimized = true
 };
-static const WindowData *WINDOWS[] = {
-    &BuildWindow, &DestroyWindow, &StatisticsWindow, &OverlayWindow, &InfoWindow
-};
-
 static u8 *currentTile;
 static i32 selected;
 
@@ -67,6 +72,7 @@ static void DrawBuildContent(Vector2 position, __attribute__((unused)) Vector2 s
     //     *currentTile = GetTileId("factory");
     // if (GuiButton((Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 260, 190, 40 }, "Generator"))
     //     *currentTile = GetTileId("generator");
+    u8 oldCurrentTile = *currentTile;
     i32 prexSelect = selected;
     GuiToggleGroup(
         (Rectangle){
@@ -87,6 +93,8 @@ static void DrawBuildContent(Vector2 position, __attribute__((unused)) Vector2 s
         case 3: *currentTile = GetTileId("drill"); break;
         case 4: *currentTile = GetTileId("generator"); break;
         }
+    if (*currentTile != oldCurrentTile)
+        currentAction = 0;
 }
 
 static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 scroll)
@@ -166,6 +174,7 @@ static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 sc
 }
 static void DrawToolsContent(Vector2 position, __attribute__((unused)) Vector2 scroll)
 {
+    i32 oldCurrentAction = currentAction;
     GuiToggleGroup(
         (Rectangle){
             position.x + 10,
@@ -176,6 +185,10 @@ static void DrawToolsContent(Vector2 position, __attribute__((unused)) Vector2 s
         "---\n#1#Destroy building\n#1#Destroy boulder\n#25#Merge\n#18#Inspect",
         &currentAction
     );
+    if (oldCurrentAction != currentAction) {
+        *currentTile = 0;
+        selected = 0;
+    }
 }
 static void DrawOverlayContent(Vector2 position, __attribute__((unused)) Vector2 scroll)
 {
@@ -252,6 +265,29 @@ void InitGui(u8 *currentTileVar)
 {
     currentTile = currentTileVar;
 }
+static Window windows[] = {
+    { .data=&BuildWindow, .title="#0#BUILD", .func=DrawBuildContent },
+    { .data=&DestroyWindow, .title="#21#TOOLS", .func=DrawToolsContent },
+    { .data=&OverlayWindow, .title="#18#OVERLAY", .func=DrawOverlayContent },
+    { .data=&StatisticsWindow, .title="#2#STATISTICS", .func=DrawStatContent },
+    { .data=&InfoWindow, .title="#23#INFO", .func=DrawInfoContent, .closable=true },
+};
+static const usize windowCount = sizeof(windows) / sizeof(windows[0]);
+static void BringToFront(usize index)
+{
+    if (index == windowCount - 1)
+        return;
+
+    Window tmp = windows[index];
+
+    memmove(
+        &windows[index],
+        &windows[index + 1],
+        (windowCount - index - 1) * sizeof(windows[0])
+    );
+
+    windows[windowCount - 1] = tmp;
+}
 void UpdateDrawGui(void)
 {
     if (GuiButton((Rectangle){ 700, 700, 20, 20 }, "#19#"))
@@ -260,75 +296,101 @@ void UpdateDrawGui(void)
     // (GuiButton((Rectangle){ 230, 670, 210, 40 }, "#1#DESTROY"));
     // (GuiButton((Rectangle){ 450, 670, 210, 40 }, "#2#STATISTICS"));
     // (GuiButton((Rectangle){ 670, 670, 40, 40 }, "#3#"));
-    if (!InfoWindow.minimized)
-        GuiWindowFloating(
-            &InfoWindow.position,
-            &InfoWindow.size,
-            &InfoWindow.minimized,
-            &InfoWindow.moving,
-            &InfoWindow.resizing,
-            DrawInfoContent,
-            (Vector2) { 0 },
-            &InfoWindow.scroll,
-            "#23#INFO",
-            true
-        );
-    GuiWindowFloating(
-        &StatisticsWindow.position,
-        &StatisticsWindow.size,
-        &StatisticsWindow.minimized,
-        &StatisticsWindow.moving,
-        &StatisticsWindow.resizing,
-        DrawStatContent,
-        (Vector2) { 0 },
-        &StatisticsWindow.scroll,
-        "#2#STATISTICS",
-        false
-    );
-    GuiWindowFloating(
-        &OverlayWindow.position,
-        &OverlayWindow.size,
-        &OverlayWindow.minimized,
-        &OverlayWindow.moving,
-        &OverlayWindow.resizing,
-        DrawOverlayContent,
-        (Vector2) { 0 },
-        &OverlayWindow.scroll,
-        "#18#OVERLAY",
-        false
-    );
-    i32 oldCurrentAction = currentAction;
-    GuiWindowFloating(
-        &DestroyWindow.position,
-        &DestroyWindow.size,
-        &DestroyWindow.minimized,
-        &DestroyWindow.moving,
-        &DestroyWindow.resizing,
-        DrawToolsContent,
-        (Vector2) { 0 },
-        &DestroyWindow.scroll,
-        "#21#TOOLS",
-        false
-    );
-    if (oldCurrentAction != currentAction) {
-        *currentTile = 0;
-        selected = 0;
+    // if (!InfoWindow.minimized)
+    //     GuiWindowFloating(
+    //         &InfoWindow.position,
+    //         &InfoWindow.size,
+    //         &InfoWindow.minimized,
+    //         &InfoWindow.moving,
+    //         &InfoWindow.resizing,
+    //         DrawInfoContent,
+    //         (Vector2) { 0 },
+    //         &InfoWindow.scroll,
+    //         "#23#INFO",
+    //         true
+    //     );
+    // GuiWindowFloating(
+    //     &StatisticsWindow.position,
+    //     &StatisticsWindow.size,
+    //     &StatisticsWindow.minimized,
+    //     &StatisticsWindow.moving,
+    //     &StatisticsWindow.resizing,
+    //     DrawStatContent,
+    //     (Vector2) { 0 },
+    //     &StatisticsWindow.scroll,
+    //     "#2#STATISTICS",
+    //     false
+    // );
+    // GuiWindowFloating(
+    //     &OverlayWindow.position,
+    //     &OverlayWindow.size,
+    //     &OverlayWindow.minimized,
+    //     &OverlayWindow.moving,
+    //     &OverlayWindow.resizing,
+    //     DrawOverlayContent,
+    //     (Vector2) { 0 },
+    //     &OverlayWindow.scroll,
+    //     "#18#OVERLAY",
+    //     false
+    // );
+    // GuiWindowFloating(
+    //     &DestroyWindow.position,
+    //     &DestroyWindow.size,
+    //     &DestroyWindow.minimized,
+    //     &DestroyWindow.moving,
+    //     &DestroyWindow.resizing,
+    //     DrawToolsContent,
+    //     (Vector2) { 0 },
+    //     &DestroyWindow.scroll,
+    //     "#21#TOOLS",
+    //     false
+    // );
+    // GuiWindowFloating(
+    //     &BuildWindow.position,
+    //     &BuildWindow.size,
+    //     &BuildWindow.minimized,
+    //     &BuildWindow.moving,
+    //     &BuildWindow.resizing,
+    //     DrawBuildContent,
+    //     (Vector2) { 0 },
+    //     &BuildWindow.scroll,
+    //     "#0#BUILD",
+    //     false
+    // );
+    int activeIndex = -1;
+    for (int i = windowCount - 1; i >= 0; --i)
+    {
+        if (windows[i].closable && windows[i].data->minimized)
+            continue;
+        if (IsCursorOnWindow(GetMousePosition(), &windows[i].data->position, &windows[i].data->size, &windows[i].data->minimized))
+        {
+            activeIndex = i;
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            {
+                BringToFront(i);
+                activeIndex = windowCount - 1;
+            }
+            break;
+        }
     }
-    u8 oldCurrentTile = *currentTile;
-    GuiWindowFloating(
-        &BuildWindow.position,
-        &BuildWindow.size,
-        &BuildWindow.minimized,
-        &BuildWindow.moving,
-        &BuildWindow.resizing,
-        DrawBuildContent,
-        (Vector2) { 0 },
-        &BuildWindow.scroll,
-        "#0#BUILD",
-        false
-    );
-    if (*currentTile != oldCurrentTile)
-        currentAction = 0;
+    for (usize i = 0; i < windowCount; ++i)
+    {
+        if (windows[i].closable && windows[i].data->minimized)
+            continue;
+        GuiWindowFloating(
+            &windows[i].data->position,
+            &windows[i].data->size,
+            &windows[i].data->minimized,
+            &windows[i].data->moving,
+            &windows[i].data->resizing,
+            windows[i].func,
+            (Vector2) { 0 },
+            &windows[i].data->scroll,
+            windows[i].title,
+            windows[i].closable,
+            (int)i == activeIndex
+        );
+    }
     if (IsKeyPressed(KEY_Q))
     {
         selected = 0;
@@ -338,13 +400,13 @@ void UpdateDrawGui(void)
 }
 bool IsCursorOnGui(Vector2 cursorPos)
 {
-    size_t len = sizeof(WINDOWS) / sizeof(WINDOWS[0]);
+    size_t len = sizeof(windows) / sizeof(windows[0]);
     for (size_t i = 0; i < len; i++)
         if (IsCursorOnWindow(
             cursorPos,
-            &WINDOWS[i]->position,
-            &WINDOWS[i]->size,
-            &WINDOWS[i]->minimized
+            &windows[i].data->position,
+            &windows[i].data->size,
+            &windows[i].data->minimized
         ))
             return true;
     return false;
