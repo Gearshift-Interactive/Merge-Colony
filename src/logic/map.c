@@ -27,6 +27,7 @@ static HexCoord FindFree()
 
 void GenerateMars(u32 seed)
 {
+    float landscape[MAP_WIDTH][MAP_HEIGHT] = { 0 };
     const u8 tiles[] = {
         GetTileId("rocks1"),
         GetTileId("rocks2"),
@@ -59,15 +60,20 @@ void GenerateMars(u32 seed)
     f32 sx = (f32)(seed & 0xFFFF);
     f32 sy = (f32)(seed >> 16);
     srand(seed);
+
     for (size_t x = 0; x < MAP_WIDTH; x++)
     for (size_t y = 0; y < MAP_HEIGHT; y++)
-    {
-        f32 perlin = stb_perlin_fbm_noise3(
+        landscape[x][y] = stb_perlin_fbm_noise3(
             sx + x * 0.15f, sy + y * 0.15f, 0,
             /* lacunarity */ 2,
             /* gain */ 0.5f,
             /* octaves */ 2
         );
+
+    for (size_t x = 0; x < MAP_WIDTH; x++)
+    for (size_t y = 0; y < MAP_HEIGHT; y++)
+    {
+        f32 perlin = landscape[x][y];
         if (perlin > -0.05f)
         {
             if (perlin > 0.4f)
@@ -88,7 +94,7 @@ void GenerateMars(u32 seed)
             /* lacunarity */ 2,
             /* gain */ 0.7f,
             /* octaves */ 4
-        );
+        ) - perlin * 2;
         if (copperPerlin > 0.3f)
             CopperMap[x][y] = ( copperPerlin - 0.3f ) / 0.7f * 255;
         f32 ironPerlin = stb_perlin_fbm_noise3(
@@ -96,9 +102,9 @@ void GenerateMars(u32 seed)
             /* lacunarity */ 2,
             /* gain */ 0.2f,
             /* octaves */ 8
-        );
-        if (ironPerlin > 0.4f)
-            IronMap[x][y] = (ironPerlin - 0.4f) / 0.6f * 255;
+        ) - perlin * 2;
+        if (ironPerlin > 0.35f)
+            IronMap[x][y] = (ironPerlin - 0.35f) / 0.65f * 255;
         // f32 waterPerlin = stb_perlin_fbm_noise3(
         //     x * 0.15f, y * 0.15f, 30000,
         //     /* lacunarity */ 2,
