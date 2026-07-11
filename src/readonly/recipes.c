@@ -69,6 +69,11 @@ const MergeRecipe RECIPES[] = {
         .inputB = "drill",
         .result = "control",
         .cost = 150,
+    }, {
+        .inputA = "apartaments",
+        .inputB = "generator",
+        .result = "utility",
+        .cost = 150,
     }
 };
 static const usize RECIPES_LEN = sizeof(RECIPES) / sizeof(RECIPES[0]);

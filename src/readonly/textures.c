@@ -41,6 +41,7 @@ Texture2D TEXTURE_BIO_APARTAMENT;
 Texture2D TEXTURE_BIO_APARTAMENTL2;
 Texture2D TEXTURE_BIO_APARTAMENTL3;
 Texture2D TEXTURE_CONTROL;
+Texture2D TEXTURE_UTILITY_HUB;
 Texture2D TEXTURE_DRILL;
 Texture2D TEXTURE_DRILLL2;
 Texture2D TEXTURE_DRILLL3;
@@ -102,6 +103,7 @@ void InitTextures(void)
     TEXTURE_BIO_APARTAMENTL2 = LoadTexture("resources/tiles/bio_house_2.png");
     TEXTURE_BIO_APARTAMENTL3 = LoadTexture("resources/tiles/bio_house_3.png");
     TEXTURE_CONTROL          = LoadTexture("resources/tiles/control_facility.png");
+    TEXTURE_UTILITY_HUB      = LoadTexture("resources/tiles/utility_hub.png");
     TEXTURE_DRILL            = LoadTexture("resources/tiles/drill.png");
     TEXTURE_DRILLL2          = LoadTexture("resources/tiles/drill2.png");
     TEXTURE_DRILLL3          = LoadTexture("resources/tiles/drill3.png");
@@ -163,6 +165,7 @@ void UnloadTextures(void)
     UnloadTexture(TEXTURE_BIO_APARTAMENTL2);
     UnloadTexture(TEXTURE_BIO_APARTAMENTL3);
     UnloadTexture(TEXTURE_CONTROL);
+    UnloadTexture(TEXTURE_UTILITY_HUB);
     UnloadTexture(TEXTURE_DRILL);
     UnloadTexture(TEXTURE_DRILLL2);
     UnloadTexture(TEXTURE_DRILLL3);

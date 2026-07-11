@@ -29,6 +29,23 @@ static f32 CheckDrillPerformance(HexCoord pos)
         result *= GetPerformanceFactor(GetTile(1, HexNeighbourTopLeft(pos)));
     return result;
 }
+static i32 CheckGeneratorPerformance(HexCoord pos)
+{
+    i32 result = GetPowerFactor(GetTile(1, pos));
+    if (GetTileKind(GetTile(1, HexNeighbourTop(pos))) == TILE_BUILDING_UTILITY)
+        result *= GetPerformanceFactor(GetTile(1, HexNeighbourTop(pos)));
+    if (GetTileKind(GetTile(1, HexNeighbourTopRight(pos))) == TILE_BUILDING_UTILITY)
+        result *= GetPerformanceFactor(GetTile(1, HexNeighbourTopRight(pos)));
+    if (GetTileKind(GetTile(1, HexNeighbourBottomRight(pos))) == TILE_BUILDING_UTILITY)
+        result *= GetPerformanceFactor(GetTile(1, HexNeighbourBottomRight(pos)));
+    if (GetTileKind(GetTile(1, HexNeighbourBottom(pos))) == TILE_BUILDING_UTILITY)
+        result *= GetPerformanceFactor(GetTile(1, HexNeighbourBottom(pos)));
+    if (GetTileKind(GetTile(1, HexNeighbourBottomLeft(pos))) == TILE_BUILDING_UTILITY)
+        result *= GetPerformanceFactor(GetTile(1, HexNeighbourBottomLeft(pos)));
+    if (GetTileKind(GetTile(1, HexNeighbourTopLeft(pos))) == TILE_BUILDING_UTILITY)
+        result *= GetPerformanceFactor(GetTile(1, HexNeighbourTopLeft(pos)));
+    return result;
+}
 static void UpdateBuildingDrill(HexCoord pos)
 {
     f32 const PERFORMANCE_FACTOR = CheckDrillPerformance(pos);
@@ -86,6 +103,12 @@ static void UpdateJobsHousingAndElectricity(void)
             break;
         default:
             break;
+        }
+        if (GetTileKind(GetTile(1, (HexCoord) { x, y })) == TILE_BUILDING_GENERATOR)
+        {
+            i32 powerFactor = CheckGeneratorPerformance((HexCoord) { x, y });
+            ElectricityGenerated += powerFactor;
+            continue;
         }
         i32 powerFactor = GetPowerFactor(GetTile(1, (HexCoord) { x, y }));
         if (powerFactor > 0)
