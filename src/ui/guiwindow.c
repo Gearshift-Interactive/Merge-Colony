@@ -105,7 +105,9 @@ void GuiWindowFloating(Vector2 *position, Vector2 *size, bool *minimized, bool *
                 BeginScissorMode(scissor.x, scissor.y, scissor.width, scissor.height);
             }
 
+            if (!interactive) GuiDisable();
             draw_content(*position, *scroll);
+            if (!interactive) GuiEnable();
 
             if(require_scissor) {
                 EndScissorMode();
