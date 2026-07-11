@@ -26,9 +26,6 @@ _pull-repo dir repo commit:
         git -C {{dir}} checkout {{commit}}; \
     fi
 
-run-web-server:
-    cd bin && python -m http.server 8080
-
 build-raylib-web: _create-lib
     just _pull-repo lib/raylib https://github.com/raysan5/raylib dbc56a87da87d973a9c5baa4e7438a9d20121d28
     if [ ! -e "lib/raylib/src/libraylib.web.a" ]; then \
@@ -55,8 +52,6 @@ build-profiler: _create-bin
 
 run:
     {{ binary }} | tee log.log
-
-build-run-web: build-web run-web-server
 
 run-asan: build-asan run
 
