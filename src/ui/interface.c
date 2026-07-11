@@ -255,7 +255,7 @@ static void DrawInfoContent(Vector2 position, __attribute__((unused)) Vector2 sc
     if (GetTileSpace(inspected))
     {
         const char *text;
-        if (GetTileKind(inspected) == TILE_BUILDING_APARTAMENTS)
+        if (GetTileKind(inspected) == TILE_BUILDING_APARTMENTS)
             text = TextFormat("#7#Beds: %d", GetTileSpace(inspected));
         else
             text = TextFormat("#7#Jobs: %d", GetTileSpace(inspected));

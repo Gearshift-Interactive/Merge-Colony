@@ -98,7 +98,7 @@ void UpdateDrawCredits(void)
 
     int y = 200;
     const char *text[] = {
-        "Big thanks to these awesome peple that",
+        "Big thanks to these awesome people that",
         "were involved in this game's development:",
         "Priklen - Lead Programmer & Artist",
         "Marc - Composer & Sound designer",

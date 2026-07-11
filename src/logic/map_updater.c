@@ -98,7 +98,7 @@ static void UpdateJobsHousingAndElectricity(void)
         case TILE_BUILDING_GENERATOR:
             Jobs += GetTileSpace(GetTile(1, (HexCoord) { x, y }));
             break;
-        case TILE_BUILDING_APARTAMENTS:
+        case TILE_BUILDING_APARTMENTS:
             Housing += GetTileSpace(GetTile(1, (HexCoord) { x, y }));
             break;
         default:
@@ -130,7 +130,7 @@ static void PopulationTick(void)
     // Calculate happiness
     for (usize x = 0; x < MAP_WIDTH; x++)
     for (usize y = 0; y < MAP_HEIGHT; y++)
-        if (GetTileKind(GetTile(1, (HexCoord) { x, y })) == TILE_BUILDING_APARTAMENTS)
+        if (GetTileKind(GetTile(1, (HexCoord) { x, y })) == TILE_BUILDING_APARTMENTS)
             happinessCount += CheckHappiness((HexCoord) { x, y }) *
                 GetTileSpace(GetTile(1, (HexCoord) { x, y })) * occupancy;
     if (Population) Happiness = happinessCount / Population;
