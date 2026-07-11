@@ -297,6 +297,7 @@ void UpdateDrawGui(void)
         "#18#OVERLAY",
         false
     );
+    i32 oldCurrentAction = currentAction;
     GuiWindowFloating(
         &DestroyWindow.position,
         &DestroyWindow.size,
@@ -309,6 +310,11 @@ void UpdateDrawGui(void)
         "#21#TOOLS",
         false
     );
+    if (oldCurrentAction != currentAction) {
+        *currentTile = 0;
+        selected = 0;
+    }
+    u8 oldCurrentTile = *currentTile;
     GuiWindowFloating(
         &BuildWindow.position,
         &BuildWindow.size,
@@ -321,7 +327,7 @@ void UpdateDrawGui(void)
         "#0#BUILD",
         false
     );
-    if (selected && currentAction)
+    if (*currentTile != oldCurrentTile)
         currentAction = 0;
     if (IsKeyPressed(KEY_Q))
     {
