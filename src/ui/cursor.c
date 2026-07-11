@@ -183,7 +183,7 @@ void RenderMouseCursor(HexCoord tileSelected, u8 currentBuilding)
     }
     else if (happ)
     {
-        const char *text = TextFormat("%d%%", happ);
+        const char *text = TextFormat("%d%%", Clamp(happ, 0, 100));
         DrawText(text, currentCursorPos.x + 5, currentCursorPos.y, GuiGetFont().baseSize, RAYWHITE);
     }
 }

@@ -89,6 +89,31 @@ const MergeRecipe RECIPES[] = {
         .inputB = "quiet_drillL2",
         .result = "quiet_drillL3",
         .cost = 500,
+    }, {
+        .inputA = "generator",
+        .inputB = "drill",
+        .result = "miningComplexL1",
+        .cost = 150,
+    }, {
+        .inputA = "generatorL2",
+        .inputB = "drillL2",
+        .result = "miningComplexL2",
+        .cost = 200,
+    }, {
+        .inputA = "generatorL3",
+        .inputB = "drillL3",
+        .result = "miningComplexL3",
+        .cost = 250,
+    }, {
+        .inputA = "miningComplexL1",
+        .inputB = "miningComplexL1",
+        .result = "miningComplexL2",
+        .cost = 300,
+    }, {
+        .inputA = "miningComplexL2",
+        .inputB = "miningComplexL2",
+        .result = "miningComplexL3",
+        .cost = 500,
     }
 };
 static const usize RECIPES_LEN = sizeof(RECIPES) / sizeof(RECIPES[0]);
