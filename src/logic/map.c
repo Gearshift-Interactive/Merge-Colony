@@ -94,7 +94,7 @@ void GenerateMars(u32 seed)
             /* lacunarity */ 2,
             /* gain */ 0.7f,
             /* octaves */ 4
-        ) - perlin * 2;
+        ) - perlin / 3;
         if (copperPerlin > 0.3f)
             CopperMap[x][y] = ( copperPerlin - 0.3f ) / 0.7f * 255;
         f32 ironPerlin = stb_perlin_fbm_noise3(
@@ -102,9 +102,9 @@ void GenerateMars(u32 seed)
             /* lacunarity */ 2,
             /* gain */ 0.2f,
             /* octaves */ 8
-        ) - perlin * 2;
-        if (ironPerlin > 0.35f)
-            IronMap[x][y] = (ironPerlin - 0.35f) / 0.65f * 255;
+        ) - perlin / 3;
+        if (ironPerlin > 0.3f)
+            IronMap[x][y] = (ironPerlin - 0.3f) / 0.7f * 255;
         // f32 waterPerlin = stb_perlin_fbm_noise3(
         //     x * 0.15f, y * 0.15f, 30000,
         //     /* lacunarity */ 2,
