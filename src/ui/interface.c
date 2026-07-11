@@ -43,7 +43,7 @@ static WindowData DestroyWindow = {
 };
 static WindowData StatisticsWindow = {
     .position = { 10, 40 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT * 3 },
-    .size = { 210, 150 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
+    .size = { 210, 210 + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT },
     .minimized = true
 };
 static WindowData OverlayWindow = {
@@ -108,20 +108,37 @@ static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 sc
     //     (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 10, 190, 40 },
     //     TextFormat("%d", Tehos)
     // );
+    GuiDrawIcon(7, position.x + 12, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 20, 1, GRAY);
     GuiLabel(
-        (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 10, 190, 40 },
-        "#7# Population"
+        (Rectangle){ position.x + 34, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 10, 190, 40 },
+        "Population"
     );
     GuiLabel(
         (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 10, 190, 40 },
-        TextFormat("%d/%d/%d", Population, Housing, Jobs)
+        TextFormat("%d", Population)
     );
     GuiLabel(
-        (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 30, 190, 40 },
-        (Happiness > 66) ? "#8# Happiness" : (Happiness > 33) ? "#9# Happiness" : "#10# Happiness"
+        (Rectangle){ position.x + 34, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 30, 190, 40 },
+        "Total Beds"
     );
     GuiLabel(
         (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 30, 190, 40 },
+        TextFormat("%d", Housing)
+    );
+    GuiLabel(
+        (Rectangle){ position.x + 34, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 50, 190, 40 },
+        "Total Jobs"
+    );
+    GuiLabel(
+        (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 50, 190, 40 },
+        TextFormat("%d", Jobs)
+    );
+    GuiLabel(
+        (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 70, 190, 40 },
+        (Happiness > 66) ? "#8# Happiness" : (Happiness > 33) ? "#9# Happiness" : "#10# Happiness"
+    );
+    GuiLabel(
+        (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 70, 190, 40 },
         TextFormat("%d%%", Happiness)
     );
     // GuiLabel(
@@ -140,28 +157,37 @@ static void DrawStatContent(Vector2 position, __attribute__((unused)) Vector2 sc
     //     (Rectangle){ position.x + 130, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 80, 190, 40 },
     //     TextFormat("%d", Food)
     // );
+    GuiDrawIcon(13, position.x + 12, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 110, 1, GRAY);
     GuiLabel(
-        (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 60, 190, 40 },
-        "#13# Electricity"
+        (Rectangle){ position.x + 34, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 100, 190, 40 },
+        "Consumed"
     );
     GuiLabel(
-        (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 60, 190, 40 },
-        TextFormat("%dkW/%dkW", ElectricityConsumed, ElectricityGenerated)
+        (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 100, 190, 40 },
+        TextFormat("%dkW", ElectricityConsumed)
     );
     GuiLabel(
-        (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 110, 190, 40 },
+        (Rectangle){ position.x + 34, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 120, 190, 40 },
+        "Generated"
+    );
+    GuiLabel(
+        (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 120, 190, 40 },
+        TextFormat("%dkW", ElectricityGenerated)
+    );
+    GuiLabel(
+        (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 170, 190, 40 },
         "#14# Iron"
     );
     GuiLabel(
-        (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 110, 190, 40 },
+        (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 170, 190, 40 },
         TextFormat("%d", Iron)
     );
     GuiLabel(
-        (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 90, 190, 40 },
+        (Rectangle){ position.x + 10, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 150, 190, 40 },
         "#15# Copper"
     );
     GuiLabel(
-        (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 90, 190, 40 },
+        (Rectangle){ position.x + 110, position.y + RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT + 150, 190, 40 },
         TextFormat("%d", Copper)
     );
     // GuiLabel(
