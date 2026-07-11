@@ -25,3 +25,16 @@ git clone https://codeberg.org/Priklen/MergeColony
 cd MergeColony
 just build
 ```
+
+## License
+
+The project uses multiple licenses.
+
+| Content | License |
+|---------|---------|
+| Source code | MIT |
+| Art, textures, shaders, fonts, data | MIT |
+| Files inside `resources/audio/` | All Rights Reserved (see LICENSE-AUDIO) |
+
+Unless explicitly stated otherwise, every file outside
+`resources/audio/` is licensed under the MIT License.
