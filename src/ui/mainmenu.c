@@ -101,8 +101,8 @@ void UpdateDrawCredits(void)
         "Big thanks to these awesome peple that",
         "were involved in this game's development:",
         "Priklen - Lead Programmer & Artist",
-        "koff - Programmer",
         "Marc - Composer & Sound designer",
+        "koff - Programmer",
         "Sai-Tess - Artist"
     };
     for (size_t i = 0; i < sizeof(text)/sizeof(text[0]); i++)
