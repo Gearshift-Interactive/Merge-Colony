@@ -114,6 +114,13 @@ static void RenderDestroyBoulderCursor(HexCoord tileSelected)
     DrawText(text, currentCursorPos.x + 16, currentCursorPos.y + 4, GuiGetFont().baseSize, color);
     GuiDrawIcon(14, currentCursorPos.x, currentCursorPos.y, 1, color);
 }
+static void RenderInspectActionCursor(HexCoord tileSelected)
+{
+    if (!GetTile(1, tileSelected))
+        return;
+    DrawTexture(TEXTURE_HIGHLIGHT, currentCursorPos.x, currentCursorPos.y + TEXTURE_HIGHLIGHT.height * 0.5f, WHITE);
+    GuiDrawIcon(18, currentCursorPos.x + 8, currentCursorPos.y + 25, 1, RAYWHITE);
+}
 static void RenderActionCursor(HexCoord tileSelected)
 {
     switch (currentAction)
@@ -121,6 +128,7 @@ static void RenderActionCursor(HexCoord tileSelected)
         case 1: RenderDestroyBuildingCursor(tileSelected); break;
         case 2: RenderDestroyBoulderCursor(tileSelected); break;
         case 3: RenderMergeActionCursor(tileSelected); break;
+        case 4: RenderInspectActionCursor(tileSelected); break;
     }
 }
 
